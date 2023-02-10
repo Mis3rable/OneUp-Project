@@ -14,16 +14,19 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
 
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
         { user ? (
-          <Stack.Screen name="Home">
+          <Stack.Screen name="Home" options={{ headerShown: false }}>
             {props => <HomeScreen {...props} extraData={user} />}
           </Stack.Screen>
         ) : (
           <>
-            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Login">
+              {props => <LoginScreen {...props} setUser={setUser} />}
+            </Stack.Screen>
             <Stack.Screen name="Registration" component={RegistrationScreen} />
           </>
         )}
