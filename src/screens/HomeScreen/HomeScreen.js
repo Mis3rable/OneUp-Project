@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
+import AboutUsModal from '../ProfileScreen/AboutUs';
+import PrivacyModal from '../ProfileScreen/Privacy';
+import TermsModal from '../ProfileScreen/Terms';
 
 function HomeScreen() {
   return (
@@ -29,7 +32,9 @@ function Search() {
 const Profile = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Profile!</Text>
+    <AboutUsModal/>
+    <PrivacyModal/>
+    <TermsModal/>
     </View>
   )
 }
