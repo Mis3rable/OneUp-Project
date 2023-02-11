@@ -7,8 +7,8 @@ const PrivacyModal = () => {
 
   return (
     <View>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Text>Privacy Policy</Text>
+      <TouchableOpacity style={{ backgroundColor: '#FFFFFF', padding: 10 }} onPress={() => setModalVisible(true)}>
+        <Text style={{ color: 'black', fontWeight: 'bold', width: 150, height: 20, textAlign: 'center' }} >Privacy Policy</Text>
       </TouchableOpacity>
       <Modal
         animationType="slide"

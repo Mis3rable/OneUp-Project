@@ -11,7 +11,6 @@ export default function LoginScreen({navigation, setUser}) {
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
     }
-
     const onLoginPress = () => {
         firebase
             .auth()

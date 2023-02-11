@@ -1,9 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
-import AboutUsModal from '../ProfileScreen/AboutUs';
-import PrivacyModal from '../ProfileScreen/Privacy';
-import TermsModal from '../ProfileScreen/Terms';
+import ProfileScreen from '../ProfileScreen/ProfileScree';
 
 function HomeScreen() {
   return (
@@ -16,7 +14,7 @@ function HomeScreen() {
 function ScheduleScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Schedule^_^</Text>
+    <Text>Schedule!</Text>
  </View>
   );
 }
@@ -31,13 +29,9 @@ function Search() {
 
 const Profile = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <AboutUsModal/>
-    <PrivacyModal/>
-    <TermsModal/>
-    </View>
-  )
-}
+    <ProfileScreen/>
+  );
+};
 
 const Tab = createBottomTabNavigator();
 

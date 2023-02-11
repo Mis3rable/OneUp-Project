@@ -7,8 +7,8 @@ const TermsModal = () => {
 
   return (
     <View>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Text>Terms and Condition</Text>
+      <TouchableOpacity style={{ backgroundColor: '#FFFFFF', padding: 10 }} onPress={() => setModalVisible(true)}>
+        <Text style={{ color: 'black', fontWeight: 'bold', width: 150, height: 20, textAlign: 'center' }} >Terms and Condition</Text>
       </TouchableOpacity>
       <Modal
         animationType="slide"
