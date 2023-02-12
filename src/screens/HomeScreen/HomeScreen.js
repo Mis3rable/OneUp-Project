@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, Button } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
+import Schedule from '../ScheduleScreen/Schedule';
 
 function HomeScreen() {
   return (
@@ -14,8 +15,8 @@ function HomeScreen() {
 function ScheduleScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Schedule!</Text>
- </View>
+      <Schedule />
+    </View>
   );
 }
 
@@ -37,7 +38,11 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+      tabBarShowLabel: false
+      })}
+    >
 
       <Tab.Screen name="HomeTab" component={HomeScreen} options={{
         tabBarIcon: ({focused}) => (
