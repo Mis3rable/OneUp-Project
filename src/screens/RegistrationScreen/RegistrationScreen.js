@@ -6,6 +6,8 @@ import { firebase } from '../../firebase/config'
 
 export default function RegistrationScreen({navigation}) {
     const [fullName, setFullName] = useState('')
+    const [age, setAge] = useState('')
+    const [location, setLocation] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -48,11 +50,11 @@ export default function RegistrationScreen({navigation}) {
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
+                style={{ flex: 1, width: '100%', backgroundColor: '#f3fffc' }}
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
+                    source={require('../../../assets/OneUp_Logo.png')}
                 />
                 <TextInput
                     style={styles.input}
@@ -60,6 +62,25 @@ export default function RegistrationScreen({navigation}) {
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setFullName(text)}
                     value={fullName}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Age'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => setAge(text)}
+                    value={age}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                    keyboardType='numeric'
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Location'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => setLocation(text)}
+                    value={location}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />

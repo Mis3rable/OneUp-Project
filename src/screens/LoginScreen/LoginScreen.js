@@ -42,11 +42,11 @@ export default function LoginScreen({navigation, setUser}) {
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
+                style={{ flex: 1, width: '100%', backgroundColor: '#f3fffc'  }}
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
+                    source={require('../../../assets/OneUp_Logo.png')}
                 />
                 <TextInput
                     style={styles.input}

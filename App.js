@@ -19,15 +19,15 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         { user ? (
-          <Stack.Screen name="Home" options={{ headerShown: false }}>
+          <Stack.Screen name="Home" options={{ headerShown: false,  }}>
             {props => <HomeScreen {...props} extraData={user} />}
           </Stack.Screen>
         ) : (
           <>
-            <Stack.Screen name="Login">
+            <Stack.Screen name="Login" options={{ headerShown: false,  }} >
               {props => <LoginScreen {...props} setUser={setUser} />}
             </Stack.Screen>
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
+            <Stack.Screen name="Registration" component={RegistrationScreen} options={{  headerStyle: { backgroundColor: '#f3fffc' }  }} />
           </>
         )}
       </Stack.Navigator>
