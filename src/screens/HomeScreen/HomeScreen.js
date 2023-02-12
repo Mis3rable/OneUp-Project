@@ -4,8 +4,10 @@ import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
 
 // imports for Schedule Screen
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Notifications from 'expo-notifications';
+import { AsyncStorage } from 'react-native';
+
 
 function HomeScreen() {
 	return (
@@ -16,6 +18,7 @@ function HomeScreen() {
 }
 
 function ScheduleScreen() {
+	const [schedules, setSchedules] = useState([]);
 	const [notificationData, setNotificationData] = useState({
 		content: {
 			title: 'Robert the gayman',
@@ -23,20 +26,33 @@ function ScheduleScreen() {
 			data: { data: 'goes here' }
 		},
 		trigger: {
-			// weekday: 0,
-			// hour: 0,
-			// minute: 0,
-			seconds: 10,
+			weekday: 1, // 0 - 6
+			hour: 12, // military time
+			minute: 30, // 0-60
 			repeats: true
 		}
 	});
 
+	useEffect(() => {
+		getNotificationsFromLocalStorage();
+	}, [])
+
+	const getNotificationsFromLocalStorage = async () => {
+		const _schedules = await AsyncStorage.getItem('schedules');
+		setSchedules(_schedules ? JSON.parse(_schedules) : []);
+	}
+
 	return (
 		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+			{schedules.length != 0 && schedules.map((x, y) => {
+				return <View key={`schedule-${y}`}>
+					<Text>{x.day} @ {x.hour}:{x.minute}</Text>
+				</View>
+			})}
 			<Button
 				title='Press to schedule a notification'
 				onPress={async () => {
-					await createLocalPushNotification(notificationData);
+					await createLocalPushNotification(notificationData, setSchedules);
 				}}
 			/>
 			<Button
@@ -44,23 +60,53 @@ function ScheduleScreen() {
 				onPress={async () => {
 					console.log('Removed All Scheduled Notifications.');
 					await Notifications.cancelAllScheduledNotificationsAsync();
+					await AsyncStorage.removeItem('schedules');
+					setSchedules([]);
 				}}
 			/>
 			<Button
 				title='Get all scheduled notifications.'
 				onPress={async () => {
 					const scheduledNotifs = await Notifications.getAllScheduledNotificationsAsync();
-					console.log(`Scheduled Notifs Length: ${scheduledNotifs.length}`);
+					console.log(`schedules, from plugin: ${scheduledNotifs.length}`);
 					scheduledNotifs.forEach((x) => {
 						console.log(x);
 					});
+					const _schedules = await AsyncStorage.getItem('schedules');
+					console.log(`schedules, from state:`, schedules);
+					console.log(`schedules, from local storage:`, _schedules);
 				}}
 			/>
 		</View>
 	);
 }
 
-const createLocalPushNotification = async (schedule) => {
+const createLocalPushNotification = async (schedule, setSchedules) => {
+	let _schedules = await AsyncStorage.getItem('schedules');
+
+	let scheduleParsed = {};
+
+	if (schedule.trigger.weekday === 1) {
+		scheduleParsed = { ...scheduleParsed, day: 'Monday' };
+	}
+
+	if (schedule.trigger.hour > 12) {
+		scheduleParsed = { ...scheduleParsed, hour: schedule.trigger.hour - 12 };
+	} else {
+		scheduleParsed = { ...scheduleParsed, hour: schedule.trigger.hour };
+	}
+
+	scheduleParsed = { ...scheduleParsed, minute: schedule.trigger.minute, repeat: schedule.trigger.repeat };
+
+	if (_schedules) {
+		_schedules = JSON.parse(_schedules);
+		setSchedules([..._schedules, scheduleParsed]);
+		await AsyncStorage.setItem('schedules', JSON.stringify([..._schedules, scheduleParsed]));
+	} else {
+		setSchedules([scheduleParsed]);
+		await AsyncStorage.setItem('schedules', JSON.stringify([scheduleParsed]));
+	}
+
 	await Notifications.scheduleNotificationAsync(schedule);
 };
 
