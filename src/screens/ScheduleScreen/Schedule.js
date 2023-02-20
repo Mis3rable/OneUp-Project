@@ -8,7 +8,7 @@ Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldSetBadge: true,
   }),
 });
 
@@ -56,9 +56,9 @@ async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "Reminder",
-      body: 'Charles Gay',
+      body: 'Time for your Deepening',
     },
-    trigger: { seconds: 5 },
+    trigger: { seconds: 10 },
   });
 }
 
