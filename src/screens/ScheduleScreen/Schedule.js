@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Alert } from 'react-native';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
@@ -7,7 +7,7 @@ import * as Notifications from 'expo-notifications';
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
+    shouldPlaySound: true,
     shouldSetBadge: true,
   }),
 }); 
@@ -46,7 +46,7 @@ export default function Schedule() {
     trigger.setMinutes(time.getMinutes());
     trigger.setSeconds(0);
     trigger.setMilliseconds(0);
-
+  
     await Notifications.scheduleNotificationAsync({
       content: {
         title,
@@ -55,7 +55,11 @@ export default function Schedule() {
       },
       trigger,
     });
+  
+    // show alert after notification is scheduled
+    Alert.alert('Notification set', 'Your notification has been scheduled.');
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,7 +98,7 @@ export default function Schedule() {
           </Card.Content>
           <Card.Actions>
             <Button
-              title="Press to schedule a notification"
+              title="Schedule"
               onPress={async () => {
                 await schedulePushNotification();
               }}
@@ -107,6 +111,9 @@ export default function Schedule() {
 }
 
 const styles = StyleSheet.create({
+  container:{
+    width: 300,
+  },
   input: {
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
@@ -125,6 +132,7 @@ async function registerForPushNotificationsAsync() {
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
       lightColor: '#FF231F7C',
+      allowImages: true,
     });
   }
 
