@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-na
 import axios from "axios";
 import YoutubePlayer from "react-native-youtube-iframe";
 
-const videoIds = ["8suKIwnGNEI", "grcdVG25wLU", "5vGds6qJHvg", "-9IW5y6DNr0", "aqhXc4lQsqk"];
+const videoIds = ["pB_wQs-QjDE", "wn7BpnDLglk", "5vGds6qJHvg", "-9IW5y6DNr0", "aqhXc4lQsqk"];
 
 export default function Row2() {
   const [videoTitles, setVideoTitles] = useState([]);
@@ -26,7 +26,7 @@ export default function Row2() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.videoContainer}>
-        <Text style={styles.title}>DYCI Music Ministry</Text>
+        <Text style={styles.title}>ICMAS Choir</Text>
         <Text style={styles.text}>{videoTitles[currentIndex]}</Text>
         <YoutubePlayer
           height={200}
