@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
@@ -8,16 +8,20 @@ Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldSetBadge: true,
   }),
-});
+}); 
 
- export default function Schedule() {
+export default function Schedule() {
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
   const notificationListener = useRef();
   const responseListener = useRef();
-  const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+  const LeftContent = props => <Avatar.Icon {...props} icon="alarm" />
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
@@ -36,31 +40,81 @@ Notifications.setNotificationHandler({
     };
   }, []);
 
+  const schedulePushNotification = async () => {
+    const trigger = new Date(date);
+    trigger.setHours(time.getHours());
+    trigger.setMinutes(time.getMinutes());
+    trigger.setSeconds(0);
+    trigger.setMilliseconds(0);
+
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title,
+        body: message,
+        data: { data: 'goes here' },
+      },
+      trigger,
+    });
+  };
+
   return (
-    <Card>
-      <Card.Title title="One Up" subtitle="Deepening Schedule" left={LeftContent} />
-      <Card.Cover source={ require('../../img/Card1.png') } />
-      <Card.Actions>
-        <Button
-          title="Press to schedule a notification"
-          onPress={async () => {
-            await schedulePushNotification();
-          }}
-        />
-      </Card.Actions>
-    </Card>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <Card>
+          <Card.Title title="One Up" subtitle="Deepening Schedule" left={LeftContent} />
+          <Card.Cover source={require('../../img/Card1.png')} />
+          <Card.Content>
+            <TextInput
+              placeholder="Title"
+              value={title}
+              onChangeText={setTitle}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Message"
+              value={message}
+              onChangeText={setMessage}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Date (YYYY-MM-DD)"
+              value={date.toISOString().split('T')[0]}
+              onChangeText={text => setDate(new Date(text))}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Time (HH:MM)"
+              value={`${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}`}
+              onChangeText={text => {
+                const [hours, minutes] = text.split(':');
+                setTime(new Date(new Date().setHours(Number(hours), Number(minutes))));
+              }}
+              style={styles.input}
+            />
+          </Card.Content>
+          <Card.Actions>
+            <Button
+              title="Press to schedule a notification"
+              onPress={async () => {
+                await schedulePushNotification();
+              }}
+            />
+          </Card.Actions>
+        </Card>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
-async function schedulePushNotification() {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: "Reminder",
-      body: 'Charles Gay',
-    },
-    trigger: { seconds: 5 },
-  });
-}
+const styles = StyleSheet.create({
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    marginBottom: 16,
+    paddingHorizontal: 8,
+  },
+});
+
 
 async function registerForPushNotificationsAsync() {
   let token;
