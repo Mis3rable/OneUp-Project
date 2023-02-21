@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function  DeepeningScreen() {
+export default function  PrayerScreen()  {
   return (
     <View>
-      <Text>Deepening Screen</Text>
+      <Text>Prayer Screen</Text>
     </View>
   );
 };

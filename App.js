@@ -4,6 +4,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
 import {decode, encode} from 'base-64'
+import DeepeningScreen from './src/screens/LibraryScreen/Deepening';
+import PrayerScreen from './src/screens/LibraryScreen/Prayer';
+import RosaryScreen from './src/screens/LibraryScreen/Rosary';
+
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
@@ -30,6 +34,9 @@ export default function App() {
             <Stack.Screen name="Registration" component={RegistrationScreen} options={{  headerStyle: { backgroundColor: '#f3fffc' }  }} />
           </>
         )}
+        <Stack.Screen name="Deepening" component={DeepeningScreen} />
+        <Stack.Screen name="Prayer" component={PrayerScreen} />
+        <Stack.Screen name="Rosary" component={RosaryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
