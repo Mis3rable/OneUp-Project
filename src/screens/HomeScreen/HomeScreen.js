@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
 import Schedule from '../ScheduleScreen/Schedule';
-import Library from '../LibraryScreen/Library';
+import Category from '../CategoryScreen/Category';
 
 
 function HomeScreen() {
@@ -22,10 +22,10 @@ function ScheduleScreen() {
   );
 }
 
-function Search() {
+function Library() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-       <Library/>
+       <Text>Library</Text>
     </View>
   );
 }
@@ -74,7 +74,7 @@ function MyTabs() {
         ),
       }}/>
 
-      <Tab.Screen name="Search" component={Search} options={{
+      <Tab.Screen name="Search" component={Library} options={{
         tabBarIcon: ({focused}) => (
           <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
             <Image 
