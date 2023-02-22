@@ -68,24 +68,9 @@ export default function Schedule() {
           <Card.Title title="One Up" subtitle="Deepening Schedule" left={LeftContent} />
           <Card.Cover source={require('../../img/Card1.png')} />
           <Card.Content>
-            <TextInput
-              placeholder="Title"
-              value={title}
-              onChangeText={setTitle}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Message"
-              value={message}
-              onChangeText={setMessage}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Date (YYYY-MM-DD)"
-              value={date.toISOString().split('T')[0]}
-              onChangeText={text => setDate(new Date(text))}
-              style={styles.input}
-            />
+            <TextInput placeholder="Title" value={title} onChangeText={setTitle} style={styles.input} />
+            <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
+            <TextInput placeholder="Date (YYYY-MM-DD)" value={date.toISOString().split('T')[0]} onChangeText={text => setDate(new Date(text))} style={styles.input}/>
             <TextInput
               placeholder="Time (HH:MM)"
               value={`${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}`}
@@ -97,12 +82,7 @@ export default function Schedule() {
             />
           </Card.Content>
           <Card.Actions>
-            <Button
-              title="Schedule"
-              onPress={async () => {
-                await schedulePushNotification();
-              }}
-            />
+            <Button title="Schedule" onPress={async () => { await schedulePushNotification(); }}/>
           </Card.Actions>
         </Card>
       </ScrollView>
