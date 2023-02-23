@@ -25,7 +25,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.dyci_oneup.OneUpProject"
+      "package": "com.dyci_oneup.OneUpProject",
+      "softwareKeyboardLayoutMode":"pan"
     },
     "web": {
       "favicon": "./assets/favicon.png"

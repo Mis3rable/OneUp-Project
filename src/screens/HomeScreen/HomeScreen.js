@@ -39,9 +39,12 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator
+    <Tab.Navigator 
       screenOptions={({ route }) => ({
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: "flex"
       })}
+      
     >
 
       <Tab.Screen name="HomeTab" component={HomeScreen} options={{
@@ -105,6 +108,6 @@ function MyTabs() {
 
 export default function NavBottom() {
   return (
-      <MyTabs />
+      <MyTabs/>
   );
 }
