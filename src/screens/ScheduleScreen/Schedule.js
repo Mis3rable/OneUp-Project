@@ -25,15 +25,8 @@ export default function Schedule() {
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-
-    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      setNotification(notification);
-    });
-
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
-
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {setNotification(notification);});
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {console.log(response);});
     return () => {
       Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
@@ -55,12 +48,9 @@ export default function Schedule() {
       },
       trigger,
     });
-  
-    // show alert after notification is scheduled
-    Alert.alert('Notification set', 'Your notification has been scheduled.');
+    Alert.alert('Notification set', `Your notification has been scheduled for ${trigger.toLocaleString()}.`);
   };
   
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -101,7 +91,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
 });
-
 
 async function registerForPushNotificationsAsync() {
   let token;
