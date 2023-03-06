@@ -58,13 +58,9 @@ const VideoList = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-        // console.log("rError:", fetchVideos);
         const storageRef = firebase.storage().ref();
         const videosRef = storageRef.child('ICMAS');
         const videoList = await videosRef.listAll();
-        // console.log(error.code, storageRef);
-        // console.log(error.code, videosRef);
-        // console.log(error.code, videoList.items);
         setVideoList(videoList.items);
     };
     fetchVideos();
