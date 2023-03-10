@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
 import Schedule from '../ScheduleScreen/Schedule';
+import Scriptures from '../ScriptireScreen/Scripture';
 
 
 function HomeScreen() {
@@ -24,7 +25,7 @@ function Library() {
 function JourneyScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-       <Text>Journey</Text>
+       <Scriptures />
     </View>
   );
 }

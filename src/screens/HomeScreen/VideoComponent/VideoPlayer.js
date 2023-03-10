@@ -1,13 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, AppState } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Video } from 'expo-av';
 import firebase from '../../../firebase/config';
 
+const SkeletonVideo = () => {
+  return (
+    <View style={styles.videoContainer}>
+      <View style={styles.skeletonVideo} />
+    </View>
+  );
+};
+
 const VideosCarousel = () => {
   const [videos, setVideos] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const videoPlayer = useRef(null);
+  const appState = useRef(AppState.currentState);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -23,9 +33,32 @@ const VideosCarousel = () => {
         })
       );
       setVideos(urls);
+      setIsLoading(false);
     };
     fetchVideos();
   }, []);
+
+  useEffect(() => {
+    // Add an event listener for changes in the app state
+    AppState.addEventListener('change', handleAppStateChange);
+
+    // Clean up the event listener on unmount
+    return () => {
+      AppState.removeEventListener('change', handleAppStateChange);
+    };
+  }, []);
+
+  const handleAppStateChange = (nextAppState) => {
+    if (
+      appState.current.match(/active/) &&
+      nextAppState !== 'active' &&
+      videoPlayer.current != null
+    ) {
+      // Pause the video if the app is in the background
+      videoPlayer.current.pauseAsync();
+    }
+    appState.current = nextAppState;
+  };
 
   const handleSnapToItem = (index) => {
     setCurrentVideoIndex(index);
@@ -51,13 +84,17 @@ const VideosCarousel = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Videos</Text>
-      <Carousel
-        data={videos}
-        renderItem={renderVideo}
-        sliderWidth={Dimensions.get('window').width}
-        itemWidth={250}
-        onSnapToItem={handleSnapToItem}
-      />
+      {isLoading ? (
+        <SkeletonVideo />
+      ) : (
+        <Carousel
+          data={videos}
+          renderItem={renderVideo}
+          sliderWidth={Dimensions.get('window').width}
+          itemWidth={250}
+          onSnapToItem={handleSnapToItem}
+        />
+      )}
     </View>
   );
 };
@@ -96,6 +133,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     left: 10,
+  },
+  skeletonVideo: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#ccc',
   },
 });
 

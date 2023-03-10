@@ -3,6 +3,7 @@ import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Aler
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -21,6 +22,7 @@ export default function Schedule() {
   const [time, setTime] = useState(new Date());
   const notificationListener = useRef();
   const responseListener = useRef();
+  const [showDatepicker, setShowDatepicker] = useState(false);
   const LeftContent = props => <Avatar.Icon {...props} icon="alarm" />
 
   useEffect(() => {
@@ -60,7 +62,6 @@ export default function Schedule() {
           <Card.Content>
             <TextInput placeholder="Title" value={title} onChangeText={setTitle} style={styles.input} />
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
-            <TextInput placeholder="Date (YYYY-MM-DD)" value={date.toISOString().split('T')[0]} onChangeText={text => setDate(new Date(text))} style={styles.input}/>
             <TextInput
               placeholder="Time (HH:MM)"
               value={`${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}`}
@@ -70,6 +71,24 @@ export default function Schedule() {
               }}
               style={styles.input}
             />
+            <TextInput
+              placeholder="Date"
+              value={date.toLocaleDateString()}
+              onFocus={() => setShowDatepicker(true)}
+              style={styles.input}
+            />
+            {showDatepicker && (
+              <DateTimePicker
+                value={date}
+                mode="date"
+                display="default"
+                onChange={(event, selectedDate) => {
+                  const currentDate = selectedDate || date;
+                  setShowDatepicker(false);
+                  setDate(currentDate);
+                }}
+            />
+)}
           </Card.Content>
           <Card.Actions>
             <Button title="Schedule" onPress={async () => { await schedulePushNotification(); }}/>
