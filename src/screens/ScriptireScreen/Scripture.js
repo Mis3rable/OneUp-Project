@@ -56,25 +56,30 @@ function Scriptures() {
       const content = await response.text();
       setFileContent(content);
       setFileName(name);
-      // setIsLoading(false);
       setModalVisible(true);
     } catch (error) {
       console.log(error);
     } finally {
+      console.log('isLoading', isLoading);
       setIsLoading(false);
     }
   }
 
   async function speakText(text) {
-    if (isSpeaking) {
-      await Speech.stop();
-      setIsSpeaking(false);
-    } else {
-      setIsSpeaking(true);
-      await Speech.speak(text, { rate: 0.8 });
-      setIsSpeaking(false);
+    try {
+      if (isSpeaking) {
+        await Speech.stop();
+        setTimeout(() => setIsSpeaking(false), 500);
+      } else {
+        setIsSpeaking(true);
+        await Speech.speak(text, { rate: 0.8 });
+        setIsSpeaking(false);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
+  
   
   useEffect(() => {
     getFileData();
@@ -95,16 +100,16 @@ function Scriptures() {
         </>
       ) : (
         fileData.map(({ url, name }, index) => (
-            <Card key={index} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
-              <Card.Content>
-                <Title>{name}</Title>
-                <Paragraph>This is some text describing the scripture.</Paragraph>
-              </Card.Content>
-              <Card.Cover source={{ uri: 'https://via.placeholder.com/150' }} />
-              <Card.Actions>
-                <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
-              </Card.Actions>
-            </Card>
+          <Card key={index} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
+            <Card.Content>
+              <Title>{name}</Title>
+              <Paragraph>This is some text describing the scripture.</Paragraph>
+            </Card.Content>
+            <Card.Cover source={{ uri: 'https://via.placeholder.com/150' }} />
+            <Card.Actions>
+              <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
+            </Card.Actions>
+          </Card>
         ))
       )}
       <Modal
