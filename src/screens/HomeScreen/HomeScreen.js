@@ -5,40 +5,9 @@ import ProfileScreen from '../ProfileScreen/ProfileScree';
 import Schedule from '../ScheduleScreen/Schedule';
 import Scriptures from '../ScriptireScreen/Scripture';
 
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <YoutubeCard/>
-    </View>
-  );
-}
-
-function Library() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Schedule />
-    </View>
-  );
-}
-
-function JourneyScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-       <Scriptures />
-    </View>
-  );
-}
-
-const Profile = () => {
-  return (
-    <ProfileScreen/>
-  );
-};
-
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+export default function MyTabs() {
   return (
     <Tab.Navigator 
       screenOptions={({ route }) => ({
@@ -48,7 +17,7 @@ function MyTabs() {
       
     >
 
-      <Tab.Screen name="HomeTab" component={HomeScreen} options={{
+      <Tab.Screen name="HomeTab" component={YoutubeCard} options={{
         tabBarIcon: ({focused}) => (
           <View style={{top: 3}}>
             <Image 
@@ -62,7 +31,7 @@ function MyTabs() {
         ),
       }}/>
 
-      <Tab.Screen name="Library" component={Library} options={{
+      <Tab.Screen name="Library" component={Schedule} options={{
         tabBarIcon: ({focused}) => (
           <View style={{top: 3}}>
             <Image 
@@ -76,7 +45,7 @@ function MyTabs() {
         ),
       }}/>
       
-      <Tab.Screen name="Journey" component={JourneyScreen} options={{
+      <Tab.Screen name="Journey" component={Scriptures} options={{
         tabBarIcon: ({focused}) => (
           <View style={{top: 3}}>
             <Image 
@@ -90,7 +59,7 @@ function MyTabs() {
         ),
       }}/>
 
-      <Tab.Screen name="Profile" component={Profile} options={{
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{
         tabBarIcon: ({focused}) => (
           <View style={{top: 3}}>
             <Image 
@@ -104,11 +73,5 @@ function MyTabs() {
         ),
       }}/>
     </Tab.Navigator>
-  );
-}
-
-export default function NavBottom() {
-  return (
-      <MyTabs/>
   );
 }
