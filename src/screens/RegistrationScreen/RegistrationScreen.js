@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Picker } from '@react-native-picker/picker'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { firebase } from '../../firebase/config'
@@ -7,10 +8,36 @@ import { firebase } from '../../firebase/config'
 export default function RegistrationScreen({navigation}) {
     const [fullName, setFullName] = useState('')
     const [age, setAge] = useState('')
-    const [location, setLocation] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+
+    const municipalityOptions = [
+        { label: 'Municipality 1', value: 'Municipality 1' },
+        { label: 'Municipality 2', value: 'Municipality 2' },
+        { label: 'Municipality 3', value: 'Municipality 3' },
+      ];
+
+    const parishOptions = {
+    'Municipality 1': [
+        { label: 'Parish 1', value: 'Parish 1' },
+        { label: 'Parish 2', value: 'Parish 2' },
+        { label: 'Parish 3', value: 'Parish 3' },
+    ],
+    'Municipality 2': [
+        { label: 'Parish 4', value: 'Parish 4' },
+        { label: 'Parish 5', value: 'Parish 5' },
+        { label: 'Parish 6', value: 'Parish 6' },
+    ],
+    'Municipality 3': [
+        { label: 'Parish 7', value: 'Parish 7' },
+        { label: 'Parish 8', value: 'Parish 8' },
+        { label: 'Parish 9', value: 'Parish 9' },
+    ],
+    };
+
+    const [selectedMunicipality, setSelectedMunicipality] = useState(null);
+    const [selectedParish, setSelectedParish] = useState(null);
 
     const onFooterLinkPress = () => {
         navigation.navigate('Login')
@@ -30,6 +57,8 @@ export default function RegistrationScreen({navigation}) {
                     id: uid,
                     email,
                     fullName,
+                    selectedMunicipality,
+                    selectedParish,
                 };
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
@@ -75,15 +104,32 @@ export default function RegistrationScreen({navigation}) {
                     autoCapitalize="none"
                     keyboardType='numeric'
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Location'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setLocation(text)}
-                    value={location}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
+                <>
+                <Picker
+                style={styles.input}
+                selectedValue={selectedMunicipality}
+                onValueChange={(itemValue, itemIndex) => {
+                setSelectedMunicipality(itemValue);
+                setSelectedParish(null);}}
+                >
+                <Picker.Item label="Select a municipality" value={null} />
+                {municipalityOptions.map((option, index) => (
+                    <Picker.Item key={index} label={option.label} value={option.value} />
+                ))}
+                </Picker>
+                {selectedMunicipality && (
+                <Picker
+                style={styles.input}
+                selectedValue={selectedParish}
+                onValueChange={(itemValue) => setSelectedParish(itemValue)}
+                >
+                <Picker.Item label="Select a parish" value={null} />
+                {parishOptions[selectedMunicipality].map((option, index) => (
+                    <Picker.Item key={index} label={option.label} value={option.value} />
+                ))}
+                </Picker>
+                )}
+                </>
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
