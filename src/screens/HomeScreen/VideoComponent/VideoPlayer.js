@@ -74,7 +74,7 @@ const VideosCarousel = () => {
           useNativeControls
           resizeMode="contain"
           isLooping
-          shouldPlay={currentVideoIndex === index}
+          // shouldPlay={currentVideoIndex === index}
         />
         <Text style={styles.videoTitle}>{item.name}</Text>
       </View>

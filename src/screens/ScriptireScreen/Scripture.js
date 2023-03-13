@@ -3,6 +3,7 @@ import { ScrollView, Modal, TouchableOpacity, StyleSheet, Text, View } from 'rea
 import firebase from '../../firebase/config';
 import { Button } from 'react-native-paper';
 import { Card, Title, Paragraph } from 'react-native-paper';
+import * as Speech from 'expo-speech';
 
 function CardSkeleton() {
   return (
@@ -25,39 +26,65 @@ function Scriptures() {
   const [modalVisible, setModalVisible] = useState(false);
   const [fileContent, setFileContent] = useState('');
   const [fileName, setFileName] = useState('');
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   async function getFileData() {
-    const storageRef = firebase.storage().ref();
-    const listRef = storageRef.child('Scriptures');
-    const res = await listRef.listAll();
-    const data = await Promise.all(
-      res.items.filter((item) => item.name.endsWith('.txt')).map(async (item) => {
-        const url = await item.getDownloadURL();
-        const name = item.name.replace(/\.[^/.]+$/, '');
-        return { url, name };
-      })
-    );
-    setFileData(data);
-  }
+    try {
+      setIsLoading(true);
+      const storageRef = firebase.storage().ref();
+      const listRef = storageRef.child('Scriptures');
+      const res = await listRef.listAll();
+      const data = await Promise.all(
+        res.items.filter((item) => item.name.endsWith('.txt')).map(async (item) => {
+          const url = await item.getDownloadURL();
+          const name = item.name.replace(/\.[^/.]+$/, '');
+          return { url, name };
+        })
+      );
+      setFileData(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }  
 
   async function downloadFile(url, name) {
     try {
       setIsLoading(true);
       const response = await fetch(url);
       const content = await response.text();
-      setIsLoading(false);
       setFileContent(content);
       setFileName(name);
+      // setIsLoading(false);
       setModalVisible(true);
     } catch (error) {
       console.log(error);
+    } finally {
       setIsLoading(false);
     }
   }
 
+  async function speakText(text) {
+    if (isSpeaking) {
+      await Speech.stop();
+      setIsSpeaking(false);
+    } else {
+      setIsSpeaking(true);
+      await Speech.speak(text, { rate: 0.8 });
+      setIsSpeaking(false);
+    }
+  }
+  
   useEffect(() => {
     getFileData();
   }, []);
+
+  useEffect(() => {
+    if (!modalVisible) {
+      setIsLoading(false);
+    }
+  }, [modalVisible]);
 
   return (
     <ScrollView>
@@ -68,16 +95,16 @@ function Scriptures() {
         </>
       ) : (
         fileData.map(({ url, name }, index) => (
-          <Card key={index} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
-            <Card.Content>
-              <Title>{name}</Title>
-              <Paragraph>This is some text describing the scripture.</Paragraph>
-            </Card.Content>
-            <Card.Cover source={{ uri: 'https://via.placeholder.com/150' }} />
-            <Card.Actions>
-              <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
-            </Card.Actions>
-          </Card>
+            <Card key={index} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
+              <Card.Content>
+                <Title>{name}</Title>
+                <Paragraph>This is some text describing the scripture.</Paragraph>
+              </Card.Content>
+              <Card.Cover source={{ uri: 'https://via.placeholder.com/150' }} />
+              <Card.Actions>
+                <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
+              </Card.Actions>
+            </Card>
         ))
       )}
       <Modal
@@ -90,6 +117,9 @@ function Scriptures() {
         <View style={styles.modal}>
           <ScrollView>
             <Title style={styles.modalTitle}>{fileName.replace(/\.[^/.]+$/, '')}</Title>
+            <Button onPress={() => speakText(fileContent)}>
+              {isSpeaking ? 'Stop Speaking' : 'Speak Text'}
+            </Button>
             <Text style={styles.fileContent}>{fileContent}</Text>
             <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
               <Text style={styles.modalButtonText}>Close</Text>
@@ -103,7 +133,7 @@ function Scriptures() {
 
 const styles = StyleSheet.create({
   card: {
-    weight: 300,
+    width: '95%',
     margin: 10,
   },
   modal: {
@@ -130,7 +160,7 @@ const styles = StyleSheet.create({
   },
   cardLoading: {
     margin: 10,
-    widht: '300%',
+    width: '95%',
   },
 });
 
