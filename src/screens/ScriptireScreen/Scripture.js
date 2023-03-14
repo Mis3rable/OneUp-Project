@@ -27,6 +27,7 @@ function Scriptures() {
   const [fileContent, setFileContent] = useState('');
   const [fileName, setFileName] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
+  // const [isSpeakingVisible, setIsSpeakingVisible] = useState(false);
 
   async function getFileData() {
     try {
@@ -69,28 +70,26 @@ function Scriptures() {
     try {
       if (isSpeaking) {
         await Speech.stop();
-        setTimeout(() => setIsSpeaking(false), 500);
       } else {
         setIsSpeaking(true);
-        await Speech.speak(text, { rate: 0.8 });
-        setIsSpeaking(false);
+        await Speech.speak(text, { rate: 0.8, onStopped: () => setIsSpeaking(false) });
       }
     } catch (error) {
       console.log(error);
     }
   }
   
-  
   useEffect(() => {
     getFileData();
   }, []);
 
   useEffect(() => {
-    if (!modalVisible) {
-      setIsLoading(false);
+    if (!modalVisible && isSpeaking) {
+      Speech.stop();
+      setIsSpeaking(false);
     }
   }, [modalVisible]);
-
+  
   return (
     <ScrollView>
       {fileData.length === 0 ? (
