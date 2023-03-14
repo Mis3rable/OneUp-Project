@@ -7,18 +7,9 @@ import styles from './styles';
 const Category = () => {
     const navigation = useNavigation();
 
-    const handleOOTDCardPress = () => {
-      navigation.navigate('OOTD');
+    const handleCardPress = (category) => {
+      navigation.navigate('Library', { category });
     }
-  
-    const handlePrayerCardPress = () => {
-      navigation.navigate('Prayer');
-    }
-  
-    const handleWordsCardPress = () => {
-      navigation.navigate('ShareTheWords');
-    }
-
 return (
   
     <SafeAreaView>
@@ -34,19 +25,19 @@ return (
         </Text>
         <View style={styles.CategoryContainer}>
         <Card style={styles.card} >
-        <TouchableOpacity onPress={handleOOTDCardPress}>
+        <TouchableOpacity onPress={() => handleCardPress('OOTD')}>
         <Card.Cover style={styles.cover} source={require('../../../assets/OOTD.png')}/>
         </TouchableOpacity>
         </Card>
         
         <Card style={styles.card}>
-        <TouchableOpacity onPress={handlePrayerCardPress}>
+        <TouchableOpacity onPress={() => handleCardPress('Prayer')}>
         <Card.Cover style={styles.cover} source={require('../../../assets/Prayer.png')}/>
         </TouchableOpacity>
         </Card>
 
         <Card style={styles.card}>
-        <TouchableOpacity onPress={handleWordsCardPress}>
+        <TouchableOpacity onPress={() => handleCardPress('ShareTheWords')}>
         <Card.Cover style={styles.cover} source={require('../../../assets/ShareTheWords.png')}/>
         </TouchableOpacity>
         </Card>
