@@ -27,7 +27,6 @@ function Scriptures() {
   const [fileContent, setFileContent] = useState('');
   const [fileName, setFileName] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
-  // const [isSpeakingVisible, setIsSpeakingVisible] = useState(false);
 
   async function getFileData() {
     try {
@@ -70,6 +69,7 @@ function Scriptures() {
     try {
       if (isSpeaking) {
         await Speech.stop();
+        setIsSpeaking(false);
       } else {
         setIsSpeaking(true);
         await Speech.speak(text, { rate: 0.8, onStopped: () => setIsSpeaking(false) });
