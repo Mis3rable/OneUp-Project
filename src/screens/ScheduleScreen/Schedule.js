@@ -56,7 +56,7 @@ export default function Schedule() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <Card>
+        <Card style={{ paddingTop: 75, paddingLeft: 10 }}>
           <Card.Title title="One Up" subtitle="Deepening Schedule" left={LeftContent} />
           <Card.Cover source={require('../../img/Card1.png')} />
           <Card.Content>
@@ -101,7 +101,7 @@ export default function Schedule() {
 
 const styles = StyleSheet.create({
   container:{
-    width: 300,
+    width: 400,
   },
   input: {
     borderBottomWidth: 1,
