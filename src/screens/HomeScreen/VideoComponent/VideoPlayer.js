@@ -44,7 +44,9 @@ const VideosCarousel = () => {
 
     // Clean up the event listener on unmount
     return () => {
-      AppState.removeEventListener('change', handleAppStateChange);
+      if (AppState.removeEventListener) {
+        AppState.removeEventListener('change', handleAppStateChange);
+      }
     };
   }, []);
 
