@@ -4,6 +4,7 @@ import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useRoute } from '@react-navigation/native';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -14,6 +15,19 @@ Notifications.setNotificationHandler({
 }); 
 
 export default function Schedule() {
+  const route = useRoute();
+  const { category } = route.params || { category: 'default' };
+  let coverImageSource;
+  if (category === 'OOTD') {
+    coverImageSource = require('../../../assets/OOTD.png');
+  } else if (category === 'Prayer') {
+    coverImageSource = require('../../../assets/Prayer.png');
+  } else if (category === 'ShareTheWords') {
+    coverImageSource = require('../../../assets/ShareTheWords.png');
+  } else {
+    coverImageSource = require('../../../assets/Prayer.png');
+  }
+
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
   const [title, setTitle] = useState('');
@@ -58,7 +72,7 @@ export default function Schedule() {
       <ScrollView style={styles.scrollView}>
         <Card style={{ paddingTop: 75, paddingLeft: 10 }}>
           <Card.Title title="One Up" subtitle="Deepening Schedule" left={LeftContent} />
-          <Card.Cover source={require('../../img/Card1.png')} />
+          <Card.Cover source={coverImageSource}/>
           <Card.Content>
             <TextInput placeholder="Title" value={title} onChangeText={setTitle} style={styles.input} />
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />

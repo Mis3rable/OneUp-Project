@@ -22,7 +22,7 @@ const VideosCarousel = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       const storageRef = firebase.storage().ref();
-      const videosRef = storageRef.child('images');
+      const videosRef = storageRef.child('Videos/ICMAS');
       const videosList = await videosRef.listAll();
       const urls = await Promise.all(
         videosList.items.map(async (video) => {
