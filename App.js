@@ -4,11 +4,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
 import {decode, encode} from 'base-64'
-import DeepeningScreen from './src/screens/CategoryScreen/Deepening';
 import PrayerScreen from './src/screens/CategoryScreen/Prayer';
-import RosaryScreen from './src/screens/CategoryScreen/Rosary';
 import Category from './src/screens/CategoryScreen/Category';
 import MyTabs from './src/screens/HomeScreen/HomeScreen';
+import OOTDScreen from './src/screens/CategoryScreen/OOTD';
+import WordsScreen from './src/screens/CategoryScreen/Words';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -28,9 +28,9 @@ export default function App() {
           {props => <MyTabs {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Category" component={Category} />
-        <Stack.Screen name="Deepening" component={DeepeningScreen} />
+        <Stack.Screen name="OOTD" component={OOTDScreen} />
         <Stack.Screen name="Prayer" component={PrayerScreen} />
-        <Stack.Screen name="Rosary" component={RosaryScreen} />
+        <Stack.Screen name="ShareTheWords" component={WordsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

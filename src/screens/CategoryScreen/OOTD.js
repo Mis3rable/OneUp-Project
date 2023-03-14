@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function  DeepeningScreen() {
+export default function  OOTDScreen() {
   return (
     <View>
-      <Text>Deepening Screen</Text>
+      <Text>OOTD Screen</Text>
     </View>
   );
 };

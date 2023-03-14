@@ -7,35 +7,35 @@ import styles from './styles';
 const Category = () => {
     const navigation = useNavigation();
 
-    const handleDeepeningCardPress = () => {
-      navigation.navigate('Deepening');
+    const handleOOTDCardPress = () => {
+      navigation.navigate('OOTD');
     }
   
     const handlePrayerCardPress = () => {
       navigation.navigate('Prayer');
     }
   
-    const handleRosaryCardPress = () => {
-      navigation.navigate('Rosary');
+    const handleWordsCardPress = () => {
+      navigation.navigate('ShareTheWords');
     }
 
 return (
   
     <SafeAreaView>
     <ScrollView>
-        <Text style={styles.title01}>
+        <Text style={[styles.title01, { marginTop: 50 }]}>
           Start your journey with a reminder
         </Text>
         <Text style={styles.title02}>
           Create a Reminder
         </Text>
         <Text style={styles.title03}>
-          Chhose a Category
+          Choose a Category
         </Text>
         <View style={styles.CategoryContainer}>
         <Card style={styles.card} >
-        <TouchableOpacity onPress={handleDeepeningCardPress}>
-        <Card.Cover style={styles.cover} source={require('../../../assets/Deepening.png')}/>
+        <TouchableOpacity onPress={handleOOTDCardPress}>
+        <Card.Cover style={styles.cover} source={require('../../../assets/OOTD.png')}/>
         </TouchableOpacity>
         </Card>
         
@@ -46,20 +46,8 @@ return (
         </Card>
 
         <Card style={styles.card}>
-        <TouchableOpacity onPress={handleRosaryCardPress}>
-        <Card.Cover style={styles.cover} source={require('../../../assets/Rosary.png')}/>
-        </TouchableOpacity>
-        </Card>
-        
-        <Card style={styles.card} >
-        <TouchableOpacity onPress={handleDeepeningCardPress}>
-        <Card.Cover style={styles.cover} source={require('../../../assets/Deepening.png')}/>
-        </TouchableOpacity>
-        </Card>
-
-        <Card style={styles.card}>
-        <TouchableOpacity onPress={handlePrayerCardPress}>
-        <Card.Cover style={styles.cover} source={require('../../../assets/Prayer.png')}/>
+        <TouchableOpacity onPress={handleWordsCardPress}>
+        <Card.Cover style={styles.cover} source={require('../../../assets/ShareTheWords.png')}/>
         </TouchableOpacity>
         </Card>
         </View>

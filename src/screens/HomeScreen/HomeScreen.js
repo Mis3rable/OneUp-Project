@@ -7,7 +7,8 @@ import Scriptures from '../ScriptireScreen/Scripture';
 
 const Tab = createBottomTabNavigator();
 
-export default function MyTabs() {
+export default function MyTabs({ navigation, route }) {
+  const { user } = route.params;
   return (
     <Tab.Navigator 
       screenOptions={({ route }) => ({
@@ -71,7 +72,7 @@ export default function MyTabs() {
               />
           </View>
         ),
-      }}/>
+      }} initialParams={{ user: user }}/>
     </Tab.Navigator>
   );
 }
