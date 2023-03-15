@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { firebase } from '../../firebase/config'
@@ -7,11 +7,13 @@ import { firebase } from '../../firebase/config'
 export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('blur', () => {
             setEmail('');
             setPassword('');
+            setLoading(false);
         });
         return unsubscribe;
     }, [navigation]);
@@ -20,6 +22,7 @@ export default function LoginScreen({navigation}) {
         navigation.navigate('Registration')
     }
     const onLoginPress = () => {
+        setLoading(true)
         firebase.auth().signInWithEmailAndPassword(email, password)
     .then((response) => {
         const uid = response.user.uid
@@ -30,6 +33,7 @@ export default function LoginScreen({navigation}) {
             .then(firestoreDocument => {
                 if (!firestoreDocument.exists) {
                     alert("User does not exist anymore.")
+                    setLoading(false)
                     return;
                 }
                 const user = firestoreDocument.data()
@@ -38,10 +42,12 @@ export default function LoginScreen({navigation}) {
             })
             .catch(error => {
                 alert(error)
+                setLoading(false)
             });
     })
     .catch(error => {
         alert(error)
+        setLoading(false)
     })
     }
 
@@ -76,7 +82,11 @@ export default function LoginScreen({navigation}) {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>Log in</Text>
+                    {loading ? (
+                        <ActivityIndicator color="#ffffff" size="small" />
+                    ) : (
+                        <Text style={styles.buttonTitle}>Log in</Text>
+                    )}
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
