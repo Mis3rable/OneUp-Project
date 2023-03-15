@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
@@ -11,6 +11,7 @@ export default function RegistrationScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const municipalityOptions = [
         { label: 'Municipality 1', value: 'Municipality 1' },
@@ -46,8 +47,10 @@ export default function RegistrationScreen({navigation}) {
     const onRegisterPress = () => {
         if (password !== confirmPassword) {
             alert("Passwords don't match.")
+            setLoading(false)
             return
         }
+        setLoading(true)
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
@@ -65,14 +68,17 @@ export default function RegistrationScreen({navigation}) {
                     .doc(uid)
                     .set(data)
                     .then(() => {
+                        console.log('Register successful');
                         navigation.navigate('Category', {user: data})
                     })
                     .catch((error) => {
                         alert(error)
+                        setLoading(false)
                     });
             })
             .catch((error) => {
                 alert(error)
+                setLoading(false)
         });
     }
 
@@ -162,7 +168,11 @@ export default function RegistrationScreen({navigation}) {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
-                    <Text style={styles.buttonTitle}>Create account</Text>
+                    {loading ? (
+                        <ActivityIndicator color="#ffffff" size="small" />
+                    ) : (
+                        <Text style={styles.buttonTitle}>Create Account</Text>
+                    )}
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>

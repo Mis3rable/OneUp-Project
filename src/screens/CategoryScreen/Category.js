@@ -4,11 +4,11 @@ import { ScrollView, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
-const Category = () => {
+const Category = ({route}) => {
     const navigation = useNavigation();
-
-    const handleCardPress = (category) => {
-      navigation.navigate('Library', { category });
+    const {user} = route.params;
+    const handleCardPress = () => {
+      navigation.navigate('Home', {user: user, initialRouteName: 'Library'});
     }
 return (
   

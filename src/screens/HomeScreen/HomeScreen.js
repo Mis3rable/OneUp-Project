@@ -8,9 +8,10 @@ import Scriptures from '../ScriptireScreen/Scripture';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs({ navigation, route }) {
-  const { user } = route.params;
+  const { user, initialRouteName } = route.params;
   return (
     <Tab.Navigator 
+    initialRouteName={initialRouteName}
       screenOptions={({ route }) => ({
         tabBarHideOnKeyboard: true,
         tabBarStyle: "flex"
@@ -30,7 +31,7 @@ export default function MyTabs({ navigation, route }) {
               />
           </View>
         ),
-      }}/>
+      }} initialParams={{ user: user }}/>
 
       <Tab.Screen name="Library" component={Schedule} options={{
         tabBarIcon: ({focused}) => (
@@ -44,7 +45,7 @@ export default function MyTabs({ navigation, route }) {
               />
           </View>
         ),
-      }}/>
+      }} initialParams={{ user: user }}/>
       
       <Tab.Screen name="Journey" component={Scriptures} options={{
         tabBarIcon: ({focused}) => (
@@ -58,7 +59,7 @@ export default function MyTabs({ navigation, route }) {
               />
           </View>
         ),
-      }}/>
+      }} initialParams={{ user: user }}/>
 
       <Tab.Screen name="Profile" component={ProfileScreen} options={{
         tabBarIcon: ({focused}) => (
