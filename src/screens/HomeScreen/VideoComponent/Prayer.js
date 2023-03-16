@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function  OOTDScreen() {
+export default function  Prayer() {
   return (
     <View>
-      <Text>OOTD Screen</Text>
+      <Text>Prayer Screen</Text>
     </View>
   );
 };

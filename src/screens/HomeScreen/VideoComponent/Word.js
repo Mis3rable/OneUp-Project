@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function  PrayerScreen()  {
+export default function  Word() {
   return (
     <View>
-      <Text>Prayer Screen</Text>
+      <Text>Share The Word Screen</Text>
     </View>
   );
 };

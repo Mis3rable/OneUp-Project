@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import Listen from "./VideoComponent/Listen";
 
-import VideoCarousel from "./VideoComponent/VideoPlayer";
+import Watch from "./VideoComponent/Watch";
 
 export default function YoutubeCard() {
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <VideoCarousel />
+        <Watch/>
+        <Listen/>
       </ScrollView>
     </SafeAreaView>
   );
