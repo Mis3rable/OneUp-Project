@@ -3,6 +3,7 @@ import { Card } from 'react-native-paper';
 import { TouchableOpacity, View, StyleSheet, Dimensions, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
+import '../../Fonts/Fonts'
 
 const Watch = () => {
     const navigation = useNavigation();
@@ -63,16 +64,18 @@ const Watch = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
+        height: 250,
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
         alignSelf: 'flex-start',
+        color: "blue",
       },
 });
 
