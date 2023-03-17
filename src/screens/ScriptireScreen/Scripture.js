@@ -35,10 +35,18 @@ function Scriptures() {
       const listRef = storageRef.child('Scriptures');
       const res = await listRef.listAll();
       const data = await Promise.all(
-        res.items.filter((item) => item.name.endsWith('.txt')).map(async (item) => {
-          const url = await item.getDownloadURL();
-          const name = item.name.replace(/\.[^/.]+$/, '');
-          return { url, name };
+        res.prefixes.map(async (prefixRef) => {
+          const prefixName = prefixRef.name;
+          const items = await prefixRef.listAll();
+          const fileItems = items.items.filter((item) => item.name.endsWith('.txt'));
+          const files = await Promise.all(
+            fileItems.map(async (item) => {
+              const url = await item.getDownloadURL();
+              const name = item.name.replace(/\.[^/.]+$/, '');
+              return { url, name };
+            })
+          );
+          return { folderName: prefixName, files };
         })
       );
       setFileData(data);
@@ -94,22 +102,31 @@ function Scriptures() {
     <ScrollView>
       {fileData.length === 0 ? (
         <>
-          <CardSkeleton />
+          <CardSkeleton /> 
           <CardSkeleton />
         </>
       ) : (
-        fileData.map(({ url, name }, index) => (
-          <Card key={index} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
-            <Card.Content>
-              <Title>{name}</Title>
-              <Paragraph>This is some text describing the scripture.</Paragraph>
-            </Card.Content>
-            <Card.Cover source={{ uri: 'https://via.placeholder.com/150' }} />
-            <Card.Actions>
-              <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
-            </Card.Actions>
-          </Card>
-        ))
+        fileData.map(({ folderName, files }, index) => (
+          <View key={index}>
+            {files.map(({ url, name }, fileIndex) => {
+              const prefix = folderName + '/' + name;
+              const coverUrl = files.find(file => file.name.endsWith('.jpg') || file.name.endsWith('.png') && file.url.includes(prefix))?.url;
+
+              return (
+                <Card key={fileIndex} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
+                  <Card.Cover source={{ uri: coverUrl }} />
+                  <Card.Content>
+                    <Title>{name}</Title>
+                    <Paragraph>This is some text describing the scripture.</Paragraph>
+                  </Card.Content>
+                  <Card.Actions>
+                    <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
+                  </Card.Actions>
+                </Card>
+              )
+            })}
+          </View>
+        ))             
       )}
       <Modal
         animationType="slide"
