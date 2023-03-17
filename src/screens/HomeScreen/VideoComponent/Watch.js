@@ -3,7 +3,6 @@ import { Card } from 'react-native-paper';
 import { TouchableOpacity, View, StyleSheet, Dimensions, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
-import '../../Fonts/Fonts'
 
 const Watch = () => {
     const navigation = useNavigation();
