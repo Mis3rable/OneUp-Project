@@ -38,12 +38,18 @@ function Scriptures() {
         res.prefixes.map(async (prefixRef) => {
           const prefixName = prefixRef.name;
           const items = await prefixRef.listAll();
-          const fileItems = items.items.filter((item) => item.name.endsWith('.txt'));
+          const textFiles = items.items.filter((item) => item.name.endsWith('.txt'));
           const files = await Promise.all(
-            fileItems.map(async (item) => {
-              const url = await item.getDownloadURL();
-              const name = item.name.replace(/\.[^/.]+$/, '');
-              return { url, name };
+            textFiles.map(async (textFile) => {
+              const url = await textFile.getDownloadURL();
+              const name = textFile.name.replace(/\.[^/.]+$/, '');
+              const jpgImageName = textFile.name.replace('.txt', '.jpg'); // Assumes that the image file has the same name as the text file with a .jpg extension
+              const jpgImageFile = items.items.find((item) => item.name === jpgImageName);
+              const jpgCoverUrl = jpgImageFile ? await jpgImageFile.getDownloadURL() : null;
+              const pngImageName = textFile.name.replace('.txt', '.png'); // Assumes that the image file has the same name as the text file with a .png extension
+              const pngImageFile = items.items.find((item) => item.name === pngImageName);
+              const pngCoverUrl = pngImageFile ? await pngImageFile.getDownloadURL() : null;
+              return { url, name, coverUrl: jpgCoverUrl || pngCoverUrl };
             })
           );
           return { folderName: prefixName, files };
@@ -55,7 +61,7 @@ function Scriptures() {
     } finally {
       setIsLoading(false);
     }
-  }  
+  } 
 
   async function downloadFile(url, name) {
     try {
@@ -108,13 +114,10 @@ function Scriptures() {
       ) : (
         fileData.map(({ folderName, files }, index) => (
           <View key={index}>
-            {files.map(({ url, name }, fileIndex) => {
-              const prefix = folderName + '/' + name;
-              const coverUrl = files.find(file => file.name.endsWith('.jpg') || file.name.endsWith('.png') && file.url.includes(prefix))?.url;
-
+            {files.map(({ url, name, coverUrl }, fileIndex) => {
               return (
                 <Card key={fileIndex} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
-                  <Card.Cover source={{ uri: coverUrl }} />
+                 {coverUrl && <Card.Cover source={{ uri: coverUrl }} />}
                   <Card.Content>
                     <Title>{name}</Title>
                     <Paragraph>This is some text describing the scripture.</Paragraph>
