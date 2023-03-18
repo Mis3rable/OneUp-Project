@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
 import Schedule from '../ScheduleScreen/Schedule';
-import Scriptures from '../ScriptireScreen/Scripture';
+import Journey from '../JourneyScreen/Journey';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,12 +14,11 @@ export default function MyTabs({ navigation, route }) {
     initialRouteName={initialRouteName}
       screenOptions={({ route }) => ({
         tabBarHideOnKeyboard: true,
-        tabBarStyle: "flex"
+        tabBarStyle: "flex",
       })}
-      
     >
 
-      <Tab.Screen name="HomeTab" component={YoutubeCard} options={{
+      <Tab.Screen name="Discover" component={YoutubeCard} options={{
         tabBarIcon: ({focused}) => (
           <View style={{top: 3}}>
             <Image 
@@ -47,7 +46,7 @@ export default function MyTabs({ navigation, route }) {
         ),
       }} initialParams={{ user: user }}/>
       
-      <Tab.Screen name="Journey" component={Scriptures} options={{
+      <Tab.Screen name="Journey" component={Journey} options={{
         tabBarIcon: ({focused}) => (
           <View style={{top: 3}}>
             <Image 

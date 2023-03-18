@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import DailyReadsCard from "./VideoComponent/DailyReads";
 import Listen from "./VideoComponent/Listen";
 
 import Watch from "./VideoComponent/Watch";
@@ -9,6 +10,7 @@ export default function YoutubeCard() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
+        <DailyReadsCard/>
         <Watch/>
         <Listen/>
       </ScrollView>

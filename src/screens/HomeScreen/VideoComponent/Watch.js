@@ -7,16 +7,20 @@ import Carousel from 'react-native-snap-carousel';
 const Watch = () => {
     const navigation = useNavigation();
 
-    const handleOOTDCardPress = () => {
-      navigation.navigate('OOTD');
+    const handleICMASCardPress = () => {
+        navigation.navigate('ICMAS');
     }
 
-    const handlePrayerCardPress = () => {
-      navigation.navigate('Prayer');
+    const handleSongCardPress = () => {
+      navigation.navigate('SongReflection');
     }
 
     const handleWordsCardPress = () => {
       navigation.navigate('Words');
+    }
+
+    const handleOOTDCardPress = () => {
+        navigation.navigate('OOTD');
     }
 
     const renderCard = ({ item }) => {
@@ -31,20 +35,25 @@ const Watch = () => {
 
     const cards = [
         {
-            title: 'OOTD',
-            image: require('../../../../assets/OOTD.png'),
-            onPress: handleOOTDCardPress,
-        },  
+            title: 'Prayer',
+            image: require('../../../../assets/ICMAS.png'),
+            onPress: handleICMASCardPress,
+        },
         {
             title: 'Prayer',
-            image: require('../../../../assets/Prayer.png'),
-            onPress: handlePrayerCardPress,
+            image: require('../../../../assets/SongReflection.png'),
+            onPress: handleSongCardPress,
         },
         {
             title: 'ShareTheWords',
             image: require('../../../../assets/ShareTheWords.png'),
             onPress: handleWordsCardPress,
         },
+        {
+            title: 'OOTD',
+            image: require('../../../../assets/OOTD.png'),
+            onPress: handleOOTDCardPress,
+        },  
     ];
 
     return (

@@ -12,6 +12,10 @@ import Prayer from './src/screens/HomeScreen/VideoComponent/Prayer';
 import Word from './src/screens/HomeScreen/VideoComponent/Word';
 import Rosary from './src/screens/HomeScreen/VideoComponent/Rosary';
 import Eucharistic from './src/screens/HomeScreen/VideoComponent/Eucharistic';
+import Journey from './src/screens/JourneyScreen/Journey';
+import Scriptures from './src/screens/ScriptireScreen/Scripture';
+import ICMAS from './src/screens/HomeScreen/VideoComponent/ICMAS';
+import SongReflection from './src/screens/HomeScreen/VideoComponent/SongReflection';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -35,6 +39,10 @@ export default function App() {
         <Stack.Screen name="Words" component={Word} />
         <Stack.Screen name="Rosary" component={Rosary} />
         <Stack.Screen name="Eucharistic" component={Eucharistic} />
+        <Stack.Screen name="Journey" component={Journey} />
+        <Stack.Screen name="Scripture" component={Scriptures} />
+        <Stack.Screen name="ICMAS" component={ICMAS} />
+        <Stack.Screen name="SongReflection" component={SongReflection} />
       </Stack.Navigator>
     </NavigationContainer>
   );

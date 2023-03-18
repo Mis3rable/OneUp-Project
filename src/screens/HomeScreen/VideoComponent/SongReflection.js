@@ -12,7 +12,7 @@ const SkeletonVideo = () => {
   );
 };
 
-export default function Prayer() {
+export default function Words() {
   const [videos, setVideos] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +22,7 @@ export default function Prayer() {
   useEffect(() => {
     const fetchVideos = async () => {
       const storageRef = firebase.storage().ref();
-      const videosRef = storageRef.child('Videos');
+      const videosRef = storageRef.child('Videos/Song Reflections');
       const videosList = await videosRef.listAll();
       const urls = await Promise.all(
         videosList.items.map(async (video) => {
