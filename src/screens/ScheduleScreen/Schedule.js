@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
@@ -50,6 +51,16 @@ export default function Schedule() {
   }, []);
 
   const schedulePushNotification = async () => {
+    if (title === '') {
+      Alert.alert('Error', 'Title cannot be empty');
+      return;
+    }
+
+    if (message === '') {
+      Alert.alert('Error', 'Message cannot be empty');
+      return;
+    }
+
     const trigger = new Date(date);
     trigger.setHours(time.getHours());
     trigger.setMinutes(time.getMinutes());
@@ -65,6 +76,9 @@ export default function Schedule() {
       trigger,
     });
     Alert.alert('Notification set', `Your notification has been scheduled for ${trigger.toLocaleString()}.`);
+    setTitle('');
+    setMessage('');
+    setTime(new Date());
   };
   
   return (
@@ -74,7 +88,18 @@ export default function Schedule() {
           <Card.Title title="One Up" subtitle="Deepening Schedule" left={LeftContent} />
           <Card.Cover source={coverImageSource}/>
           <Card.Content>
-            <TextInput placeholder="Title" value={title} onChangeText={setTitle} style={styles.input} />
+          <Picker
+            selectedValue={title}
+            onValueChange={(itemValue) => setTitle(itemValue)}
+          >
+            <Picker.Item label="Choose a Category" value="" enabled={false} />
+            <Picker.Item label="ICMAS" value="ICMAS" />
+            <Picker.Item label="Song Reflections" value="Song Reflections" />
+            <Picker.Item label="Share the Words" value="Share the Words" />
+            <Picker.Item label="OOTD" value="OOTD" />
+            <Picker.Item label="Eucharistic Celebration Hymns" value="Eucharistic Celebration Hymns" />
+            <Picker.Item label="Rosary" value="Rosary" />
+          </Picker>
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
             <TextInput
               placeholder="Time (HH:MM)"
@@ -101,8 +126,8 @@ export default function Schedule() {
                   setShowDatepicker(false);
                   setDate(currentDate);
                 }}
-            />
-)}
+              />
+            )}
           </Card.Content>
           <Card.Actions>
             <Button title="Schedule" onPress={async () => { await schedulePushNotification(); }}/>
