@@ -10,6 +10,9 @@ export default function YoutubeCard() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
+        <Text style={styles.text}>Start your</Text>
+        <Text style={styles.text}>Journey with</Text>
+        <Text style={[styles.text, { marginBottom: 30 }]}>ONE UP.</Text>
         <DailyReadsCard/>
         <Watch/>
         <Listen/>
@@ -33,9 +36,8 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   text: {
-    fontSize: 20,
+    fontSize: 50,
     fontWeight: "bold",
-    marginTop: 10
   },
   buttonContainer: {
     flexDirection: "row",
