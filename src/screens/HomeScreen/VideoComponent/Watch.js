@@ -58,7 +58,7 @@ const Watch = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Watch</Text>
+            <Text style={styles.myText}>Watch</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height: 250,
+        height: '100%',
     },
     title: {
         fontSize: 24,
@@ -85,6 +85,16 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         color: "blue",
       },
+    myText: {
+        fontFamily: 'DMSerifDisplay-Regular',
+        fontWeight: '500',
+        fontSize: 24,
+        color: "blue",
+        alignSelf: 'flex-start',
+        marginLeft: 5,
+        marginTop: 30,
+        marginBottom: 20,
+    },
 });
 
 export default Watch;

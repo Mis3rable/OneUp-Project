@@ -40,7 +40,7 @@ const Listen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Listen</Text>
+            <Text style={styles.myText}>Listen</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -58,15 +58,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height: 250,
+        height: '100%',
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
         alignSelf: 'flex-start',
-        color: 'blue',
+        color: "blue",
+        fontFamily: 'DMSerifDisplay-Regular',
+        fontWeight: '500',
+        color: "blue",
       },
+      myText: {
+        fontFamily: 'DMSerifDisplay-Regular',
+        fontWeight: '500',
+        fontSize: 24,
+        color: "blue",
+        alignSelf: 'flex-start',
+        marginLeft: 5,
+        marginTop: 30,
+        marginBottom: 20,
+    },
 });
 
 export default Listen;

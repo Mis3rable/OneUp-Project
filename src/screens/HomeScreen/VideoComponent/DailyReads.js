@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         alignSelf: 'flex-start',
         color: "blue",
+        fontFamily: 'DMSerifDisplay-Regular',
+        fontWeight: '500',
+        color: "blue",
       },
 });
 

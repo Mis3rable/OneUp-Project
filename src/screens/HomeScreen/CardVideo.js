@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView} from "react-native";
 import DailyReadsCard from "./VideoComponent/DailyReads";
 import Listen from "./VideoComponent/Listen";
-
+import Header from '../../../src/header/header';
 import Watch from "./VideoComponent/Watch";
 
 export default function YoutubeCard() {
 
   return (
+
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <Text style={styles.text}>Start your</Text>
+      <Header/>
+        <Text style={styles.start}>Start your</Text>
         <Text style={styles.text}>Journey with</Text>
-        <Text style={[styles.text, { marginBottom: 30 }]}>ONE UP.</Text>
+        <Text style={styles.oneup}>ONE UP</Text>
         <DailyReadsCard/>
         <Watch/>
         <Listen/>
@@ -22,6 +24,21 @@ export default function YoutubeCard() {
 }
 
 const styles = StyleSheet.create({
+    background: {
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
+    },
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    text: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#fff',
+    },
   container: {
     flex: 1,
     backgroundColor: "#fff"
@@ -35,9 +52,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 20
   },
+  start: {
+    marginTop: 20,
+    fontFamily: 'DMSerifDisplay-Regular',
+    fontWeight: '500',
+    fontSize: 50,
+  },
   text: {
     fontSize: 50,
     fontWeight: "bold",
+    fontFamily: 'DMSerifDisplay-Regular',
+    fontWeight: '500',
+    marginBottom: 6,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -57,4 +83,11 @@ const styles = StyleSheet.create({
   scrollView: {
     marginHorizontal: 20,
   },
+  oneup: {
+    fontFamily: 'DMSerifDisplay-Italic',
+    fontWeight: '500',
+    fontSize: 50,
+    color: "blue",
+    marginBottom: 20,
+  }
 });

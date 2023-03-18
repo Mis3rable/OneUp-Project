@@ -29,7 +29,8 @@ export default function MyTabs({ navigation, route }) {
               height: 30,}}
               />
           </View>
-        ),
+        ),  
+        headerShown: false,
       }} initialParams={{ user: user }}/>
 
       <Tab.Screen name="Library" component={Schedule} options={{
@@ -73,6 +74,7 @@ export default function MyTabs({ navigation, route }) {
           </View>
         ),
       }} initialParams={{ user: user }}/>
+      
     </Tab.Navigator>
   );
 }

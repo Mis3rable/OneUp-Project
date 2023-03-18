@@ -16,14 +16,28 @@ import Journey from './src/screens/JourneyScreen/Journey';
 import Scriptures from './src/screens/ScriptireScreen/Scripture';
 import ICMAS from './src/screens/HomeScreen/VideoComponent/ICMAS';
 import SongReflection from './src/screens/HomeScreen/VideoComponent/SongReflection';
+import * as Font from 'expo-font';
+import { useEffect } from 'react';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
+const fontMap = {
+  'DMSerifDisplay-Regular': require('./assets/fonts/DMSerifDisplay-Regular.ttf'),
+  'DMSerifDisplay-Italic': require('./assets/fonts/DMSerifDisplay-Italic.ttf'),
+};
+
 const Stack = createStackNavigator();
 
 export default function App() {
+  const loadFonts = async () => {
+    await Font.loadAsync(fontMap);
+  }
   
+  useEffect(() => {
+    loadFonts();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>    
