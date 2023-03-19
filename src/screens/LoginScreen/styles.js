@@ -15,7 +15,7 @@ export default StyleSheet.create({
         height: '50%',
         width: '90%',
         backgroundColor: 'rgba(255, 255, 255, 0.68)',
-        borderRadius: '15'
+        borderRadius: 15,
     },
     logo: {
         flex: 1,
@@ -37,7 +37,7 @@ export default StyleSheet.create({
         paddingLeft: 16,
         //
         borderWidth: 2,
-        fontSize: '17',
+        fontSize: 17,
     },
     button: {
         backgroundColor: '#000092',
