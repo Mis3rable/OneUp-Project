@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Alert } from 'react-native';
+import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
@@ -38,6 +38,7 @@ export default function Schedule() {
   const notificationListener = useRef();
   const responseListener = useRef();
   const [showDatepicker, setShowDatepicker] = useState(false);
+  const [showTimepicker, setShowTimepicker] = useState(false);
   const LeftContent = props => <Avatar.Icon {...props} icon="alarm" />
 
   useEffect(() => {
@@ -101,17 +102,29 @@ export default function Schedule() {
             <Picker.Item label="Rosary" value="Rosary" />
           </Picker>
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
+            <TouchableOpacity onPress={() => setShowTimepicker(true)}>
             <TextInput
-              placeholder="Time (HH:MM)"
-              value={`${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}`}
-              onChangeText={text => {
-                const [hours, minutes] = text.split(':');
-                setTime(new Date(new Date().setHours(Number(hours), Number(minutes))));
-              }}
+              placeholder="Time"
+              editable={false}
+              value={time.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit', hour12: true})}
               style={styles.input}
             />
+            </TouchableOpacity>
+            {showTimepicker && (
+              <DateTimePicker
+                value={time}
+                mode="time"
+                display="default"
+                onChange={(event, selectedTime) => {
+                  const currentTime = selectedTime || time;
+                  setShowTimepicker(false);
+                  setTime(currentTime);
+                }}
+              />
+            )}
             <TextInput
               placeholder="Date"
+              editable={false}
               value={date.toLocaleDateString()}
               onFocus={() => setShowDatepicker(true)}
               style={styles.input}
