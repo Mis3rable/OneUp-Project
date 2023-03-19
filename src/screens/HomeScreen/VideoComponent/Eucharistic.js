@@ -9,6 +9,7 @@ const App = () => {
 
   useEffect(() => {
     const storageRef = firebase.storage().ref('/Audio/Eucharistic Celebration Hymns (Diocese of Malolos)');
+
     storageRef.listAll().then(result => {
       const folderNames = result.prefixes.map(prefix => prefix.name);
       const visibility = new Array(folderNames.length).fill(false);
@@ -17,12 +18,30 @@ const App = () => {
     }).catch(error => {
       console.log('Error getting folder names:', error);
     });
+
   }, []);
 
-  const toggleModalVisibility = (index) => {
-    const newVisibility = [...modalVisibility];
-    newVisibility[index] = !modalVisibility[index];
-    setModalVisibility(newVisibility);
+  const toggleModalVisibility = async (index) => {
+    try {
+      const storageRef = firebase.storage().ref(`/Audio/Eucharistic Celebration Hymns (Diocese of Malolos)/${folders[index]}`);
+
+      const files = await storageRef.listAll().then(async (result) => {
+        return await Promise.all(result.items.map(async (x) => {
+          return {
+            fileName: x.name,
+            url: await x.getDownloadURL()
+          }
+        }))
+      });
+
+      console.log(`Files under /Audio/Eucharistic Celebration Hymns (Diocese of Malolos)/${folders[index]}`, files);
+
+      const newVisibility = [...modalVisibility];
+      newVisibility[index] = !modalVisibility[index];
+      setModalVisibility(newVisibility);
+    } catch (error) {
+      console.log('Error getting files', error);
+    }
   };
 
   const closeModal = (index) => {
@@ -65,7 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  title:{
+  title: {
     fontSize: 24,
     paddingBottom: 50,
     paddingTop: 20,
