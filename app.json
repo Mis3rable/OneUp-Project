@@ -14,16 +14,6 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assets": [
-      "assets/fonts/"
-    ],
-    "fonts": [
-      {
-        "family": "DMSerifDisplay",
-        "source": "./assets/fonts/DMSerifDisplay-Italic/DMSerifDisplayRegular.ttf",
-        "weight": "400"
-      }
-    ],
     "assetBundlePatterns": [
       "**/*"
     ],

@@ -54,15 +54,11 @@ const styles = StyleSheet.create({
   },
   start: {
     marginTop: 20,
-    fontFamily: 'DMSerifDisplay-Regular',
-    fontWeight: '500',
     fontSize: 50,
   },
   text: {
     fontSize: 50,
     fontWeight: "bold",
-    fontFamily: 'DMSerifDisplay-Regular',
-    fontWeight: '500',
     marginBottom: 6,
   },
   buttonContainer: {
@@ -84,8 +80,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   oneup: {
-    fontFamily: 'DMSerifDisplay-Italic',
-    fontWeight: '500',
     fontSize: 50,
     color: "blue",
     marginBottom: 20,

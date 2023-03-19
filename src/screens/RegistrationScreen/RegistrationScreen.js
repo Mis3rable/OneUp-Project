@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native'
+import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator, ImageBackground } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
@@ -83,9 +83,12 @@ export default function RegistrationScreen({navigation}) {
     }
 
     return (
+        <ImageBackground
+            source={require('../../../assets/bg.jpg')}
+            style={styles.background}>
         <View style={styles.container}>
             <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%', backgroundColor: '#f3fffc' }}
+                style={{ flex: 1, width: '100%'}}
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
@@ -109,26 +112,26 @@ export default function RegistrationScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                     keyboardType='numeric'
-                />
+                    />
                 <>
                 <Picker
                 style={styles.input}
                 selectedValue={selectedMunicipality}
                 onValueChange={(itemValue, itemIndex) => {
-                setSelectedMunicipality(itemValue);
-                setSelectedParish(null);}}
+                    setSelectedMunicipality(itemValue);
+                    setSelectedParish(null);}}
                 >
                 <Picker.Item label="Select a municipality" value={null} />
                 {municipalityOptions.map((option, index) => (
                     <Picker.Item key={index} label={option.label} value={option.value} />
-                ))}
+                    ))}
                 </Picker>
                 {selectedMunicipality && (
-                <Picker
-                style={styles.input}
-                selectedValue={selectedParish}
-                onValueChange={(itemValue) => setSelectedParish(itemValue)}
-                >
+                    <Picker
+                    style={styles.input}
+                    selectedValue={selectedParish}
+                    onValueChange={(itemValue) => setSelectedParish(itemValue)}
+                    >
                 <Picker.Item label="Select a parish" value={null} />
                 {parishOptions[selectedMunicipality].map((option, index) => (
                     <Picker.Item key={index} label={option.label} value={option.value} />
@@ -170,14 +173,15 @@ export default function RegistrationScreen({navigation}) {
                     onPress={() => onRegisterPress()}>
                     {loading ? (
                         <ActivityIndicator color="#ffffff" size="small" />
-                    ) : (
-                        <Text style={styles.buttonTitle}>Create Account</Text>
-                    )}
+                        ) : (
+                            <Text style={styles.buttonTitle}>Create Account</Text>
+                            )}
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
         </View>
+    </ImageBackground>
     )
 }

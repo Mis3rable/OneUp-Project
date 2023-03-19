@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator, ImageBackground } from 'react-native'
 import styles from './styles';
 import { firebase } from '../../firebase/config'
 
 export default function LoginScreen({navigation}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [focusedInput, setFocusedInput] = useState(null);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+
+    const handleFocus = (inputName) => setFocusedInput(inputName);
+    const handleBlur = () => setFocusedInput(null);
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('blur', () => {
@@ -17,6 +21,7 @@ export default function LoginScreen({navigation}) {
         });
         return unsubscribe;
     }, [navigation]);
+    
 
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
@@ -52,31 +57,35 @@ export default function LoginScreen({navigation}) {
     }
 
     return (
+        <ImageBackground
+            source={require('../../../assets/bg.jpg')}
+            style={styles.background}>
         <View style={styles.container}>
-            <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%', backgroundColor: '#f3fffc'  }}
-                keyboardShouldPersistTaps="always">
+            <View style={styles.form}>
                 <Image
                     style={styles.logo}
                     source={require('../../../assets/OneUp_Logo.png')}
                 />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'blue' : 'white' },]}
                     placeholder='E-mail'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     underlineColorAndroid="transparent"
+                    onFocus={() => handleFocus('email')}
+                    onBlur={handleBlur}
                     autoCapitalize="none"
                 />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'blue' : 'white' },]}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
                     placeholder='Password'
                     onChangeText={(text) => setPassword(text)}
                     value={password}
-                    underlineColorAndroid="transparent"
+                    onFocus={() => handleFocus('password')}
+                    onBlur={handleBlur}
                     autoCapitalize="none"
                 />
                 <TouchableOpacity
@@ -84,14 +93,15 @@ export default function LoginScreen({navigation}) {
                     onPress={() => onLoginPress()}>
                     {loading ? (
                         <ActivityIndicator color="#ffffff" size="small" />
-                    ) : (
-                        <Text style={styles.buttonTitle}>Log in</Text>
-                    )}
+                        ) : (
+                        <Text style={styles.buttonTitle}>Log In</Text>
+                        )}
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+                <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign Up Here.</Text></Text>
                 </View>
-            </KeyboardAwareScrollView>
+            </View>
         </View>
+        </ImageBackground>
     )
 }

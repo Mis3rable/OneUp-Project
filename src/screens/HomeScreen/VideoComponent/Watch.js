@@ -86,8 +86,6 @@ const styles = StyleSheet.create({
         color: "blue",
       },
     myText: {
-        fontFamily: 'DMSerifDisplay-Regular',
-        fontWeight: '500',
         fontSize: 24,
         color: "blue",
         alignSelf: 'flex-start',

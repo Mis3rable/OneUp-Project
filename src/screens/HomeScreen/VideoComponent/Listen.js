@@ -66,13 +66,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         alignSelf: 'flex-start',
         color: "blue",
-        fontFamily: 'DMSerifDisplay-Regular',
-        fontWeight: '500',
         color: "blue",
       },
       myText: {
-        fontFamily: 'DMSerifDisplay-Regular',
-        fontWeight: '500',
         fontSize: 24,
         color: "blue",
         alignSelf: 'flex-start',
