@@ -3,18 +3,22 @@ import { View, StyleSheet, Image } from 'react-native';
 
 const styles = StyleSheet.create({
   header: {
-    height: 60,
+    height: 130,
     justifyContent: 'center',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(248, 237, 237, 0.68)',
     borderBottomWidth: 1,
     borderBottomColor: 'white',
     paddingTop: 10,
     alignItems: 'center',
+    marginBottom: 5,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
   },
   logo: {
     resizeMode: 'contain',
-    width: 80,
-    height: 80,
+    width: 130,
+    height: 130,
+    marginTop: 30,
   },
 });
 

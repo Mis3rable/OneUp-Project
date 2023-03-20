@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import Header from '../../../src/header/header';
 
 export default function Journey() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.scrollView}>
+      <Header/>
       <Text style={styles.text}>No Materials Yet</Text>
-    </View>
+    </ScrollView>
+  </SafeAreaView>
   );
 };
 

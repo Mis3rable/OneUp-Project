@@ -25,10 +25,10 @@ export default function ProfileScreen ({ route }) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ position: 'absolute', top: 50 }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Welcome {userState ? userState.fullName : ''}!</Text>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Email: {userState ? userState.email : ''}</Text>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Municipality: {userState ? userState.selectedMunicipality : ''}</Text>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Parish: {userState ? userState.selectedParish : ''}</Text>
+        <Text style={{ fontSize: 24, marginTop: 80, fontWeight: 'bold', fontStyle: 'italic'}}>Welcome {userState ? userState.fullName : ''}!</Text>
+        <Text style={{ fontSize: 20, }}>Email: {userState ? userState.email : ''}</Text>
+        <Text style={{ fontSize: 20, }}>Parish: {userState ? userState.selectedParish : ''}</Text>
+        <Text style={{ fontSize: 20, }}>Municipality: {userState ? userState.selectedMunicipality : ''}</Text>
         </View>
         <View style={{ marginBottom: 20 , marginTop: 100}}>
             <AboutUsModal />

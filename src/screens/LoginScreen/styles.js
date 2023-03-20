@@ -8,9 +8,6 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    title: {
-
-    },
     form: {
         height: '50%',
         width: '90%',
@@ -18,9 +15,10 @@ export default StyleSheet.create({
         borderRadius: 15,
     },
     logo: {
+        resizeMode: 'contain',
         flex: 1,
         height: 20,
-        width: 230,
+        width: 250,
         alignSelf: "center",
         marginTop: 30,
         marginBottom: 10,
@@ -35,7 +33,6 @@ export default StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         paddingLeft: 16,
-        //
         borderWidth: 2,
         fontSize: 17,
     },
@@ -53,7 +50,6 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 20,
         fontWeight: "bold",
-        //
     },
     footerView: {
         flex: 1,
@@ -63,13 +59,11 @@ export default StyleSheet.create({
     footerText: {
         fontSize: 16,
         color: 'black',
-        //
     },
     footerLink: {
         color: "blue",
         fontWeight: "bold",
         fontSize: 16,
-        //
         textDecorationLine: 'underline',
     },
     background: {

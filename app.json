@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "OneUp-Project",
-    "slug": "OneUp-Project",
+    "name": "OneUp",
+    "slug": "OneUp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/OneUp_Logo.png",

@@ -6,6 +6,7 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRoute } from '@react-navigation/native';
+import Header from '../../../src/header/header';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -22,11 +23,11 @@ export default function Schedule() {
   if (category === 'OOTD') {
     coverImageSource = require('../../../assets/OOTD.png');
   } else if (category === 'Prayer') {
-    coverImageSource = require('../../../assets/Prayer.png');
+    coverImageSource = require('../../../assets/prayer.png');
   } else if (category === 'ShareTheWords') {
     coverImageSource = require('../../../assets/ShareTheWords.png');
   } else {
-    coverImageSource = require('../../../assets/Prayer.png');
+    coverImageSource = require('../../../assets/prayer.png');
   }
 
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -84,8 +85,9 @@ export default function Schedule() {
   
   return (
     <SafeAreaView style={styles.container}>
+    <Header/>
       <ScrollView style={styles.scrollView}>
-        <Card style={{ paddingTop: 75, paddingLeft: 10 }}>
+        <Card style={{ paddingTop: 10, paddingLeft: 10 }}>
           <Card.Title title="One Up" subtitle="Set A Schedule" left={LeftContent} />
           <Card.Cover source={coverImageSource}/>
           <Card.Content>
@@ -144,7 +146,9 @@ export default function Schedule() {
             )}
           </Card.Content>
           <Card.Actions>
-            <Button title="Schedule" onPress={async () => { await schedulePushNotification(); }}/>
+          <Button 
+            title="Schedule" onPress={async () => { await schedulePushNotification(); }}
+          />
           </Card.Actions>
         </Card>
       </ScrollView>
@@ -161,6 +165,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
     marginBottom: 16,
     paddingHorizontal: 8,
+  },
+  scrollView: {
+    marginTop: 20,
+    marginLeft: 50,
+    marginRight: 50,
   },
 });
 

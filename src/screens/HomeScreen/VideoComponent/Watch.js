@@ -58,7 +58,7 @@ const Watch = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.myText}>Watch</Text>
+            <Text style={styles.title}>Watch</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -81,17 +81,10 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 10,
+        marginLeft: 20,
+        marginTop: 10,
         alignSelf: 'flex-start',
-        color: "blue",
-      },
-    myText: {
-        fontSize: 24,
-        color: "blue",
-        alignSelf: 'flex-start',
-        marginLeft: 5,
-        marginTop: 30,
-        marginBottom: 20,
     },
 });
 

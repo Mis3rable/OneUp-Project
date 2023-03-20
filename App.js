@@ -35,9 +35,9 @@ export default function App() {
         <Stack.Screen name="Category" component={Category} />
         <Stack.Screen name="Library" component={Schedule} options={{ headerShown: false }}/>
         <Stack.Screen name="OOTD" component={OOTD} />
-        <Stack.Screen name="Prayer" component={Prayer} />
+        {/* <Stack.Screen name="Prayer" component={Prayer} /> */}
         <Stack.Screen name="Words" component={Word} />
-        <Stack.Screen name="Rosary" component={Rosary} />
+        <Stack.Screen name="Prayer" component={Rosary} />
         <Stack.Screen name="Eucharistic" component={Eucharistic} />
         <Stack.Screen name="Journey" component={Journey} />
         <Stack.Screen name="Scripture" component={Scriptures} />

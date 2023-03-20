@@ -8,7 +8,7 @@ const Listen = () => {
     const navigation = useNavigation();
 
     const handleOOTDCardPress = () => {
-      navigation.navigate('Rosary');
+      navigation.navigate('Prayer');
     }
 
     const handlePrayerCardPress = () => {
@@ -28,19 +28,19 @@ const Listen = () => {
     const cards = [
         {
             title: 'Rosary',
-            image: require('../../../../assets/Rosary.png'),
+            image: require('../../../../assets/prayer.png'),
             onPress: handleOOTDCardPress,
         },  
         {
             title: 'Eucharistic',
-            image: require('../../../../assets/card_ECH.png'),
+            image: require('../../../../assets/cards-ECH.png'),
             onPress: handlePrayerCardPress,
         },
     ];
 
     return (
         <View style={styles.container}>
-            <Text style={styles.myText}>Listen</Text>
+            <Text style={styles.title}>Listen</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -63,18 +63,10 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 10,
+        marginLeft: 20,
+        marginTop: 10,
         alignSelf: 'flex-start',
-        color: "blue",
-        color: "blue",
-      },
-      myText: {
-        fontSize: 24,
-        color: "blue",
-        alignSelf: 'flex-start',
-        marginLeft: 5,
-        marginTop: 30,
-        marginBottom: 20,
     },
 });
 
