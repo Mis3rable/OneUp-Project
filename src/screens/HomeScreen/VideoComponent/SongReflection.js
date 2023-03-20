@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, AppState } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Video } from 'expo-av';
+import { Card } from 'react-native-paper';
 import firebase from '../../../firebase/config';
 
 const SkeletonVideo = () => {
@@ -68,18 +69,20 @@ export default function Words() {
 
   const renderVideo = ({ item, index }) => {
     return (
-      <View style={styles.videoContainer}>
-        <Video
-          ref={videoPlayer}
-          source={{ uri: item.url }}
-          style={styles.video}
-          useNativeControls
-          resizeMode="contain"
-          isLooping
-          shouldPlay={currentVideoIndex === index}
-        />
-        <Text style={styles.videoTitle}>{item.name}</Text>
-      </View>
+      <Card style={styles.cardVideo}>
+          <Video
+            ref={videoPlayer}
+            source={{ uri: item.url }}
+            style={styles.video}
+            useNativeControls
+            resizeMode="cover"
+            isLooping
+            shouldPlay={currentVideoIndex === index}
+          />
+        <Card.Content style={styles.cardContent}>
+          <Text style={styles.cardText}>{item.name}</Text>
+        </Card.Content>
+      </Card>
     );
   };
 
@@ -115,6 +118,14 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 80,
   },
+  cardContent: {
+    marginTop: 10,
+  },
+  cardText: {
+    fontSize: 20,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+  },
   videoContainer: {
     width: 255,
     height: 220,
@@ -129,14 +140,11 @@ const styles = StyleSheet.create({
   video: {
     width: '100%',
     height: '100%',
+    borderRadius: 10,
   },
-  videoTitle: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    position: 'absolute',
-    top: 10,
-    left: 10,
+  cardVideo: {
+    height: 250,
+    borderColor: 'black',
   },
   skeletonVideo: {
     width: '100%',

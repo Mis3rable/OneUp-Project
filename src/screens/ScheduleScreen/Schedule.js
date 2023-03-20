@@ -86,7 +86,7 @@ export default function Schedule() {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <Card style={{ paddingTop: 75, paddingLeft: 10 }}>
-          <Card.Title title="One Up" subtitle="Deepening Schedule" left={LeftContent} />
+          <Card.Title title="One Up" subtitle="Set A Schedule" left={LeftContent} />
           <Card.Cover source={coverImageSource}/>
           <Card.Content>
           <Picker
@@ -103,12 +103,12 @@ export default function Schedule() {
           </Picker>
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
             <TouchableOpacity onPress={() => setShowTimepicker(true)}>
-            <TextInput
-              placeholder="Time"
-              editable={false}
-              value={time.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit', hour12: true})}
-              style={styles.input}
-            />
+              <TextInput
+                placeholder="Time"
+                editable={false}
+                value={time.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit', hour12: true})}
+                style={styles.input}
+              />
             </TouchableOpacity>
             {showTimepicker && (
               <DateTimePicker
@@ -122,13 +122,14 @@ export default function Schedule() {
                 }}
               />
             )}
-            <TextInput
-              placeholder="Date"
-              editable={false}
-              value={date.toLocaleDateString()}
-              onFocus={() => setShowDatepicker(true)}
-              style={styles.input}
-            />
+            <TouchableOpacity onPress={() => setShowDatepicker(true)}>
+              <TextInput
+                placeholder="Date"
+                editable={false}
+                value={date.toLocaleDateString()}
+                style={styles.input}
+              />
+            </TouchableOpacity>
             {showDatepicker && (
               <DateTimePicker
                 value={date}

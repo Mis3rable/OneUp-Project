@@ -121,7 +121,6 @@ const App = () => {
                           isLooping={false}
                           shouldPlay={isPlaying}
                           style={{ width: '100%', height: 40 }}
-                          hideControlsTimeout={Infinity}
                         />
                       </View>
                     </View>
