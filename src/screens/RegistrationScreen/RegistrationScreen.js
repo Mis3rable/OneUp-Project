@@ -193,7 +193,7 @@ export default function RegistrationScreen({navigation}) {
         { label: 'Sto. Niño Parish', value: 'Sto. Niño Parish' },
         { label: 'San Jose Parish', value: 'San Jose Parish' },
     ],
-    'San Jose Del Monte ': [
+    'San Jose Del Monte': [
         { label: 'St. Joseph the Worker Parish', value: 'St. Joseph the Worker Parish' },
         { label: 'Immaculate Conception Parish', value: 'Immaculate Conception Parish' },
         { label: 'Sagrada Familia Parish', value: 'Sagrada Familia Parish' },
