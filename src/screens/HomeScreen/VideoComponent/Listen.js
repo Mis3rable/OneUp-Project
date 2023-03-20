@@ -28,7 +28,7 @@ const Listen = () => {
     const cards = [
         {
             title: 'Rosary',
-            image: require('../../../../assets/prayer.png'),
+            image: require('../../../../assets/Prayer.png'),
             onPress: handleOOTDCardPress,
         },  
         {

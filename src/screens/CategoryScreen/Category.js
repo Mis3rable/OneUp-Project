@@ -32,7 +32,7 @@ return (
         
         <Card style={styles.card}>
         <TouchableOpacity onPress={() => handleCardPress('Prayer')}>
-        <Card.Cover style={styles.cover} source={require('../../../assets/prayer.png')}/>
+        <Card.Cover style={styles.cover} source={require('../../../assets/Prayer.png')}/>
         </TouchableOpacity>
         </Card>
 
