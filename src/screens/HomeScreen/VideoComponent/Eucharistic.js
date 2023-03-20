@@ -116,6 +116,7 @@ const App = () => {
                       <View style={styles.audioPlayer}>
                         <Video
                           source={{ uri: file.url }}
+                          controls={true}
                           useNativeControls={true}
                           resizeMode="contain"
                           isLooping={false}

@@ -32,7 +32,7 @@ function Scriptures() {
     try {
       setIsLoading(true);
       const storageRef = firebase.storage().ref();
-      const listRef = storageRef.child('Scriptures');
+      const listRef = storageRef.child('Scriptures/Daily Readings');
       const res = await listRef.listAll();
       const data = await Promise.all(
         res.prefixes.map(async (prefixRef) => {
@@ -120,7 +120,6 @@ function Scriptures() {
                  {coverUrl && <Card.Cover source={{ uri: coverUrl }} />}
                   <Card.Content>
                     <Title>{name}</Title>
-                    <Paragraph>This is some text describing the scripture.</Paragraph>
                   </Card.Content>
                   <Card.Actions>
                     <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
