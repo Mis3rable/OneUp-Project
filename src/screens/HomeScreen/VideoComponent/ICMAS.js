@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, AppState } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Video } from 'expo-av';
-import { Card } from 'react-native-paper';
+import { Card, Searchbar, List } from 'react-native-paper';
 import firebase from '../../../firebase/config';
 
 const SkeletonVideo = () => {
@@ -17,6 +17,7 @@ export default function Words() {
   const [videos, setVideos] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
   const videoPlayer = useRef(null);
   const appState = useRef(AppState.currentState);
 
@@ -67,6 +68,18 @@ export default function Words() {
     setCurrentVideoIndex(index);
   };
 
+  const filteredVideos = videos.filter((video) =>
+    video.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const suggestions = videos.filter((video) =>
+    video.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+  );
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
   const renderVideo = ({ item, index }) => {
     return (
       <Card style={styles.cardVideo}>
@@ -89,17 +102,27 @@ export default function Words() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Videos</Text>
-      {isLoading ? (
-        <SkeletonVideo />
-      ) : (
-        <Carousel
-          data={videos}
-          renderItem={renderVideo}
-          sliderWidth={Dimensions.get('window').width}
-          itemWidth={250}
-          onSnapToItem={handleSnapToItem}
-        />
+      <Searchbar
+        placeholder="Search videos"
+        onChangeText={handleSearch}
+        value={searchQuery}
+      />
+      {searchQuery.length > 0 && suggestions.length === 0 && (
+        <Text style={styles.noSearchText}>No results found for "{searchQuery}"</Text>
       )}
+      <View style={styles.carouselContainer}>
+        {isLoading ? (
+          <SkeletonVideo />
+        ) : (
+          <Carousel
+            data={filteredVideos}
+            renderItem={renderVideo}
+            sliderWidth={Dimensions.get('window').width}
+            itemWidth={250}
+            onSnapToItem={handleSnapToItem}
+          />
+        )}
+      </View>
     </View>
   );
 };
@@ -117,6 +140,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingTop: 10,
     paddingBottom: 80,
+  },
+  carouselContainer:{
+    marginTop: 30,
   },
   cardContent: {
     marginTop: 10,
@@ -150,5 +176,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#ccc',
+  },
+  noSearchText: {
+    textAlign: 'center',
+    marginTop: 10,
+    fontStyle: 'italic',
+    color: '#aaa',
   },
 });
