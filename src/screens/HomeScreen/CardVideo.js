@@ -4,6 +4,7 @@ import DailyReadsCard from "./VideoComponent/DailyReads";
 import Listen from "./VideoComponent/Listen";
 import Header from '../../../src/header/header';
 import Watch from "./VideoComponent/Watch";
+import PrayerCard from "./VideoComponent/PrayerCard";
 
 export default function YoutubeCard() {
 
@@ -14,6 +15,7 @@ export default function YoutubeCard() {
         {/* <Text style={styles.start}>Start your journey with</Text>
         <Text style={styles.oneup}>ONE UP</Text> */}
         <DailyReadsCard/>
+        <PrayerCard/>
         <Watch/>
         <Listen/>
       </ScrollView>

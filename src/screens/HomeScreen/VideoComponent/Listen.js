@@ -7,16 +7,32 @@ import Carousel from 'react-native-snap-carousel';
 const Listen = () => {
     const navigation = useNavigation();
 
-    const handleOOTDCardPress = () => {
-      navigation.navigate('Prayer');
-    }
+    // const handleEucharisticCardPress = () => {
+    //   navigation.navigate('Eucharistic');
+    // }
 
-    const handlePrayerCardPress = () => {
-      navigation.navigate('Eucharistic');
+    const handleChefPress = () => {
+        navigation.navigate('The Lord Is My Chef');
     }
-    const handleHimnoAudioPress = () => {
-        navigation.navigate('Himno Bulakenyo(Audio)');
+    const handleTinigNgPastolPress = () => {
+        navigation.navigate('Tinig Ng Pastol');
     }
+    const handleCrossWordPress = () => {
+        navigation.navigate('Cross Word');
+    }
+    const handleOOTDCardPress = () => {
+        navigation.navigate('OOTD');
+    }
+    const handleSaMadalingSabiPress = () => {
+        navigation.navigate('Sa Madaling Sabi');
+    }
+    const handleItanongMoKungBakitPress = () => {
+        navigation.navigate('Itanong Mo Kung Bakit');
+    }
+    // const handleHimnoAudioPress = () => {
+    //     navigation.navigate('Himno Bulakenyo(Audio)');
+    // }
+    
 
     const renderCard = ({ item }) => {
         return (
@@ -29,26 +45,52 @@ const Listen = () => {
     }
 
     const cards = [
+        // {
+        //     title: 'Eucharistic',
+        //     image: require('../../../../assets/cards-ECH.png'),
+        //     onPress: handleEucharisticCardPress,
+        // },
+        
         {
-            title: 'Rosary',
-            image: require('../../../../assets/Prayer.png'),
+            title: 'Prayer',
+            image: require('../../../../assets/TheLordIsMyChef.jpg'),
+            onPress: handleChefPress,
+        },
+        {
+            title: 'TinigNgPastol',
+            image: require('../../../../assets/Tinig.jpg'),
+            onPress: handleTinigNgPastolPress,
+        },
+        {
+            title: 'CrossWord',
+            image: require('../../../../assets/CrossWord.png'),
+            onPress: handleCrossWordPress,
+        },  
+        {
+            title: 'OOTD',
+            image: require('../../../../assets/OOTD.png'),
             onPress: handleOOTDCardPress,
         },  
         {
-            title: 'Eucharistic',
-            image: require('../../../../assets/cards-ECH.png'),
-            onPress: handlePrayerCardPress,
-        },
+            title: 'SaMadalingSabi',
+            image: require('../../../../assets/SaMadalingSabi.png'),
+            onPress: handleSaMadalingSabiPress,
+        },  
         {
-            title: 'Himno',
-            image: require('../../../../assets/cards-HimnoBulakenyoVid.png'),
-            onPress: handleHimnoAudioPress,
+            title: 'ItanongMoKungBakit',
+            image: require('../../../../assets/ItanongMoKungBakit.png'),
+            onPress: handleItanongMoKungBakitPress,
         },
+        // {
+        //     title: 'Himno',
+        //     image: require('../../../../assets/cards-HimnoBulakenyoVid.png'),
+        //     onPress: handleHimnoAudioPress,
+        // },
     ];
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Listen</Text>
+            <Text style={styles.title}>Reflections and Homilies</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -69,7 +111,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     title: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
         marginLeft: 20,

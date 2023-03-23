@@ -15,33 +15,36 @@ const Watch = () => {
       navigation.navigate('Icons');
     }
 
-    const handleWordsCardPress = () => {
-      navigation.navigate('Words');
+    const handleEucharisticCardPress = () => {
+        navigation.navigate('Eucharistic');
     }
+    // const handleWordsCardPress = () => {
+    //   navigation.navigate('Words');
+    // }
 
-    const handleOOTDCardPress = () => {
-        navigation.navigate('OOTD');
-    }
+    // const handleOOTDCardPress = () => {
+    //     navigation.navigate('OOTD');
+    // }
 
-    const handleHimnoPress = () => {
-        navigation.navigate('Himno Bulakenyo');
-    }
+    // const handleHimnoPress = () => {
+    //     navigation.navigate('Himno Bulakenyo');
+    // }
 
-    const handleCrossWordPress = () => {
-        navigation.navigate('Cross Word');
-    }
-    const handleSaMadalingSabiPress = () => {
-        navigation.navigate('Sa Madaling Sabi');
-    }
-    const handleJoelCruzPress = () => {
-        navigation.navigate('Joel Cruz');
-    }
-    const handleItanongMoKungBakitPress = () => {
-        navigation.navigate('Itanong Mo Kung Bakit');
-    }
-    const handleTinigNgPastolPress = () => {
-        navigation.navigate('Tinig Ng Pastol');
-    }
+    // const handleCrossWordPress = () => {
+    //     navigation.navigate('Cross Word');
+    // }
+    // const handleSaMadalingSabiPress = () => {
+    //     navigation.navigate('Sa Madaling Sabi');
+    // }
+    // const handleJoelCruzPress = () => {
+    //     navigation.navigate('Joel Cruz');
+    // }
+    // const handleItanongMoKungBakitPress = () => {
+    //     navigation.navigate('Itanong Mo Kung Bakit');
+    // }
+    // const handleTinigNgPastolPress = () => {
+    //     navigation.navigate('Tinig Ng Pastol');
+    // }
 
     const renderCard = ({ item }) => {
         return (
@@ -55,8 +58,8 @@ const Watch = () => {
 
     const cards = [
         {
-            title: 'Prayer',
-            image: require('../../../../assets/ICMAS.png'),
+            title: 'ICMAS',
+            image: require('../../../../assets/ICMAS.jpg'),
             onPress: handleICMASCardPress,
         },
         {
@@ -65,50 +68,56 @@ const Watch = () => {
             onPress: handleSongCardPress,
         },
         {
-            title: 'ShareTheWords',
-            image: require('../../../../assets/ShareTheWord.png'),
-            onPress: handleWordsCardPress,
+            title: 'Eucharistic',
+            image: require('../../../../assets/cards-ECH.png'),
+            onPress: handleEucharisticCardPress,
         },
-        {
-            title: 'OOTD',
-            image: require('../../../../assets/OOTD.png'),
-            onPress: handleOOTDCardPress,
-        },  
-        {
-            title: 'Himno',
-            image: require('../../../../assets/cards-HimnoBulakenyoVid.png'),
-            onPress: handleHimnoPress,
-        },  
-        {
-            title: 'CrossWord',
-            image: require('../../../../assets/CrossWord.png'),
-            onPress: handleCrossWordPress,
-        },  
-        {
-            title: 'SaMadalingSabi',
-            image: require('../../../../assets/SaMadalingSabi.png'),
-            onPress: handleSaMadalingSabiPress,
-        },  
-        {
-            title: 'JoelCruz',
-            image: require('../../../../assets/JoelCruz.png'),
-            onPress: handleJoelCruzPress,
-        },
-        {
-            title: 'ItanongMoKungBakit',
-            image: require('../../../../assets/ItanongMoKungBakit.png'),
-            onPress: handleItanongMoKungBakitPress,
-        },
-        {
-            title: 'TinigNgPastol',
-            image: require('../../../../assets/TinigNgPastol.png'),
-            onPress: handleTinigNgPastolPress,
-        },
+        // {
+        //     title: 'ShareTheWords',
+        //     image: require('../../../../assets/ShareTheWord.jpg'),
+        //     onPress: handleWordsCardPress,
+        // },
+        // {
+        //     title: 'OOTD',
+        //     image: require('../../../../assets/OOTD.png'),
+        //     onPress: handleOOTDCardPress,
+        // },  
+        // {
+        //     title: 'Himno',
+        //     image: require('../../../../assets/cards-HimnoBulakenyoVid.png'),
+        //     onPress: handleHimnoPress,
+        // },  
+        // {
+        //     title: 'CrossWord',
+        //     image: require('../../../../assets/CrossWord.png'),
+        //     onPress: handleCrossWordPress,
+        // },  
+        // {
+        //     title: 'SaMadalingSabi',
+        //     image: require('../../../../assets/SaMadalingSabi.png'),
+        //     onPress: handleSaMadalingSabiPress,
+        // },  
+        // {
+        //     title: 'JoelCruz',
+        //     image: require('../../../../assets/JoelCruz.png'),
+        //     onPress: handleJoelCruzPress,
+        // },
+        // {
+        //     title: 'ItanongMoKungBakit',
+        //     image: require('../../../../assets/ItanongMoKungBakit.png'),
+        //     onPress: handleItanongMoKungBakitPress,
+        // },
+        // {
+        //     title: 'TinigNgPastol',
+        //     image: require('../../../../assets/Tinig.jpg'),
+        //     onPress: handleTinigNgPastolPress,
+        // },
     ];
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Watch</Text>
+            <Text style={styles.title2}>Religous and Inspirational Music</Text>
+            <Text style={styles.title}>Music Videos</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -129,7 +138,15 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     title: {
-        fontSize: 24,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginLeft: 20,
+        marginTop: 10,
+        alignSelf: 'flex-start',
+    },
+    title2: {
+        fontSize: 25,
         fontWeight: 'bold',
         marginBottom: 10,
         marginLeft: 20,

@@ -4,16 +4,12 @@ import { TouchableOpacity, View, StyleSheet, Dimensions, Text } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 
-const DailyReadsCard = () => {
+const PrayerCard = () => {
     const navigation = useNavigation();
 
-    const handleScripturePress = () => {
-        navigation.navigate('Scripture');
-    }
-
-    // const handleChefPress = () => {
-    //   navigation.navigate('The Lord Is My Chef');
-    // }
+    const handlePrayerCardPress = () => {
+        navigation.navigate('Prayer');
+      }
 
     const renderCard = ({ item }) => {
         return (
@@ -27,15 +23,11 @@ const DailyReadsCard = () => {
 
     const cards = [
         {
-            title: 'Scripture',
-            image: require('../../../../assets/Scripture.jpg'),
-            onPress: handleScripturePress,
-        },
-        // {
-        //     title: 'Prayer',
-        //     image: require('../../../../assets/TheLordIsMyChef.jpg'),
-        //     onPress: handleChefPress,
-        // },
+            title: 'Rosary',
+            image: require('../../../../assets/Prayer.jpg'),
+            onPress: handlePrayerCardPress,
+        },  
+        
     ];
 
     return (
@@ -70,4 +62,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DailyReadsCard;
+export default PrayerCard;
