@@ -21,9 +21,9 @@ import CrossWord from './src/screens/HomeScreen/VideoComponent/CrossWord';
 import SaMadalingSabi from './src/screens/HomeScreen/VideoComponent/SaMadalingSabi';
 import JoelCruz from './src/screens/HomeScreen/VideoComponent/JoelCruz';
 import ItanongMoKungBakit from './src/screens/HomeScreen/VideoComponent/ItanongMoKungBakit';
-import TinigNgPastol from './src/screens/HomeScreen/VideoComponent/TinigNgPastol';
 import HimnoBulakenyoAudio from './src/screens/HomeScreen/VideoComponent/HimnoAudio';
 import Lithurgical from './src/screens/HomeScreen/VideoComponent/Liturgical';
+import Tinig from './src/screens/HomeScreen/VideoComponent/TinigNgPastol';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -58,7 +58,7 @@ export default function App() {
         <Stack.Screen name="Sa Madaling Sabi" component={SaMadalingSabi} />
         <Stack.Screen name="Joel Cruz" component={JoelCruz} />
         <Stack.Screen name="Itanong Mo Kung Bakit" component={ItanongMoKungBakit} />
-        <Stack.Screen name="Tinig Ng Pastol" component={TinigNgPastol} />
+        <Stack.Screen name="Tinig Ng Pastol" component={Tinig} />
       </Stack.Navigator>
     </NavigationContainer>
   );
