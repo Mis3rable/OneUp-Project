@@ -8,15 +8,15 @@ const Watch = () => {
     const navigation = useNavigation();
 
     const handleICMASCardPress = () => {
-        navigation.navigate('ICMAS');
+        navigation.navigate("Sa 'Yong Tahanan");
     }
 
     const handleSongCardPress = () => {
       navigation.navigate('Icons');
     }
 
-    const handleEucharisticCardPress = () => {
-        navigation.navigate('Eucharistic');
+    const handleLithurgicalCardPress = () => {
+        navigation.navigate('Liturgical Songs');
     }
     // const handleWordsCardPress = () => {
     //   navigation.navigate('Words');
@@ -58,9 +58,9 @@ const Watch = () => {
 
     const cards = [
         {
-            title: 'ICMAS',
-            image: require('../../../../assets/ICMAS.jpg'),
-            onPress: handleICMASCardPress,
+            title: 'Lithurgical',
+            image: require('../../../../assets/Liturgical.jpg'),
+            onPress: handleLithurgicalCardPress,
         },
         {
             title: 'Icon',
@@ -68,9 +68,9 @@ const Watch = () => {
             onPress: handleSongCardPress,
         },
         {
-            title: 'Eucharistic',
-            image: require('../../../../assets/cards-ECH.png'),
-            onPress: handleEucharisticCardPress,
+            title: "ISa 'Yong Tahanan",
+            image: require('../../../../assets/SaYongTahanan.png'),
+            onPress: handleICMASCardPress,
         },
         // {
         //     title: 'ShareTheWords',

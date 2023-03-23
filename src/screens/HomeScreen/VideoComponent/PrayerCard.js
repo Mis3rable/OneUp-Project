@@ -8,7 +8,7 @@ const PrayerCard = () => {
     const navigation = useNavigation();
 
     const handlePrayerCardPress = () => {
-        navigation.navigate('Prayer');
+        navigation.navigate('Prayers');
       }
 
     const renderCard = ({ item }) => {

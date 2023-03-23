@@ -4,7 +4,7 @@ import { Title, Card } from 'react-native-paper';
 import { Audio, Video } from 'expo-av';
 import firebase from '../../../firebase/config';
 
-const App = () => {
+const Liturgical = () => {
   const [folders, setFolders] = useState([]);
   const [modalVisibility, setModalVisibility] = useState([]);
   const [modalFiles, setModalFiles] = useState({ audioFiles: [], imageFiles: [] });
@@ -203,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Liturgical;

@@ -11,7 +11,6 @@ import OOTD from './src/screens/HomeScreen/VideoComponent/OOTD';
 import Prayer from './src/screens/HomeScreen/VideoComponent/Prayer';
 import Word from './src/screens/HomeScreen/VideoComponent/Word';
 import Rosary from './src/screens/HomeScreen/VideoComponent/Rosary';
-import Eucharistic from './src/screens/HomeScreen/VideoComponent/Eucharistic';
 import Journey from './src/screens/JourneyScreen/Journey';
 import Scriptures from './src/screens/ScriptireScreen/Scripture';
 import ICMAS from './src/screens/HomeScreen/VideoComponent/ICMAS';
@@ -24,6 +23,7 @@ import JoelCruz from './src/screens/HomeScreen/VideoComponent/JoelCruz';
 import ItanongMoKungBakit from './src/screens/HomeScreen/VideoComponent/ItanongMoKungBakit';
 import TinigNgPastol from './src/screens/HomeScreen/VideoComponent/TinigNgPastol';
 import HimnoBulakenyoAudio from './src/screens/HomeScreen/VideoComponent/HimnoAudio';
+import Lithurgical from './src/screens/HomeScreen/VideoComponent/Liturgical';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -45,12 +45,12 @@ export default function App() {
         <Stack.Screen name="OOTD" component={OOTD} />
         {/* <Stack.Screen name="Prayer" component={Prayer} /> */}
         <Stack.Screen name="Words" component={Word} />
-        <Stack.Screen name="Prayer" component={Rosary} />
-        <Stack.Screen name="Eucharistic" component={Eucharistic} />
+        <Stack.Screen name="Prayers" component={Rosary} />
+        <Stack.Screen name="Liturgical Songs" component={Lithurgical} />
         <Stack.Screen name="Journey" component={Journey} />
         <Stack.Screen name="Scripture" component={Scriptures} />
         <Stack.Screen name="The Lord Is My Chef" component={LordChef} />
-        <Stack.Screen name="ICMAS" component={ICMAS} />
+        <Stack.Screen name="Sa 'Yong Tahanan" component={ICMAS} />
         <Stack.Screen name="Icons" component={Icons} />
         <Stack.Screen name="Himno Bulakenyo" component={HimnoBulakenyo} />
         <Stack.Screen name="Himno Bulakenyo(Audio)" component={HimnoBulakenyoAudio} />
