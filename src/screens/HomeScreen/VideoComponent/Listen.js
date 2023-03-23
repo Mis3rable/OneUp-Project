@@ -98,6 +98,7 @@ const Listen = () => {
                 itemWidth={300}
                 layout={'default'}
             />
+            <Text style={styles.swipe}> Swipe to browse more categories</Text>
         </View>
     );
 };
@@ -112,12 +113,23 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: '800',
         marginBottom: 10,
         marginLeft: 20,
-        marginTop: 10,
+        marginTop: 8,
         alignSelf: 'flex-start',
+        color: 'white',
     },
+    swipe: {
+        color: 'white', 
+        fontStyle: 'italic', 
+        fontSize: 14,
+        marginBottom: 15, 
+        marginTop: 5, 
+        textShadowColor: 'black', 
+        textShadowOffset: { width: 3, height: 3 }, 
+        textShadowRadius: 5,
+    }
 });
 
 export default Listen;

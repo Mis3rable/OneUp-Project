@@ -116,15 +116,16 @@ const Watch = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title2}>Religous and Inspirational Music</Text>
-            <Text style={styles.title}>Music Videos</Text>
+            <Text style={styles.title}>Religious and Inspirational Music</Text>
+            <Text style={styles.title2}>Music Videos</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
                 sliderWidth={Dimensions.get('window').width}
-                itemWidth={300}
+                itemWidth={330}
                 layout={'default'}
             />
+            <Text style={styles.swipe}> Swipe to browse more categories</Text>
         </View>
     );
 };
@@ -138,21 +139,42 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        marginLeft: 20,
-        marginTop: 10,
-        alignSelf: 'flex-start',
-    },
+        fontSize: 23,
+        fontWeight: '800',
+        alignSelf: 'center',
+        color: 'white',
+        textShadowColor: 'black',
+        textShadowOffset: { width: 3, height: 3 },
+        textShadowRadius: 5,
+        textTransform: 'uppercase',
+        textAlign: 'center', 
+        textAlignVertical: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 30
+      },
     title2: {
-        fontSize: 25,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: '800',
         marginBottom: 10,
-        marginLeft: 20,
-        marginTop: 10,
+        marginLeft: 30,
+        marginTop: 8,
         alignSelf: 'flex-start',
+        color: 'white',
+        textShadowColor: 'black',
+        textShadowOffset: { width: 3, height: 3 },
+        textShadowRadius: 5,
     },
+    swipe: {
+        color: 'white', 
+        fontStyle: 'italic', 
+        fontSize: 14,
+        marginBottom: 15, 
+        marginTop: 5, 
+        textShadowColor: 'black', 
+        textShadowOffset: { width: 3, height: 3 }, 
+        textShadowRadius: 5,
+    }
 });
 
 export default Watch;

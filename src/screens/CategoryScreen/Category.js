@@ -8,7 +8,7 @@ const Category = ({route}) => {
     const navigation = useNavigation();
     const {user} = route.params;
     const handleCardPress = () => {
-      navigation.navigate('Home', {user: user, initialRouteName: 'Library'});
+      navigation.navigate('Home', {user: user, initialRouteName: 'Schedule'});
     }
 return (
   

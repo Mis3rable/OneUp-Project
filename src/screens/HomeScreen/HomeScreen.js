@@ -1,4 +1,4 @@
-import { Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
@@ -11,46 +11,56 @@ export default function MyTabs({ navigation, route }) {
   const { user, initialRouteName } = route.params;
   return (
     <Tab.Navigator 
-    initialRouteName={initialRouteName}
+      initialRouteName={initialRouteName}
       screenOptions={({ route }) => ({
         tabBarHideOnKeyboard: true,
-        tabBarStyle: "flex",
+        tabBarStyle: {
+          backgroundColor: 'white',
+          borderTopColor: 'transparent',
+            borderTopWidth: 0,
+            elevation: 0,
+            paddingTop: 40, // Add padding to the top
+        },
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'gray',
       })}
     >
-
       <Tab.Screen name="Discover" component={YoutubeCard} options={{
         tabBarIcon: ({focused, color}) => (
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Image 
-            source={require('../../../assets/cottage.png')}
-            resizeMode='contain'
-            style={{
-              width: 30,
-              height: 30,
-              tintColor: focused ? 'blue' : color,
-            }}
-          />
-        </View>
+            <Image 
+              source={require('../../../assets/cottage.png')}
+              resizeMode='contain'
+              style={{
+                width: 30,
+                height: 30,
+                tintColor: focused ? 'blue' : color,
+                marginBottom: 30,
+              }}
+            />
+          </View>
         ),  
         headerShown: false,
       }} initialParams={{ user: user }}/>
 
-      <Tab.Screen name="Library" component={Schedule} options={{
+      <Tab.Screen name="Schedule" component={Schedule} options={{
         tabBarIcon: ({focused, color}) => (
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Image 
-              source={require('../../../assets/search.png')}
+              source={require('../../../assets/schedule.png')}
               resizeMode='contain'
               style={{
-              width: 30,
-              height: 30,
-              tintColor: focused ? 'blue' : color,
+                width: 30,
+                height: 30,
+                tintColor: focused ? 'blue' : color,
+                marginBottom: 30,
               }}
-              />
+            />
           </View>
         ),
         headerShown: false,
-      }} initialParams={{ user: user }}/>
+      }} 
+      initialParams={{ user: user }}/>
       
       <Tab.Screen name="Journey" component={Journey} options={{
         tabBarIcon: ({focused, color}) => (
@@ -59,15 +69,17 @@ export default function MyTabs({ navigation, route }) {
               source={require('../../../assets/import_contacts.png')}
               resizeMode='contain'
               style={{
-              width: 30,
-              height: 30,
-              tintColor: focused ? 'blue' : color,
-            }}
-          />
+                width: 30,
+                height: 30,
+                tintColor: focused ? 'blue' : color,
+                marginBottom: 30,
+              }}
+            />
           </View>
         ),
         headerShown: false,
-      }} initialParams={{ user: user }}/>
+      }} 
+      initialParams={{ user: user }}/>
 
       <Tab.Screen name="Profile" component={ProfileScreen} options={{
         tabBarIcon: ({focused, color}) => (
@@ -75,17 +87,17 @@ export default function MyTabs({ navigation, route }) {
             <Image 
               source={require('../../../assets/account_circle.png')}
               resizeMode='contain'
-                style={{
-              width: 30,
-              height: 30,
-              tintColor: focused ? 'blue' : color,
-            }}
-          />
+              style={{
+                width: 30,
+                height: 30,
+                tintColor: focused ? 'blue' : color,
+                marginBottom: 30,
+              }}
+            />
           </View>
         ),
         headerShown: false,
       }} initialParams={{ user: user }}/>
-      
     </Tab.Navigator>
   );
 }

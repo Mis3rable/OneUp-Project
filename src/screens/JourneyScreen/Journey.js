@@ -5,11 +5,9 @@ import Header from '../../../src/header/header';
 export default function Journey() {
   return (
     <SafeAreaView style={styles.container}>
-    <ScrollView style={styles.scrollView}>
       <Header/>
       <Text style={styles.text}>No Materials Yet</Text>
-    </ScrollView>
-  </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
@@ -18,7 +16,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+ },
   text: {
     fontSize: 24,
     fontWeight: 'bold',

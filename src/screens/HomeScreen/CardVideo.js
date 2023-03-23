@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, ImageBackground, Button} from "react-native";
 import DailyReadsCard from "./VideoComponent/DailyReads";
 import Listen from "./VideoComponent/Listen";
 import Header from '../../../src/header/header';
 import Watch from "./VideoComponent/Watch";
 import PrayerCard from "./VideoComponent/PrayerCard";
+import 'firebase/auth';
 
-export default function YoutubeCard() {
-
+export default function YoutubeCard({ route })  {
+  
+  const [userState, setUserState] = useState(route.params.user);
   return (
     <SafeAreaView style={styles.container}>
+      <ImageBackground
+          source={require('../../../assets/background/bgmenu.png')}
+          style={styles.background}>
       <ScrollView style={styles.scrollView}>
-    <Header/>
+      <Header/>
+      <Text style={styles.info}> Welcome, {userState ? userState.fullName : ''}!</Text>
         {/* <Text style={styles.start}>Start your journey with</Text>
         <Text style={styles.oneup}>ONE UP</Text> */}
         <DailyReadsCard/>
@@ -19,6 +25,7 @@ export default function YoutubeCard() {
         <Watch/>
         <Listen/>
       </ScrollView>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -26,12 +33,15 @@ export default function YoutubeCard() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#fff"
+      backgroundColor: "#fff",
+      width: '100%',
+      height: '100%'
     },
     scrollView: {
-      marginHorizontal: 5,
+      marginHorizontal: 0,
     },
     start: {
       marginTop: 5,
@@ -44,5 +54,21 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       fontStyle: 'italic',
       alignSelf: "center",
+    },
+    background: {
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
+    },
+    info: {
+      fontSize: 24, 
+      fontWeight: 'bold', 
+      fontStyle: 'italic',
+      marginTop: 100,
+      alignSelf: "center",
+      color: 'white',
+      textShadowColor: 'black',
+      textShadowOffset: { width: 3, height: 3 },
+      textShadowRadius: 5,
     }
 });

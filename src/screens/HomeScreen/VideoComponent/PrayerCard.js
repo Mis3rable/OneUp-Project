@@ -37,7 +37,7 @@ const PrayerCard = () => {
                 data={cards}
                 renderItem={renderCard}
                 sliderWidth={Dimensions.get('window').width}
-                itemWidth={300}
+                itemWidth={330}
                 layout={'default'}
             />
         </View>

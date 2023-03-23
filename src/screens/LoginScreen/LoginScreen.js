@@ -58,7 +58,7 @@ export default function LoginScreen({navigation}) {
 
     return (
         <ImageBackground
-            source={require('../../../assets/bg.jpg')}
+            source={require('../../../assets/background/00.png')}
             style={styles.background}>
         <View style={styles.container}>
             <View style={styles.form}>

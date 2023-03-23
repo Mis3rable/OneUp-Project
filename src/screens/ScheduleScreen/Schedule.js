@@ -6,7 +6,6 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRoute } from '@react-navigation/native';
-import Header from '../../../src/header/header';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -93,7 +92,6 @@ export default function Schedule() {
   
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
       <FlatList
         data={schedules}
         style={styles.flatList}

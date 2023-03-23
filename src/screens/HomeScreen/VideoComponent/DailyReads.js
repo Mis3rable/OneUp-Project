@@ -45,7 +45,7 @@ const DailyReadsCard = () => {
                 data={cards}
                 renderItem={renderCard}
                 sliderWidth={Dimensions.get('window').width}
-                itemWidth={300}
+                itemWidth={330}
                 layout={'default'}
             />
         </View>
@@ -59,6 +59,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
+        marginBottom: 20,
+        marginTop: 30,
+        color: 'blue',
     },
     title: {
         fontSize: 24,

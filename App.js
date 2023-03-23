@@ -41,7 +41,7 @@ export default function App() {
           {props => <MyTabs {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Category" component={Category} />
-        <Stack.Screen name="Library" component={Schedule} options={{ headerShown: false }}/>
+        <Stack.Screen name="Schedule" component={Schedule} options={{ headerShown: false }}/>
         <Stack.Screen name="OOTD" component={OOTD} />
         {/* <Stack.Screen name="Prayer" component={Prayer} /> */}
         <Stack.Screen name="Words" component={Word} />
