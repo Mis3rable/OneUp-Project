@@ -12,7 +12,7 @@ const Watch = () => {
     }
 
     const handleSongCardPress = () => {
-      navigation.navigate('SongReflection');
+      navigation.navigate('Icons');
     }
 
     const handleWordsCardPress = () => {
@@ -21,6 +21,26 @@ const Watch = () => {
 
     const handleOOTDCardPress = () => {
         navigation.navigate('OOTD');
+    }
+
+    const handleHimnoPress = () => {
+        navigation.navigate('Himno Bulakenyo');
+    }
+
+    const handleCrossWordPress = () => {
+        navigation.navigate('Cross Word');
+    }
+    const handleSaMadalingSabiPress = () => {
+        navigation.navigate('Sa Madaling Sabi');
+    }
+    const handleJoelCruzPress = () => {
+        navigation.navigate('Joel Cruz');
+    }
+    const handleItanongMoKungBakitPress = () => {
+        navigation.navigate('Itanong Mo Kung Bakit');
+    }
+    const handleTinigNgPastolPress = () => {
+        navigation.navigate('Tinig Ng Pastol');
     }
 
     const renderCard = ({ item }) => {
@@ -40,13 +60,13 @@ const Watch = () => {
             onPress: handleICMASCardPress,
         },
         {
-            title: 'Prayer',
-            image: require('../../../../assets/SongReflection.png'),
+            title: 'Icon',
+            image: require('../../../../assets/icons.png'),
             onPress: handleSongCardPress,
         },
         {
             title: 'ShareTheWords',
-            image: require('../../../../assets/ShareTheWords.png'),
+            image: require('../../../../assets/ShareTheWord.png'),
             onPress: handleWordsCardPress,
         },
         {
@@ -54,6 +74,36 @@ const Watch = () => {
             image: require('../../../../assets/OOTD.png'),
             onPress: handleOOTDCardPress,
         },  
+        {
+            title: 'Himno',
+            image: require('../../../../assets/cards-HimnoBulakenyoVid.png'),
+            onPress: handleHimnoPress,
+        },  
+        {
+            title: 'CrossWord',
+            image: require('../../../../assets/CrossWord.png'),
+            onPress: handleCrossWordPress,
+        },  
+        {
+            title: 'SaMadalingSabi',
+            image: require('../../../../assets/SaMadalingSabi.png'),
+            onPress: handleSaMadalingSabiPress,
+        },  
+        {
+            title: 'JoelCruz',
+            image: require('../../../../assets/JoelCruz.png'),
+            onPress: handleJoelCruzPress,
+        },
+        {
+            title: 'ItanongMoKungBakit',
+            image: require('../../../../assets/ItanongMoKungBakit.png'),
+            onPress: handleItanongMoKungBakitPress,
+        },
+        {
+            title: 'TinigNgPastol',
+            image: require('../../../../assets/TinigNgPastol.png'),
+            onPress: handleTinigNgPastolPress,
+        },
     ];
 
     return (

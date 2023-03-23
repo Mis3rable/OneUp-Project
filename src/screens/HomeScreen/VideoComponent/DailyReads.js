@@ -1,27 +1,65 @@
 import * as React from 'react';
-import { Card, Text } from 'react-native-paper';
-import { ScrollView, SafeAreaView, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Card } from 'react-native-paper';
+import { TouchableOpacity, View, StyleSheet, Dimensions, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Carousel from 'react-native-snap-carousel';
 
 const DailyReadsCard = () => {
     const navigation = useNavigation();
-    const handleCardPress = () => {
-      navigation.navigate('Scripture');
-    }
-return (
 
-    <View>
-        <Text style={styles.title}>Daily Reads</Text>
-            <Card style={styles.card}>
-                <TouchableOpacity onPress={() => handleCardPress('DailyReadsCard')}>
-                    <Card.Cover source={require('../../../../assets/Scripture.png')} style={styles.cover}/>
+    const handleScripturePress = () => {
+        navigation.navigate('Scripture');
+    }
+
+    const handleChefPress = () => {
+      navigation.navigate('The Lord Is My Chef');
+    }
+
+    const renderCard = ({ item }) => {
+        return (
+            <Card>
+                <TouchableOpacity onPress={item.onPress}>
+                    <Card.Cover source={item.image} />
                 </TouchableOpacity>
             </Card>
-    </View>
-);
+        );
+    }
+
+    const cards = [
+        {
+            title: 'Scripture',
+            image: require('../../../../assets/cards-Scripture.png'),
+            onPress: handleScripturePress,
+        },
+        {
+            title: 'Prayer',
+            image: require('../../../../assets/cards-TheLordIsMyChef.png'),
+            onPress: handleChefPress,
+        },
+    ];
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Watch</Text>
+            <Carousel 
+                data={cards}
+                renderItem={renderCard}
+                sliderWidth={Dimensions.get('window').width}
+                itemWidth={300}
+                layout={'default'}
+            />
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
@@ -29,18 +67,6 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 10,
         alignSelf: 'flex-start',
-    },
-    card: {
-        backgroundColor: 'green',
-        elevation: 0,
-        width: 320,
-        height: 170,
-        alignSelf: 'center',
-    },
-    cover: {
-        width: 320, 
-        height: 170,
-        alignSelf: 'center'
     },
 });
 

@@ -14,6 +14,9 @@ const Listen = () => {
     const handlePrayerCardPress = () => {
       navigation.navigate('Eucharistic');
     }
+    const handleHimnoAudioPress = () => {
+        navigation.navigate('Himno Bulakenyo(Audio)');
+    }
 
     const renderCard = ({ item }) => {
         return (
@@ -35,6 +38,11 @@ const Listen = () => {
             title: 'Eucharistic',
             image: require('../../../../assets/cards-ECH.png'),
             onPress: handlePrayerCardPress,
+        },
+        {
+            title: 'Himno',
+            image: require('../../../../assets/cards-HimnoBulakenyoVid.png'),
+            onPress: handleHimnoAudioPress,
         },
     ];
 

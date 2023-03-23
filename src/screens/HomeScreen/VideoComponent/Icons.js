@@ -13,7 +13,7 @@ const SkeletonVideo = () => {
   );
 };
 
-export default function Words() {
+export default function Icons() {
   const [videos, setVideos] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
