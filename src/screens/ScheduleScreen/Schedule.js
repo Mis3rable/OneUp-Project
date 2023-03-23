@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Alert, TouchableOpacity, View, Modal, Text, FlatList } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
@@ -38,8 +38,10 @@ export default function Schedule() {
   const [time, setTime] = useState(new Date());
   const notificationListener = useRef();
   const responseListener = useRef();
+  const [modalVisible, setModalVisible] = useState(false);
   const [showDatepicker, setShowDatepicker] = useState(false);
   const [showTimepicker, setShowTimepicker] = useState(false);
+  const [schedules, setSchedules] = useState([]);
   const LeftContent = props => <Avatar.Icon {...props} icon="alarm" />
 
   useEffect(() => {
@@ -52,17 +54,12 @@ export default function Schedule() {
     };
   }, []);
 
-  const schedulePushNotification = async () => {
+  const schedulePushNotification = async (item) => {  
     if (title === '') {
-      Alert.alert('Error', 'Title cannot be empty');
+      Alert.alert('One Up', 'Category cannot be empty');
       return;
     }
-
-    if (message === '') {
-      Alert.alert('Error', 'Message cannot be empty');
-      return;
-    }
-
+  
     const trigger = new Date(date);
     trigger.setHours(time.getHours());
     trigger.setMinutes(time.getMinutes());
@@ -81,28 +78,63 @@ export default function Schedule() {
     setTitle('');
     setMessage('');
     setTime(new Date());
+  
+    // list the schedules
+    const newSchedule = {
+      title,
+      message,
+      date,
+      time,
+      id: Math.random().toString(36).substr(2, 9),
+    };
+  
+    setSchedules([...schedules, newSchedule]);
   };
   
   return (
     <SafeAreaView style={styles.container}>
-    <Header/>
-      <ScrollView style={styles.scrollView}>
+      <Header />
+      <FlatList
+        data={schedules}
+        style={styles.flatList}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.title}</Text>
+            <Text>
+              {item.date.toLocaleDateString()} at{' '}
+              {(() => {
+                const date = new Date(item.time);
+                let hour = date.getHours();
+                const minute = date.getMinutes();
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12;
+                hour = hour ? hour : 12;
+                return `${hour}:${minute < 10 ? '0' + minute : minute} ${ampm}`;
+              })()}
+            </Text>
+          </View>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.addButton}>
+        <Text style={styles.addButtonText}>Add Schedule</Text>
+      </TouchableOpacity>
+      <Modal visible={modalVisible} animationType="slide">
         <Card style={{ paddingTop: 10, paddingLeft: 10 }}>
           <Card.Title title="One Up" subtitle="Set A Schedule" left={LeftContent} />
-          <Card.Cover source={coverImageSource}/>
           <Card.Content>
-          <Picker
-            selectedValue={title}
-            onValueChange={(itemValue) => setTitle(itemValue)}
-          >
-            <Picker.Item label="Choose a Category" value="" enabled={false} />
-            <Picker.Item label="ICMAS" value="ICMAS" />
-            <Picker.Item label="Song Reflections" value="Song Reflections" />
-            <Picker.Item label="Share the Words" value="Share the Words" />
-            <Picker.Item label="OOTD" value="OOTD" />
-            <Picker.Item label="Eucharistic Celebration Hymns" value="Eucharistic Celebration Hymns" />
-            <Picker.Item label="Rosary" value="Rosary" />
-          </Picker>
+              <Picker
+                selectedValue={title}
+                onValueChange={(itemValue) => setTitle(itemValue)}
+              >
+                <Picker.Item label="Select A Category" value="" />
+                <Picker.Item label="Sa 'Yong Tahanan" value="Sa 'Yong Tahanan" />
+                <Picker.Item label="Song Reflections" value="Song Reflections" />
+                <Picker.Item label="Share the Word" value="Share the Word" />
+                <Picker.Item label="OOTD" value="OOTD" />
+                <Picker.Item label="Eucharistic Celebration Hymns" value="Eucharistic Celebration Hymns" />
+                <Picker.Item label="Rosary" value="Rosary" />
+              </Picker>
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
             <TouchableOpacity onPress={() => setShowTimepicker(true)}>
               <TextInput
@@ -146,12 +178,12 @@ export default function Schedule() {
             )}
           </Card.Content>
           <Card.Actions>
-          <Button 
-            title="Schedule" onPress={async () => { await schedulePushNotification(); }}
-          />
+          <Button title="Schedule" onPress={async () => { await schedulePushNotification(); }} style={styles.schedule}/>
+          <View style={{ marginVertical: 30 }} />
+          <Button title="Close" onPress={() => setModalVisible(false)} />
           </Card.Actions>
         </Card>
-      </ScrollView>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -166,10 +198,27 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingHorizontal: 8,
   },
-  scrollView: {
+  flatList: {
     marginTop: 20,
     marginLeft: 50,
     marginRight: 50,
+  },
+  schedule: {
+    marginRight: 10,
+  },
+  addButton: {
+    backgroundColor: '#00a6ff', 
+    padding: 2, 
+    width: 100,
+    height: 25,
+    borderRadius: 10,
+    marginTop: 20,
+    alignSelf: 'center'
+  },
+  addButtonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
