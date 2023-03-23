@@ -1,23 +1,58 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Modal } from 'react-native';
+import firebase from '../../../firebase/config';
 
-export default function LordChef() {
+const ListFolders = () => {
+  const [folders, setFolders] = useState([]);
+  const [selectedFolder, setSelectedFolder] = useState(null);
+  const [subfolders, setSubfolders] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    const storageRef = firebase.storage().ref('Lord My Chef');
+    storageRef.list().then((result) => {
+      const folderNames = result.prefixes.map((prefix) => {
+        return prefix.name.replace('/', '');
+      });
+      setFolders(folderNames);
+    });
+  }, []);
+
+  const handleFolderPress = (folder) => {
+    setSelectedFolder(folder);
+    const storageRef = firebase.storage().ref(`Lord My Chef/${folder}`);
+    storageRef.list().then((result) => {
+      const subfolderNames = result.prefixes.map((prefix) => {
+        return prefix.name.replace(`${folder}/`, '');
+      });
+      setSubfolders(subfolderNames);
+      setModalVisible(true);
+    });
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>No Materials Yet</Text>
+    <View>
+      {folders.map((folder, index) => (
+        <TouchableOpacity key={index} onPress={() => handleFolderPress(folder)}>
+          <Text>{folder}</Text>
+        </TouchableOpacity>
+      ))}
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View>
+          <Text>{selectedFolder}</Text>
+          {subfolders.map((subfolder, index) => (
+            <TouchableOpacity key={index}>
+              <Text>{subfolder}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </Modal>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
+export default ListFolders;
