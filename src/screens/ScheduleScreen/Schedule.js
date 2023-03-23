@@ -22,11 +22,11 @@ export default function Schedule() {
   if (category === 'OOTD') {
     coverImageSource = require('../../../assets/OOTD.png');
   } else if (category === 'Prayer') {
-    coverImageSource = require('../../../assets/Prayer.png');
+    coverImageSource = require('../../../assets/Prayer.jpg');
   } else if (category === 'ShareTheWords') {
     coverImageSource = require('../../../assets/ShareTheWords.png');
   } else {
-    coverImageSource = require('../../../assets/Prayer.png');
+    coverImageSource = require('../../../assets/Prayer.jpg');
   }
 
   const [expoPushToken, setExpoPushToken] = useState('');
