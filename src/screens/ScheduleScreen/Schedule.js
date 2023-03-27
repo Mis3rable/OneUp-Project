@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Platform, StyleSheet, TextInput, SafeAreaView, ScrollView, Alert, TouchableOpacity, View, Modal, Text, FlatList } from 'react-native';
+import { Button, Platform, StyleSheet, TextInput, SafeAreaView, Alert, TouchableOpacity, View, Modal, Text, FlatList } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
@@ -92,6 +92,7 @@ export default function Schedule() {
   
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={{ fontSize: 24, marginTop: 20, textAlign: 'center' }}>Scheduled Notifications</Text>
       <FlatList
         data={schedules}
         style={styles.flatList}

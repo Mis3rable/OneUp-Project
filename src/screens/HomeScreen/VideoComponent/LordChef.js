@@ -1,189 +1,113 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Modal, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Modal, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 import firebase from '../../../firebase/config';
-import { Button } from 'react-native-paper';
-import { Card, Title, Paragraph } from 'react-native-paper';
-import * as Speech from 'expo-speech';
 
-function CardSkeleton() {
-  return (
-    <Card style={styles.card}>
-      <Card.Content>
-        <Title>Loading...</Title>
-        <Paragraph>Loading...</Paragraph>
-      </Card.Content>
-      <Card.Actions>
-        <Button>Loading...</Button>
-      </Card.Actions>
-    </Card>
-  );
-}
+const FolderList = () => {
+  const [folders, setFolders] = useState([]);
+  const [selectedFolder, setSelectedFolder] = useState(null);
+  const [subFolders, setSubFolders] = useState([]);
+  const [selectedSubFolder, setSelectedSubFolder] = useState(null);
+  const [fileContent, setFileContent] = useState(null);
 
-function Scriptures() {
-  const [fileData, setFileData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [fileContent, setFileContent] = useState('');
-  const [fileName, setFileName] = useState('');
-  const [isSpeaking, setIsSpeaking] = useState(false);
-
-  async function getFileData() {
-    try {
-      setIsLoading(true);
-      const storageRef = firebase.storage().ref();
-      const listRef = storageRef.child('Lord My Chef/40 Shades of Lent');
-      const res = await listRef.listAll();
-      const data = await Promise.all(
-        res.prefixes.map(async (prefixRef) => {
-          const prefixName = prefixRef.name;
-          const items = await prefixRef.listAll();
-          const textFiles = items.items.filter((item) => item.name.endsWith('.txt'));
-          const files = await Promise.all(
-            textFiles.map(async (textFile) => {
-              const url = await textFile.getDownloadURL();
-              const name = textFile.name.replace(/\.[^/.]+$/, '');
-              const jpgImageName = textFile.name.replace('.txt', '.jpg'); // Assumes that the image file has the same name as the text file with a .jpg extension
-              const jpgImageFile = items.items.find((item) => item.name === jpgImageName);
-              const jpgCoverUrl = jpgImageFile ? await jpgImageFile.getDownloadURL() : null;
-              const pngImageName = textFile.name.replace('.txt', '.png'); // Assumes that the image file has the same name as the text file with a .png extension
-              const pngImageFile = items.items.find((item) => item.name === pngImageName);
-              const pngCoverUrl = pngImageFile ? await pngImageFile.getDownloadURL() : null;
-              return { url, name, coverUrl: jpgCoverUrl || pngCoverUrl };
-            })
-          );
-          return { folderName: prefixName, files };
-        })
-      );
-      setFileData(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  } 
-
-  async function downloadFile(url, name) {
-    try {
-      setIsLoading(true);
-      const response = await fetch(url);
-      const content = await response.text();
-      setFileContent(content);
-      setFileName(name);
-      setModalVisible(true);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      console.log('isLoading', isLoading);
-      setIsLoading(false);
-    }
-  }
-
-  async function speakText(text) {
-    try {
-      if (isSpeaking) {
-        await Speech.stop();
-        setIsSpeaking(false);
-      } else {
-        setIsSpeaking(true);
-        await Speech.speak(text, { rate: 0.8, onStopped: () => setIsSpeaking(false) });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  
   useEffect(() => {
-    getFileData();
+    const fetchFolders = async () => {
+      const folderRef = firebase.storage().ref(`Lord My Chef`);
+      const folderList = await folderRef.list();
+      const folderNames = folderList.prefixes.map((folder) => folder.name);
+      setFolders(folderNames);
+    };
+    fetchFolders();
   }, []);
 
   useEffect(() => {
-    if (!modalVisible && isSpeaking) {
-      Speech.stop();
-      setIsSpeaking(false);
+    const fetchSubFolders = async () => {
+      const folderRef = firebase.storage().ref(`Lord My Chef/${selectedFolder}`);
+      const folderList = await folderRef.list();
+      const folderNames = folderList.prefixes.map((folder) => folder.name);
+      setSubFolders(folderNames);
+    };
+
+    if (selectedFolder) {
+      fetchSubFolders();
     }
-  }, [modalVisible]);
+  }, [selectedFolder]);
+
+  useEffect(() => {
+    const fetchFileContent = async () => {
+      const folderRef = firebase.storage().ref(`Lord My Chef/${selectedFolder}/${selectedSubFolder}`);
+      const fileList = await folderRef.list();
+      const file = fileList.items.find((item) => item.name.endsWith('.txt'));
+      if (file) {
+        const downloadURL = await file.getDownloadURL();
+        const response = await fetch(downloadURL);
+        const fileContent = await response.text();
+        setFileContent(fileContent);
+      }
+    };
   
+    if (selectedFolder && selectedSubFolder) {
+      fetchFileContent();
+    }
+  }, [selectedFolder, selectedSubFolder]);  
+
+  const closeModal = () => {
+    setSelectedFolder(null);
+    setSelectedSubFolder(null);
+
+  };
+
+  const closeFileContentModal = () => {
+    setFileContent(null);
+  };
+
   return (
-    <ScrollView>
-      {fileData.length === 0 ? (
-        <>
-          <CardSkeleton /> 
-          <CardSkeleton />
-        </>
-      ) : (
-        fileData.map(({ folderName, files }, index) => (
-          <View key={index}>
-            {files.map(({ url, name, coverUrl }, fileIndex) => {
-              return (
-                <Card key={fileIndex} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
-                {coverUrl && <Card.Cover source={{ uri: coverUrl }} />}
-                  <Card.Content>
-                    <Title>{name}</Title>
-                  </Card.Content>
-                  <Card.Actions>
-                    <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
-                  </Card.Actions>
-                </Card>
-              )
-            })}
-          </View>
-        ))             
-      )}
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}>
-        <View style={styles.modal}>
-          <ScrollView>
-            <Title style={styles.modalTitle}>{fileName.replace(/\.[^/.]+$/, '')}</Title>
-            <Button onPress={() => speakText(fileContent)}>
-              {isSpeaking ? 'Stop Speaking' : 'Speak Text'}
-            </Button>
-            <Text style={styles.fileContent}>{fileContent}</Text>
-            <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
-              <Text style={styles.modalButtonText}>Close</Text>
-            </TouchableOpacity>
-          </ScrollView>
+    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <FlatList
+        data={folders}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => setSelectedFolder(item)}>
+            <Text style={{ fontSize: 18, marginTop: 20, textAlign: 'center' }}>{item}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item}
+      />
+      <Modal visible={selectedFolder !== null} onRequestClose={closeModal}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+          <FlatList
+            data={subFolders}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => setSelectedSubFolder(item)}>
+                <Text style={{ fontSize: 18, marginTop: 20, textAlign: 'center' }}>{item}</Text>
+              </TouchableOpacity>
+            )}
+            ListEmptyComponent={() => (
+              <Text style={{ fontSize: 18, marginTop: 20, textAlign: 'center' }}>No content found</Text>
+            )}
+            keyExtractor={(item) => item}
+          />
+          {selectedSubFolder && (
+            <Modal visible={fileContent !== null} onRequestClose={closeFileContentModal}>
+              <FlatList
+                data={[fileContent]}
+                keyExtractor={(item) => item}
+                renderItem={({ item }) => (
+                  <View>
+                    <Text style={{ fontSize: 18, textAlign: 'left', marginTop: 20, marginLeft: 10 }}>{item}</Text>
+                    <TouchableOpacity onPress={closeFileContentModal}>
+                      <Text style={{ fontSize: 16, color: "red", marginTop: 10, marginBottom: 10, textAlign: 'center' }}>Close</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              />
+            </Modal>
+          )}
+          <TouchableOpacity onPress={closeModal}>
+            <Text style={{ fontSize: 16, color: "red", marginTop: 20, textAlign: 'center' }}>Close</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
-    </ScrollView>
-  );
-}
+    </SafeAreaView>
+  );   
+};
 
-const styles = StyleSheet.create({
-  card: {
-    width: '95%',
-    margin: 10,
-  },
-  modal: {
-    marginTop: 50,
-    marginHorizontal: 20,
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  fileContent: {
-    fontSize: 18,
-    padding: 10,
-  },
-  modalButton: {
-    backgroundColor: 'blue',
-    padding: 12,
-    borderRadius: 4,
-  },
-  modalButtonText: {
-    fontSize: 18,
-    color: 'white',
-  },
-  cardLoading: {
-    margin: 10,
-    width: '95%',
-  },
-});
-
-export default Scriptures;
+export default FolderList;
