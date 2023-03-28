@@ -6,6 +6,7 @@ import { firebase } from '../../firebase/config'
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfileScreen ({ route }) {  
     const [userState, setUserState] = useState(route.params.user);
@@ -13,10 +14,16 @@ export default function ProfileScreen ({ route }) {
     console.log(userState);
     const handleLogout = async () => {
         try {
+            // Remove user data from AsyncStorage
+            await AsyncStorage.removeItem('userData');
+
+            // Sign out user and reset user state
             await firebase.auth().signOut();
+            route.params.setUser(null);
             setUserState(null);
+
             // Navigate to the login screen after successful logout
-            navigation.navigate('Login', { user: null } );
+            navigation.navigate('Login');
         } catch (error) {
             console.error(error);
         }

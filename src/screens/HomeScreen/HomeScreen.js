@@ -1,17 +1,28 @@
-import { View, Image } from 'react-native';
+import { View, Image, BackHandler } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
 import Schedule from '../ScheduleScreen/Schedule';
 import Journey from '../JourneyScreen/Journey';
-
+import React, {useEffect} from 'react'
 const Tab = createBottomTabNavigator();
 
-export default function MyTabs({ navigation, route }) {
-  const { user, initialRouteName } = route.params;
+export default function MyTabs({ navigation, user, setUser }) {
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        BackHandler.exitApp();
+        return true;
+      }
+    );
+  
+    return () => backHandler.remove();
+  }, []);
+  
   return (
     <Tab.Navigator 
-      initialRouteName={initialRouteName}
       screenOptions={({ route }) => ({
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
@@ -41,7 +52,7 @@ export default function MyTabs({ navigation, route }) {
           </View>
         ),  
         headerShown: false,
-      }} initialParams={{ user: user }}/>
+      }} initialParams={{ user: user}}/>
 
       <Tab.Screen name="Schedule" component={Schedule} options={{
         tabBarIcon: ({focused, color}) => (
@@ -59,8 +70,7 @@ export default function MyTabs({ navigation, route }) {
           </View>
         ),
         headerShown: false,
-      }} 
-      initialParams={{ user: user }}/>
+      }} initialParams={{ user: user }} />
       
       <Tab.Screen name="Journey" component={Journey} options={{
         tabBarIcon: ({focused, color}) => (
@@ -78,8 +88,7 @@ export default function MyTabs({ navigation, route }) {
           </View>
         ),
         headerShown: false,
-      }} 
-      initialParams={{ user: user }}/>
+      }} initialParams={{ user: user }} />
 
       <Tab.Screen name="Profile" component={ProfileScreen} options={{
         tabBarIcon: ({focused, color}) => (
@@ -97,7 +106,7 @@ export default function MyTabs({ navigation, route }) {
           </View>
         ),
         headerShown: false,
-      }} initialParams={{ user: user }}/>
+      }} initialParams={{ user: user, setUser: setUser }}/>
     </Tab.Navigator>
   );
 }

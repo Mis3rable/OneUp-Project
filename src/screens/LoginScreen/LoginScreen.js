@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator, ImageBackground } from 'react-native'
 import styles from './styles';
 import { firebase } from '../../firebase/config'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({navigation, setUser}) {
     const [focusedInput, setFocusedInput] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +27,7 @@ export default function LoginScreen({navigation}) {
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
     }
+    
     const onLoginPress = () => {
         setLoading(true)
         firebase.auth().signInWithEmailAndPassword(email, password)
@@ -43,6 +45,9 @@ export default function LoginScreen({navigation}) {
                 }
                 const user = firestoreDocument.data()
                 console.log('Login successful');
+                AsyncStorage.setItem('userData', JSON.stringify(user))
+                console.log('User data stored in AsyncStorage:', user);
+                setUser(user);
                 navigation.navigate('Home', { user: user });
             })
             .catch(error => {

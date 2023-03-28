@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import React, {useEffect, useState} from 'react'
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
 import {decode, encode} from 'base-64'
@@ -24,6 +24,8 @@ import ItanongMoKungBakit from './src/screens/HomeScreen/VideoComponent/ItanongM
 import HimnoBulakenyoAudio from './src/screens/HomeScreen/VideoComponent/HimnoAudio';
 import Lithurgical from './src/screens/HomeScreen/VideoComponent/Liturgical';
 import Tinig from './src/screens/HomeScreen/VideoComponent/TinigNgPastol';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, ActivityIndicator } from 'react-native'
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -31,14 +33,51 @@ if (!global.atob) { global.atob = decode }
 const Stack = createStackNavigator();
 
 export default function App() {
-  
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAsyncStorage = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('userData');
+        if (userData !== null) {
+          setUser(JSON.parse(userData));
+        } 
+      } catch (e) {
+        console.error(e);
+      }
+      setLoading(false);
+    };
+
+    checkAsyncStorage();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (user === null) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" options={{ headerShown: false }}>
+            {props => <LoginScreen {...props} setUser={setUser} />}
+          </Stack.Screen>
+          <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerStyle: { backgroundColor: '#f3fffc' } }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+
   return (
     <NavigationContainer>
-      <Stack.Navigator>    
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Registration" component={RegistrationScreen} options={{  headerStyle: { backgroundColor: '#f3fffc' }  }} />
+      <Stack.Navigator>
         <Stack.Screen name="Home" options={{ headerShown: false }}>
-          {props => <MyTabs {...props} />}
+          {props => <MyTabs {...props} user={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen name="Category" component={Category} />
         <Stack.Screen name="Schedule" component={Schedule} options={{ headerShown: false }}/>

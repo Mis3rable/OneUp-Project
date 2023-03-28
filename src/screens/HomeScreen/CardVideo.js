@@ -9,7 +9,7 @@ import 'firebase/auth';
 
 export default function YoutubeCard({ route })  {
   
-  const [userState, setUserState] = useState(route.params.user);
+  const { user } = route.params;
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -17,7 +17,7 @@ export default function YoutubeCard({ route })  {
           style={styles.background}>
       <ScrollView style={styles.scrollView}>
       <Header/>
-      <Text style={styles.info}> Welcome, {userState ? userState.fullName : ''}!</Text>
+      <Text style={styles.info}> Welcome, {user ? user.fullName : ''}!</Text>
         {/* <Text style={styles.start}>Start your journey with</Text>
         <Text style={styles.oneup}>ONE UP</Text> */}
         <DailyReadsCard/>
