@@ -4,8 +4,9 @@ import { Picker } from '@react-native-picker/picker'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { firebase } from '../../firebase/config'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function RegistrationScreen({navigation}) {
+export default function RegistrationScreen({navigation, setUser}) {
     const [fullName, setFullName] = useState('')
     const [age, setAge] = useState('')
     const [email, setEmail] = useState('')
@@ -316,6 +317,9 @@ export default function RegistrationScreen({navigation}) {
                     .set(data)
                     .then(() => {
                         console.log('Register successful');
+                        AsyncStorage.setItem('userData', JSON.stringify(data))
+                        console.log('User data stored in AsyncStorage:', data);
+                        setUser(data);
                         navigation.navigate('Category', {user: data})
                     })
                     .catch((error) => {

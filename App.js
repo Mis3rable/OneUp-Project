@@ -67,7 +67,9 @@ export default function App() {
           <Stack.Screen name="Login" options={{ headerShown: false }}>
             {props => <LoginScreen {...props} setUser={setUser} />}
           </Stack.Screen>
-          <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerStyle: { backgroundColor: '#f3fffc' } }} />
+          <Stack.Screen name="Registration" options={{ headerStyle: { backgroundColor: '#f3fffc' } }}>
+          {props => <RegistrationScreen {...props} setUser={setUser} />}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -79,7 +81,7 @@ export default function App() {
         <Stack.Screen name="Home" options={{ headerShown: false }}>
           {props => <MyTabs {...props} user={user} setUser={setUser} />}
         </Stack.Screen>
-        <Stack.Screen name="Category" component={Category} />
+        <Stack.Screen name="Category" component={Category}/>
         <Stack.Screen name="Schedule" component={Schedule} options={{ headerShown: false }}/>
         <Stack.Screen name="OOTD" component={OOTD} />
         {/* <Stack.Screen name="Prayer" component={Prayer} /> */}

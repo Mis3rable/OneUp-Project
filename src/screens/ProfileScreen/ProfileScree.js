@@ -9,9 +9,9 @@ import 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfileScreen ({ route }) {  
-    const [userState, setUserState] = useState(route.params.user);
+    const { user } = route.params;
     const navigation = useNavigation();
-    console.log(userState);
+    console.log(user);
     const handleLogout = async () => {
         try {
             // Remove user data from AsyncStorage
@@ -20,7 +20,6 @@ export default function ProfileScreen ({ route }) {
             // Sign out user and reset user state
             await firebase.auth().signOut();
             route.params.setUser(null);
-            setUserState(null);
 
             // Navigate to the login screen after successful logout
             navigation.navigate('Login');
@@ -32,10 +31,10 @@ export default function ProfileScreen ({ route }) {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ position: 'absolute', top: 50 }}>
-        <Text style={{ fontSize: 24, marginTop: 80, fontWeight: 'bold', fontStyle: 'italic'}}>Welcome {userState ? userState.fullName : ''}!</Text>
-        <Text style={{ fontSize: 20, }}>Email: {userState ? userState.email : ''}</Text>
-        <Text style={{ fontSize: 20, }}>Parish: {userState ? userState.selectedParish : ''}</Text>
-        <Text style={{ fontSize: 20, }}>Municipality: {userState ? userState.selectedMunicipality : ''}</Text>
+        <Text style={{ fontSize: 24, marginTop: 80, fontWeight: 'bold', fontStyle: 'italic'}}>Welcome {user ? user.fullName : ''}!</Text>
+        <Text style={{ fontSize: 20, }}>Email: {user ? user.email : ''}</Text>
+        <Text style={{ fontSize: 20, }}>Parish: {user ? user.selectedParish : ''}</Text>
+        <Text style={{ fontSize: 20, }}>Municipality: {user ? user.selectedMunicipality : ''}</Text>
         </View>
         <View style={{ marginBottom: 20 , marginTop: 100}}>
             <AboutUsModal />
