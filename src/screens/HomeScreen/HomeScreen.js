@@ -106,7 +106,7 @@ export default function MyTabs({ navigation, user, setUser }) {
           </View>
         ),
         headerShown: false,
-      }} initialParams={{ user: user, setUser: setUser }}/>
+      }} initialParams={{ user: user }}/>
     </Tab.Navigator>
   );
 }
