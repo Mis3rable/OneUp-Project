@@ -13,14 +13,16 @@ export default StyleSheet.create({
     flatList: {
       marginTop: 20,
     },
-    schedule: {
-      marginRight: 10,
+    scheduleBtn: {
+      marginRight: 20,
+      color: 'blue',
     },
     addButton: {
       backgroundColor: 'skyblue',
       marginLeft: 30,
       marginRight: 30,
       marginTop: 20,
+      marginBottom: 10,
       height: 48,
       borderRadius: 5,
       alignItems: "center",

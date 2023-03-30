@@ -7,6 +7,8 @@ import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRoute } from '@react-navigation/native';
 import styles from './styles';
+import Angelus from './Angelus';
+import ThreeClockPrayer from './3ClockPrayer';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -18,18 +20,6 @@ Notifications.setNotificationHandler({
 
 export default function Schedule() {
   const route = useRoute();
-  const { category } = route.params || { category: 'default' };
-  let coverImageSource;
-  if (category === 'SaMadalingSabi') {
-    coverImageSource = require('../../../assets/SaMadalingSabi.jpg');
-  } else if (category === 'Prayer') {
-    coverImageSource = require('../../../assets/Prayer.jpg');
-  } else if (category === 'CrossWord') {
-    coverImageSource = require('../../../assets/CrossWord.jpg');
-  } else {
-    coverImageSource = require('../../../assets/Prayer.jpg');
-  }
-
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
   const [title, setTitle] = useState('');
@@ -97,6 +87,8 @@ export default function Schedule() {
     source={require('../../../assets/background/church.png')}
     style={styles.background}>
       <Text style={styles.notif}>Scheduled Notifications</Text>
+      <Angelus />
+      <ThreeClockPrayer />
       <FlatList
         data={schedules}
         style={styles.flatList}
@@ -130,13 +122,14 @@ export default function Schedule() {
                 selectedValue={title}
                 onValueChange={(itemValue) => setTitle(itemValue)}
               >
-                <Picker.Item label="Select A Category" value="" />
+                <Picker.Item label="Title" value="" />
                 <Picker.Item label="Sa 'Yong Tahanan" value="Sa 'Yong Tahanan" />
-                <Picker.Item label="Song Reflections" value="Song Reflections" />
-                <Picker.Item label="Share the Word" value="Share the Word" />
+                <Picker.Item label="Tinig ng Pastol" value="Tinig ng Pastol" />
                 <Picker.Item label="OOTD" value="OOTD" />
-                <Picker.Item label="Eucharistic Celebration Hymns" value="Eucharistic Celebration Hymns" />
-                <Picker.Item label="Rosary" value="Rosary" />
+                <Picker.Item label="Sa Madaling Sabi" value="Sa Madaling Sabi" />
+                <Picker.Item label="Crossword" value="Crossword" />
+                <Picker.Item label="Itanong Mo Kung Bakit" value="Itanong Mo Kung Bakit" />
+                <Picker.Item label="Prayer" value="Rosary" />
               </Picker>
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
             <TouchableOpacity onPress={() => setShowTimepicker(true)}>
