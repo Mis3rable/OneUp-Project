@@ -8,18 +8,6 @@ import YoutubeCard from './Home';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs({ navigation, user, setUser }) {
-
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      () => {
-        BackHandler.exitApp();
-        return true;
-      }
-    );
-  
-    return () => backHandler.remove();
-  }, []);
   
   return (
     <Tab.Navigator 
