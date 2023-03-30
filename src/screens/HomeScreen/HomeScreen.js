@@ -8,7 +8,6 @@ import YoutubeCard from './Home';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs({ navigation, user, setUser }) {
-  
   const CustomHeader = ({ navigation, route }) => {
     return (
       <View 
@@ -30,11 +29,13 @@ export default function MyTabs({ navigation, user, setUser }) {
       screenOptions={({ route }) => ({
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: 'white',
-          borderTopColor: 'transparent',
-            borderTopWidth: 0,
-            elevation: 0,
-            paddingTop: 40, // Add padding to the top
+        height: 50, // Adjust the height of the tab bar
+        backgroundColor: 'white',
+        borderTopColor: 'transparent',
+        borderTopWidth: 0,
+        elevation: 0,
+        paddingTop: 30,
+        marginBottom: 10,
         },
         tabBarActiveTintColor: 'blue',
         tabBarInactiveTintColor: 'gray',
@@ -50,7 +51,7 @@ export default function MyTabs({ navigation, user, setUser }) {
                 width: 30,
                 height: 30,
                 tintColor: focused ? 'blue' : color,
-                marginBottom: 30,
+                marginBottom: 20,
               }}
             />
           </View>
@@ -60,7 +61,7 @@ export default function MyTabs({ navigation, user, setUser }) {
 
       <Tab.Screen name="Schedule" component={Schedule} options={{
         tabBarIcon: ({focused, color}) => (
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{alignItems: 'center', justifyContent: 'center', }}>
             <Image 
               source={require('../../../assets/schedule.png')}
               resizeMode='contain'
@@ -68,7 +69,7 @@ export default function MyTabs({ navigation, user, setUser }) {
                 width: 30,
                 height: 30,
                 tintColor: focused ? 'blue' : color,
-                marginBottom: 30,
+                marginBottom: 20,
               }}
             />
           </View>
@@ -87,7 +88,7 @@ export default function MyTabs({ navigation, user, setUser }) {
                 width: 30,
                 height: 30,
                 tintColor: focused ? 'blue' : color,
-                marginBottom: 30,
+                marginBottom: 20,
               }}
             />
           </View>

@@ -52,16 +52,28 @@ export default function ThreeClockPrayer() {
   
     return (
       <View>
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text>3 O'Clock Prayer</Text>
-        </View>
+        <View style={{ 
+          alignItems: 'flex-start', 
+          backgroundColor: 'white',
+          padding: 20,
+          flexDirection: 'row', 
+          justifyContent: 'space-between',
+          marginRight: 20,
+          marginLeft: 20,
+          borderBottomColor: 'gray',
+          borderBottomWidth: 1,
+          // borderColor: 'black',
+          // borderRadius: 5, 
+          }}>
+          <Text style={{ fontSize: 20, alignSelf: 'center'}}>3 O'Clock Prayer</Text>
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          thumbColor={isEnabled ? "blue" : "black"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isEnabled}
         />
+      </View>
       </View>
     );
   }

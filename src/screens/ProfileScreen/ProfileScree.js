@@ -31,7 +31,7 @@ export default function ProfileScreen ({ route }) {
     }
 
     return (
-        <ImageBackground source={require('../../../assets/background/people.png')}
+        <ImageBackground source={require('../../../assets/background/church.png')}
         style={styles.background}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={styles.info}>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
     button: {
-        backgroundColor: 'skyblue',
+        backgroundColor: 'blue',
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,

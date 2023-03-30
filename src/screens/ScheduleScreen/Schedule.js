@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Platform, StyleSheet, TextInput, SafeAreaView, Alert, TouchableOpacity, View, Modal, Text, FlatList, ImageBackground } from 'react-native';
+import { Button, Platform, TextInput, SafeAreaView, Alert, ScrollView, TouchableOpacity, View, Modal, Text, ImageBackground } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
@@ -82,47 +82,49 @@ export default function Schedule() {
   };
   
   return (
+    <ImageBackground source={require('../../../assets/background/people.png')} style={styles.background}>
     <SafeAreaView style={styles.container}>
-    <ImageBackground
-    source={require('../../../assets/background/church.png')}
-    style={styles.background}>
-      <Text style={styles.notif}>Scheduled Notifications</Text>
+      <Text style={styles.scheduleTitle}>Scheduled Notifications</Text>
+    <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.addButton}>
+      <Text style={styles.addButtonText}> + Set A Reminder</Text>
+    </TouchableOpacity>
       <Angelus />
       <ThreeClockPrayer />
-      <FlatList
-        data={schedules}
-        style={styles.flatList}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.title}</Text>
-            <Text>
-              {item.date.toLocaleDateString()} at{' '}
-              {(() => {
-                const date = new Date(item.time);
-                let hour = date.getHours();
-                const minute = date.getMinutes();
-                const ampm = hour >= 12 ? 'PM' : 'AM';
-                hour = hour % 12;
-                hour = hour ? hour : 12;
-                return `${hour}:${minute < 10 ? '0' + minute : minute} ${ampm}`;
-              })()}
-            </Text>
-          </View>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-      <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.addButton}>
-        <Text style={styles.addButtonText}>Add Schedule</Text>
-      </TouchableOpacity>
+    <Text style={styles.reminderList}> Reminders List</Text>
+    <ScrollView style={{ height: '20%'}}>
+
+    <View>
+    <View style={styles.scheduleTemplate}>
+    {schedules.map((item) => (
+        <View key={item.id} style={styles.scheduleContainer}>
+          <Text style={styles.scheduleCategory}>{item.title}</Text>
+          <Text style={styles.scheduleList}>
+            {item.date.toLocaleDateString()} at{' '}{'\n'}
+            {(() => {
+              const date = new Date(item.time);
+              let hour = date.getHours();
+              const minute = date.getMinutes();
+              const ampm = hour >= 12 ? 'PM' : 'AM';
+              hour = hour % 12;
+              hour = hour ? hour : 12;
+              return `${hour}:${minute < 10 ? '0' + minute : minute} ${ampm}`;
+            })()}
+          </Text>
+        </View>
+      ))}
+      </View>
+
+      {/* MODAL */}
+
       <Modal visible={modalVisible} animationType="slide">
-        <Card style={{ paddingTop: 10, paddingLeft: 10 }}>
+        <Card style={styles.addModal}>
           <Card.Title title="One Up" subtitle="Set A Schedule" left={LeftContent} />
           <Card.Content>
               <Picker
                 selectedValue={title}
                 onValueChange={(itemValue) => setTitle(itemValue)}
-              >
-                <Picker.Item label="Title" value="" />
+                >
+                <Picker.Item label="Select a Category" value="" />
                 <Picker.Item label="Sa 'Yong Tahanan" value="Sa 'Yong Tahanan" />
                 <Picker.Item label="Tinig ng Pastol" value="Tinig ng Pastol" />
                 <Picker.Item label="OOTD" value="OOTD" />
@@ -138,11 +140,11 @@ export default function Schedule() {
                 editable={false}
                 value={time.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit', hour12: true})}
                 style={styles.input}
-              />
+                />
             </TouchableOpacity>
             {showTimepicker && (
               <DateTimePicker
-                value={time}
+              value={time}
                 mode="time"
                 display="default"
                 onChange={(event, selectedTime) => {
@@ -150,43 +152,46 @@ export default function Schedule() {
                   setShowTimepicker(false);
                   setTime(currentTime);
                 }}
-              />
-            )}
+                />
+                )}
             <TouchableOpacity onPress={() => setShowDatepicker(true)}>
               <TextInput
                 placeholder="Date"
                 editable={false}
                 value={date.toLocaleDateString()}
                 style={styles.input}
-              />
+                />
             </TouchableOpacity>
             {showDatepicker && (
               <DateTimePicker
-                value={date}
-                mode="date"
-                display="default"
+              value={date}
+              mode="date"
+              display="default"
                 onChange={(event, selectedDate) => {
                   const currentDate = selectedDate || date;
                   setShowDatepicker(false);
                   setDate(currentDate);
                 }}
-              />
-            )}
+                />
+                )}
           </Card.Content>
           <Card.Actions>
           <Button title="Schedule" onPress={async () => { await schedulePushNotification(); }} style={styles.schedule}/>
+          <View style={{ marginVertical: 30 }} />
           <Button title="Close" onPress={() => setModalVisible(false)} />
           </Card.Actions>
         </Card>
       </Modal>
-    </ImageBackground>
+    </View>
+</ScrollView>
     </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 async function registerForPushNotificationsAsync() {
   let token;
-
+  
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync('default', {
       name: 'default',

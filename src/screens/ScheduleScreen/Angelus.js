@@ -52,16 +52,33 @@ export default function Angelus() {
   
     return (
       <View>
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Angelus</Text>
-        </View>
+        <View style={{ 
+          alignItems: 'flex-start', 
+          backgroundColor: 'white',
+          padding: 20,
+          flexDirection: 'row', 
+          justifyContent: 'space-between',
+          marginTop: 20,
+          marginRight: 20,
+          marginLeft: 20,
+          borderBottomColor: 'gray',
+          borderBottomWidth: 1,
+          // borderWidth: 1,
+          // borderColor: 'black',
+          // borderRadius: 5, 
+          }}>
+          <Text style={{ fontSize: 20, alignSelf: 'center', }}>Angelus</Text>
         <Switch
+        style ={{
+          alignItems: 'flex-end'
+        }}
           trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          thumbColor={isEnabled ? "blue" : "black"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isEnabled}
         />
+        </View>
       </View>
     );
   }
