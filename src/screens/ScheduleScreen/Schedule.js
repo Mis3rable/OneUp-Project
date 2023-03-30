@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
-import { Button, Platform, StyleSheet, TextInput, SafeAreaView, Alert, TouchableOpacity, View, Modal, Text, FlatList } from 'react-native';
+import { Button, Platform, StyleSheet, TextInput, SafeAreaView, Alert, TouchableOpacity, View, Modal, Text, FlatList, ImageBackground } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Avatar, Card } from 'react-native-paper';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRoute } from '@react-navigation/native';
+import styles from './styles';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -92,7 +93,10 @@ export default function Schedule() {
   
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ fontSize: 24, marginTop: 20, textAlign: 'center' }}>Scheduled Notifications</Text>
+    <ImageBackground
+    source={require('../../../assets/background/church.png')}
+    style={styles.background}>
+      <Text style={styles.notif}>Scheduled Notifications</Text>
       <FlatList
         data={schedules}
         style={styles.flatList}
@@ -178,48 +182,14 @@ export default function Schedule() {
           </Card.Content>
           <Card.Actions>
           <Button title="Schedule" onPress={async () => { await schedulePushNotification(); }} style={styles.schedule}/>
-          <View style={{ marginVertical: 30 }} />
           <Button title="Close" onPress={() => setModalVisible(false)} />
           </Card.Actions>
         </Card>
       </Modal>
+    </ImageBackground>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container:{
-    width: 400,
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    marginBottom: 16,
-    paddingHorizontal: 8,
-  },
-  flatList: {
-    marginTop: 20,
-    marginLeft: 50,
-    marginRight: 50,
-  },
-  schedule: {
-    marginRight: 10,
-  },
-  addButton: {
-    backgroundColor: '#00a6ff', 
-    padding: 2, 
-    width: 100,
-    height: 25,
-    borderRadius: 10,
-    marginTop: 20,
-    alignSelf: 'center'
-  },
-  addButtonText: {
-    color: '#ffffff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
 
 async function registerForPushNotificationsAsync() {
   let token;

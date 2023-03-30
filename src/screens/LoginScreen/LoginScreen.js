@@ -63,16 +63,16 @@ export default function LoginScreen({navigation, setUser}) {
 
     return (
         <ImageBackground
-            source={require('../../../assets/background/00.png')}
+            source={require('../../../assets/background/church.png')}
             style={styles.background}>
         <View style={styles.container}>
             <View style={styles.form}>
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/OneUp_Logo.png')}
+                    source={require('../../../assets/transparent-logo.png')}
                 />
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'blue' : 'white' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'skyblue' : '#aaaaaa' },]}
                     placeholder='E-mail'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmail(text)}
@@ -83,7 +83,7 @@ export default function LoginScreen({navigation, setUser}) {
                     autoCapitalize="none"
                 />
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'blue' : 'white' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'skyblue' : '#aaaaaa' },]}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
                     placeholder='Password'
@@ -99,7 +99,7 @@ export default function LoginScreen({navigation, setUser}) {
                     {loading ? (
                         <ActivityIndicator color="#ffffff" size="small" />
                         ) : (
-                        <Text style={styles.buttonTitle}>Log In</Text>
+                        <Text style={styles.buttonTitle}>Sign In</Text>
                         )}
                 </TouchableOpacity>
                 <View style={styles.footerView}>

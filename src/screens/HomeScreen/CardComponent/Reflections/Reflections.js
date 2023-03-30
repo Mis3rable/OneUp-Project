@@ -119,6 +119,9 @@ const styles = StyleSheet.create({
         marginTop: 8,
         alignSelf: 'flex-start',
         color: 'white',
+      textShadowColor: 'black',
+      textShadowOffset: { width: 3, height: 3 },
+      textShadowRadius: 5,
     },
     swipe: {
         color: 'white', 

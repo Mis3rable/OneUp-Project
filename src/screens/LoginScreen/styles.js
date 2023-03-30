@@ -11,13 +11,13 @@ export default StyleSheet.create({
     form: {
         height: '50%',
         width: '90%',
-        backgroundColor: 'rgba(255, 255, 255, 0.68)',
+        backgroundColor: 'white',
         borderRadius: 15,
     },
     logo: {
         resizeMode: 'contain',
         flex: 1,
-        height: 20,
+        height: 50,
         width: 250,
         alignSelf: "center",
         marginTop: 30,
@@ -37,14 +37,16 @@ export default StyleSheet.create({
         fontSize: 17,
     },
     button: {
-        backgroundColor: '#000092',
+        backgroundColor: 'skyblue',
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
         height: 48,
         borderRadius: 5,
         alignItems: "center",
-        justifyContent: 'center'
+        justifyContent: 'center',
+        // borderColor: 'orange',
+        // borderWidth: 1,
     },
     buttonTitle: {
         color: 'white',
@@ -61,7 +63,7 @@ export default StyleSheet.create({
         color: 'black',
     },
     footerLink: {
-        color: "blue",
+        color: "skyblue",
         fontWeight: "bold",
         fontSize: 16,
         textDecorationLine: 'underline',

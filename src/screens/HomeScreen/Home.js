@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, ImageBackground, Button} from "react-native";
-import Header from '../../header/header';
 import 'firebase/auth';
 import DailyReadsCard from "./CardComponent/DailyReadsCard";
 import PrayerCard from "./CardComponent/PrayerCard";
@@ -12,11 +11,8 @@ export default function YoutubeCard({ route })  {
   const { user } = route.params;
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground
-          source={require('../../../assets/background/bgmenu.png')}
-          style={styles.background}>
+      <ImageBackground source={require('../../../assets/background/altar.png')}>
       <ScrollView style={styles.scrollView}>
-      <Header/>
       <Text style={styles.info}> Welcome, {user ? user.fullName : ''}!</Text>
       <DailyReadsCard/>
       <PrayerCard/>
@@ -62,7 +58,7 @@ const styles = StyleSheet.create({
       fontSize: 24, 
       fontWeight: 'bold', 
       fontStyle: 'italic',
-      marginTop: 100,
+      marginTop: 30,
       alignSelf: "center",
       color: 'white',
       textShadowColor: 'black',

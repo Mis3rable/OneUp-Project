@@ -13,6 +13,10 @@ export default function RegistrationScreen({navigation, setUser}) {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
+    const [focusedInput, setFocusedInput] = useState(null);
+
+    const handleFocus = (inputName) => setFocusedInput(inputName);
+    const handleBlur = () => setFocusedInput(null);
 
     const municipalityOptions = [
         { label: 'Angat', value: 'Angat' },
@@ -335,27 +339,31 @@ export default function RegistrationScreen({navigation, setUser}) {
 
     return (
         <ImageBackground
-            source={require('../../../assets/bg.jpg')}
+            source={require('../../../assets/background/priest.png')}
             style={styles.background}>
         <View style={styles.container}>
+        <View style={styles.form}>
             <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%'}}
+                style={{ flex: 1, width: '100%'}} 
                 keyboardShouldPersistTaps="always">
-                <Image
+                {/* <Image
                     style={styles.logo}
                     source={require('../../../assets/OneUp_Logo.png')}
-                />
+                /> */}
+                <Text style={styles.text}> Create an Account </Text>
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input,{ borderColor: focusedInput === 'fullName' ? 'skyblue' : '#aaaaaa' },]}
                     placeholder='Full Name'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setFullName(text)}
                     value={fullName}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
+                    onFocus={() => handleFocus('fullName')}
+                    onBlur={handleBlur}
                 />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input,{ borderColor: focusedInput === 'age' ? 'skyblue' : '#aaaaaa' },]}
                     placeholder='Age'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setAge(text)}
@@ -363,10 +371,12 @@ export default function RegistrationScreen({navigation, setUser}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                     keyboardType='numeric'
+                    onFocus={() => handleFocus('age')}
+                    onBlur={handleBlur}
                     />
                 <>
                 <Picker
-                style={styles.input}
+                style={[styles.input, {borderWidth: 1, borderColor: '#aaaaaa'}]}
                 selectedValue={selectedMunicipality}
                 onValueChange={(itemValue, itemIndex) => {
                     setSelectedMunicipality(itemValue);
@@ -379,7 +389,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                 </Picker>
                 {selectedMunicipality && (
                     <Picker
-                    style={styles.input}
+                    style={[styles.input, {borderWidth: 1, borderColor: '#aaaaaa'}]}
                     selectedValue={selectedParish}
                     onValueChange={(itemValue) => setSelectedParish(itemValue)}
                     >
@@ -391,16 +401,18 @@ export default function RegistrationScreen({navigation, setUser}) {
                 )}
                 </>
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'skyblue' : '#aaaaaa' },]}
                     placeholder='E-mail'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
+                    onFocus={() => handleFocus('email')}
+                    onBlur={handleBlur}
                 />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'skyblue' : '#aaaaaa' },]}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
                     placeholder='Password'
@@ -408,9 +420,11 @@ export default function RegistrationScreen({navigation, setUser}) {
                     value={password}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
+                    onFocus={() => handleFocus('password')}
+                    onBlur={handleBlur}
                 />
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input,{ borderColor: focusedInput === 'confirmPassword' ? 'skyblue' : '#aaaaaa' },]}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
                     placeholder='Confirm Password'
@@ -418,6 +432,8 @@ export default function RegistrationScreen({navigation, setUser}) {
                     value={confirmPassword}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
+                    onFocus={() => handleFocus('confirmPassword')}
+                    onBlur={handleBlur}
                 />
                 <TouchableOpacity
                     style={styles.button}
@@ -432,6 +448,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
+            </View>
         </View>
     </ImageBackground>
     )

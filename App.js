@@ -62,7 +62,7 @@ export default function App() {
           <Stack.Screen name="Login" options={{ headerShown: false }}>
             {props => <LoginScreen {...props} setUser={setUser} />}
           </Stack.Screen>
-          <Stack.Screen name="Registration" options={{ headerStyle: { backgroundColor: '#f3fffc' } }}>
+          <Stack.Screen name="Registration" options={{ headerShown: false, headerStyle: { backgroundColor: '#f3fffc' } }}>
           {props => <RegistrationScreen {...props} setUser={setUser} />}
           </Stack.Screen>
         </Stack.Navigator>

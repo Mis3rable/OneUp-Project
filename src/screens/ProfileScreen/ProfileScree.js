@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function ProfileScreen ({ route }) {  
     const { user, setUser } = route.params;
@@ -30,12 +31,14 @@ export default function ProfileScreen ({ route }) {
     }
 
     return (
+        <ImageBackground source={require('../../../assets/background/people.png')}
+        style={styles.background}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <View style={{ position: 'absolute', top: 50 }}>
-        <Text style={{ fontSize: 24, marginTop: 80, fontWeight: 'bold', fontStyle: 'italic'}}>Welcome {user ? user.fullName : ''}!</Text>
-        <Text style={{ fontSize: 20, }}>Email: {user ? user.email : ''}</Text>
-        <Text style={{ fontSize: 20, }}>Parish: {user ? user.selectedParish : ''}</Text>
-        <Text style={{ fontSize: 20, }}>Municipality: {user ? user.selectedMunicipality : ''}</Text>
+        <View style={styles.info}>
+        <Text style={styles.info}>Welcome {user ? user.fullName : ''}!</Text>
+        <Text style={styles.info}>Email: {user ? user.email : ''}</Text>
+        <Text style={styles.info}>Parish: {user ? user.selectedParish : ''}</Text>
+        <Text style={styles.info}>Municipality: {user ? user.selectedMunicipality : ''}</Text>
         </View>
         <View style={{ marginBottom: 20 , marginTop: 100}}>
             <AboutUsModal />
@@ -47,8 +50,47 @@ export default function ProfileScreen ({ route }) {
             <TermsModal/>
         </View>
         <View style={{ marginBottom: 20 }}>
-        <Button title="Logout" onPress={handleLogout} />
+        <TouchableOpacity
+            style={styles.button}
+            onPress={handleLogout}>
+            <Text style={styles.buttonTitle}>Log Out</Text>
+        </TouchableOpacity>
         </View>
         </View>
+        </ImageBackground>
       );
 }
+
+const styles = StyleSheet.create({
+    background: {
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
+    },
+    info: {
+    color: 'white',
+      textShadowColor: 'black',
+      textShadowOffset: { width: 3, height: 3 },
+      textShadowRadius: 5,
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    button: {
+        backgroundColor: 'skyblue',
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 20,
+        height: 48,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: 'center',
+        width: 100
+        // borderColor: 'orange',
+        // borderWidth: 1,
+    },
+    buttonTitle: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+});
