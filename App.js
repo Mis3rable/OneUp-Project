@@ -7,25 +7,20 @@ import {decode, encode} from 'base-64'
 import Category from './src/screens/CategoryScreen/Category';
 import MyTabs from './src/screens/HomeScreen/HomeScreen';
 import Schedule from './src/screens/ScheduleScreen/Schedule';
-import OOTD from './src/screens/HomeScreen/VideoComponent/OOTD';
-import Prayer from './src/screens/HomeScreen/VideoComponent/Prayer';
-import Word from './src/screens/HomeScreen/VideoComponent/Word';
-import Rosary from './src/screens/HomeScreen/VideoComponent/Rosary';
 import Journey from './src/screens/JourneyScreen/Journey';
 import Scriptures from './src/screens/ScriptireScreen/Scripture';
-import ICMAS from './src/screens/HomeScreen/VideoComponent/ICMAS';
-import LordChef from './src/screens/HomeScreen/VideoComponent/LordChef';
-import HimnoBulakenyo from './src/screens/HomeScreen/VideoComponent/Himno';
-import Icons from './src/screens/HomeScreen/VideoComponent/Icons';
-import CrossWord from './src/screens/HomeScreen/VideoComponent/CrossWord';
-import SaMadalingSabi from './src/screens/HomeScreen/VideoComponent/SaMadalingSabi';
-import JoelCruz from './src/screens/HomeScreen/VideoComponent/JoelCruz';
-import ItanongMoKungBakit from './src/screens/HomeScreen/VideoComponent/ItanongMoKungBakit';
-import HimnoBulakenyoAudio from './src/screens/HomeScreen/VideoComponent/HimnoAudio';
-import Lithurgical from './src/screens/HomeScreen/VideoComponent/Liturgical';
-import Tinig from './src/screens/HomeScreen/VideoComponent/TinigNgPastol';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, ActivityIndicator } from 'react-native'
+import SaIyongTahanan from './src/screens/HomeScreen/CardComponent/Music Videos/SaIyongTahanan';
+import Rosary from './src/screens/HomeScreen/CardComponent/Rosary';
+import Liturgical from './src/screens/HomeScreen/CardComponent/Music Videos/Liturgical';
+import LordChef from './src/screens/HomeScreen/CardComponent/Reflections/LordChef';
+import Icons from './src/screens/HomeScreen/CardComponent/Music Videos/Icons';
+import CrossWord from './src/screens/HomeScreen/CardComponent/Reflections/CrossWord';
+import SaMadalingSabi from './src/screens/HomeScreen/CardComponent/Reflections/SaMadalingSabi';
+import ItanongMoKungBakit from './src/screens/HomeScreen/CardComponent/Reflections/ItanongMoKungBakit';
+import Tinig from './src/screens/HomeScreen/CardComponent/Reflections/TinigNgPastol';
+import OOTD from './src/screens/HomeScreen/CardComponent/Reflections/OOTD';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -85,19 +80,16 @@ export default function App() {
         <Stack.Screen name="Schedule" component={Schedule} options={{ headerShown: false }}/>
         <Stack.Screen name="OOTD" component={OOTD} />
         {/* <Stack.Screen name="Prayer" component={Prayer} /> */}
-        <Stack.Screen name="Words" component={Word} />
+        {/* <Stack.Screen name="Words" component={} /> */}
         <Stack.Screen name="Prayers" component={Rosary} />
-        <Stack.Screen name="Liturgical Songs" component={Lithurgical} />
+        <Stack.Screen name="Liturgical Songs" component={Liturgical} />
         <Stack.Screen name="Journey" component={Journey} />
         <Stack.Screen name="Scripture" component={Scriptures} />
         <Stack.Screen name="The Lord Is My Chef" component={LordChef} />
-        <Stack.Screen name="Sa 'Yong Tahanan" component={ICMAS} />
+        <Stack.Screen name="Sa Iyong Tahanan" component={SaIyongTahanan} />
         <Stack.Screen name="Icons" component={Icons} />
-        <Stack.Screen name="Himno Bulakenyo" component={HimnoBulakenyo} />
-        <Stack.Screen name="Himno Bulakenyo(Audio)" component={HimnoBulakenyoAudio} />
         <Stack.Screen name="Cross Word" component={CrossWord} />
         <Stack.Screen name="Sa Madaling Sabi" component={SaMadalingSabi} />
-        <Stack.Screen name="Joel Cruz" component={JoelCruz} />
         <Stack.Screen name="Itanong Mo Kung Bakit" component={ItanongMoKungBakit} />
         <Stack.Screen name="Tinig Ng Pastol" component={Tinig} />
       </Stack.Navigator>

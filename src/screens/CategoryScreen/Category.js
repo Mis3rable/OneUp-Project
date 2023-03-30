@@ -25,8 +25,8 @@ return (
         </Text>
         <View style={styles.CategoryContainer}>
         <Card style={styles.card} >
-        <TouchableOpacity onPress={() => handleCardPress('OOTD')}>
-        <Card.Cover style={styles.cover} source={require('../../../assets/OOTD.png')}/>
+        <TouchableOpacity onPress={() => handleCardPress('SaMadalingSabi')}>
+        <Card.Cover style={styles.cover} source={require('../../../assets/SaMadalingSabi.jpg')}/>
         </TouchableOpacity>
         </Card>
         
@@ -37,8 +37,8 @@ return (
         </Card>
 
         <Card style={styles.card}>
-        <TouchableOpacity onPress={() => handleCardPress('ShareTheWords')}>
-        <Card.Cover style={styles.cover} source={require('../../../assets/ShareTheWords.png')}/>
+        <TouchableOpacity onPress={() => handleCardPress('CrossWord')}>
+        <Card.Cover style={styles.cover} source={require('../../../assets/CrossWord.jpg')}/>
         </TouchableOpacity>
         </Card>
         </View>

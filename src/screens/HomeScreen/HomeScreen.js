@@ -1,10 +1,10 @@
 import { View, Image, BackHandler } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import YoutubeCard from './CardVideo';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
 import Schedule from '../ScheduleScreen/Schedule';
 import Journey from '../JourneyScreen/Journey';
 import React, {useEffect} from 'react'
+import YoutubeCard from './Home';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs({ navigation, user, setUser }) {

@@ -19,12 +19,12 @@ export default function Schedule() {
   const route = useRoute();
   const { category } = route.params || { category: 'default' };
   let coverImageSource;
-  if (category === 'OOTD') {
-    coverImageSource = require('../../../assets/OOTD.png');
+  if (category === 'SaMadalingSabi') {
+    coverImageSource = require('../../../assets/SaMadalingSabi.jpg');
   } else if (category === 'Prayer') {
     coverImageSource = require('../../../assets/Prayer.jpg');
-  } else if (category === 'ShareTheWords') {
-    coverImageSource = require('../../../assets/ShareTheWords.png');
+  } else if (category === 'CrossWord') {
+    coverImageSource = require('../../../assets/CrossWord.jpg');
   } else {
     coverImageSource = require('../../../assets/Prayer.jpg');
   }
