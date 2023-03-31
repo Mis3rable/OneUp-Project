@@ -2,17 +2,21 @@ import { View, Image, BackHandler } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProfileScreen from '../ProfileScreen/ProfileScree';
 import Schedule from '../ScheduleScreen/Schedule';
-import Journey from '../JourneyScreen/Journey';
+import { StatusBar } from 'react-native';
 import React, {useEffect} from 'react'
 import YoutubeCard from './Home';
+import Constants from 'expo-constants';
 const Tab = createBottomTabNavigator();
 
 export default function MyTabs({ navigation, user, setUser }) {
   const CustomHeader = ({ navigation, route }) => {
     return (
-      <View 
+      <>
+      <StatusBar translucent={true} />
+      <View
       style={{ 
         flexDirection: 'row', 
+        marginTop: Constants.statusBarHeight,
         alignItems: 'center', 
         justifyContent: 'center',
         marginTop: 50,
@@ -20,6 +24,7 @@ export default function MyTabs({ navigation, user, setUser }) {
         }}>
         <Image source={require('../../../assets/transparent-logo.png')} style={{ width: 150, height: 50 }} />
       </View>
+      </>
     );
   };
 
