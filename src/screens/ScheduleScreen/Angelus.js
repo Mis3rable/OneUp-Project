@@ -67,7 +67,7 @@ export default function Angelus() {
           // borderColor: 'black',
           // borderRadius: 5, 
           }}>
-          <Text style={{ fontSize: 20, alignSelf: 'center', }}>Angelus</Text>
+          <Text style={{ fontSize: 20, alignSelf: 'center', }}>Angelus 12:00 PM</Text>
         <Switch
         style ={{
           alignItems: 'flex-end'
@@ -86,7 +86,7 @@ export default function Angelus() {
   async function schedulePushNotification() {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: "Angelus",
+        title: "Angelus 12:00 PM",
       },
       trigger: {
           hour: 12,

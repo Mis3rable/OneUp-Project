@@ -9,6 +9,7 @@ import { useRoute } from '@react-navigation/native';
 import styles from './styles';
 import Angelus from './Angelus';
 import ThreeClockPrayer from './3ClockPrayer';
+import AngelusSix from './Angelus6';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -90,6 +91,7 @@ export default function Schedule() {
     </TouchableOpacity>
       <Angelus />
       <ThreeClockPrayer />
+      <AngelusSix />
     <Text style={styles.reminderList}> Reminders List</Text>
     <ScrollView style={{ height: '20%'}}>
 
