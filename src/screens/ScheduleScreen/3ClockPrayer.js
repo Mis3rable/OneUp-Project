@@ -30,7 +30,7 @@ export default function ThreeClockPrayer() {
         console.log(response);
       });
   
-      AsyncStorage.getItem('notificationEnabled').then((value) => {
+      AsyncStorage.getItem('ThreeClockNotificationEnabled').then((value) => {
         setIsEnabled(value === 'true');
       });
   
@@ -42,7 +42,7 @@ export default function ThreeClockPrayer() {
   
     const toggleSwitch = async () => {
       setIsEnabled(previousState => !previousState);
-      await AsyncStorage.setItem('notificationEnabled', (!isEnabled).toString());
+      await AsyncStorage.setItem('ThreeClockNotificationEnabled', (!isEnabled).toString());
       if (!isEnabled) {
         await schedulePushNotification();
       } else {
