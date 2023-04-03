@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, RefreshControl } from "react-native";
+import { View, Text, ScrollView, Image } from "react-native";
 import AboutUsModal from "./AboutUs";
 import PrivacyModal from "./Privacy";
 import TermsModal from "./Terms";
@@ -12,7 +12,6 @@ import { ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
 export default function ProfileScreen ({ route }) {  
     const { user, setUser } = route.params;
     const navigation = useNavigation();
-    const [refreshing, setRefreshing] = useState(false);
     console.log(user);
     
     const handleLogout = async () => {
@@ -35,26 +34,26 @@ export default function ProfileScreen ({ route }) {
         navigation.navigate('Update Profile', { user, setUser });
     };
 
-    const onRefresh = async () => {
-    setRefreshing(true);
-    try {
-        const currentUser = firebase.auth().currentUser;
-        const userDoc = await firebase.firestore().collection('users').doc(currentUser.uid).get();
-        setUser(userDoc.data().user);
-    } catch (error) {
-        console.error(error);
-    }
-    setRefreshing(false);
-}
-
     return (
         <ImageBackground source={require('../../../assets/background/church.png')}
         style={styles.background}>
             <ScrollView
                 style={{ flex: 1 }}
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-            >
+                >
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={styles.profileImage}>
+                        {user.photoURL ? (
+                            <Image
+                                source={{ uri: user.photoURL }}
+                                style={styles.profileImage}
+                            />
+                        ) : (
+                            <Image
+                                source={require('../../../assets//placeholder.png')}
+                                style={styles.profileImage}
+                            />
+                        )}
+                    </View>
                     <View style={styles.info}>
                         <Text style={styles.info}>Welcome {user ? user.fullName : ''}!</Text>
                         <Text style={styles.info}>Email: {user ? user.email : ''}</Text>
@@ -99,6 +98,12 @@ const styles = StyleSheet.create({
       textShadowRadius: 5,
       fontSize: 20,
       fontWeight: 'bold',
+    },
+    profileImage: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        marginBottom: 20,
     },
     button: {
         backgroundColor: 'blue',
