@@ -21,6 +21,7 @@ import SaMadalingSabi from './src/screens/HomeScreen/CardComponent/Reflections/S
 import ItanongMoKungBakit from './src/screens/HomeScreen/CardComponent/Reflections/ItanongMoKungBakit';
 import Tinig from './src/screens/HomeScreen/CardComponent/Reflections/TinigNgPastol';
 import OOTD from './src/screens/HomeScreen/CardComponent/Reflections/OOTD';
+import UpdateProfile from './src/screens/ProfileScreen/UpdateProfileForm';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -92,6 +93,7 @@ export default function App() {
         <Stack.Screen name="Sa Madaling Sabi" component={SaMadalingSabi} />
         <Stack.Screen name="Itanong Mo Kung Bakit" component={ItanongMoKungBakit} />
         <Stack.Screen name="Tinig Ng Pastol" component={Tinig} />
+        <Stack.Screen name="Update Profile" component={UpdateProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
