@@ -23,14 +23,17 @@ export default function UpdateProfile({ route }) {
   const handleUpdateProfile = async () => {
     try {
       const userRef = firebase.firestore().collection('users').doc(user.id);
-      await userRef.update({
-        fullName,
-        email,
-        selectedParish,
-        selectedMunicipality,
-        photoURL,
-      });
-      console.log('User profile updated!');
+      const userDoc = await userRef.get();
+      if (userDoc.exists) {
+        await userRef.update({
+          fullName,
+          email,
+          selectedParish,
+          selectedMunicipality,
+          photoURL,
+        });
+        console.log('User profile updated!');
+      }
       await AsyncStorage.removeItem('userData');
       await firebase.auth().signOut(); // sign out the user
       route.params.setUser(null);
@@ -63,8 +66,9 @@ export default function UpdateProfile({ route }) {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      const response = await fetch(result.uri);
+    if (!result.canceled) {
+      const selectedAsset = result.assets[0];
+      const response = await fetch(selectedAsset.uri);
       const blob = await response.blob();
       const filename = user.id + '_' + new Date().getTime();
       const storageRef = firebase.storage().ref().child('profile_images/' + filename);
