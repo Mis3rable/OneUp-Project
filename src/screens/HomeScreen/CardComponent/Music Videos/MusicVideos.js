@@ -18,6 +18,10 @@ const MusicVideos = () => {
     const handleLithurgicalCardPress = () => {
         navigation.navigate('Liturgical Songs');
     }
+
+    const handleReligiousAndInspirationalPress = () => {
+        navigation.navigate('Religious And Inspirational Videos');
+    }
     // const handleWordsCardPress = () => {
     //   navigation.navigate('Words');
     // }
@@ -71,6 +75,11 @@ const MusicVideos = () => {
             title: "ISa Iyong Tahanan",
             image: require('../../../../../assets/SaIyongTahanan.jpg'),
             onPress: handleICMASCardPress,
+        },
+        {
+            title: "Religious And Inspirational Videos",
+            image: require('../../../../../assets/ReligiousAndInspirational.jpg'),
+            onPress: handleReligiousAndInspirationalPress,
         },
         // {
         //     title: 'ShareTheWords',

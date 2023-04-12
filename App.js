@@ -22,6 +22,7 @@ import ItanongMoKungBakit from './src/screens/HomeScreen/CardComponent/Reflectio
 import Tinig from './src/screens/HomeScreen/CardComponent/Reflections/TinigNgPastol';
 import OOTD from './src/screens/HomeScreen/CardComponent/Reflections/OOTD';
 import UpdateProfile from './src/screens/ProfileScreen/UpdateProfileForm';
+import ReligiousAndInspirational from './src/screens/HomeScreen/CardComponent/Music Videos/ReligiousAndInspirational';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -93,6 +94,7 @@ export default function App() {
         <Stack.Screen name="Sa Madaling Sabi" component={SaMadalingSabi} />
         <Stack.Screen name="Itanong Mo Kung Bakit" component={ItanongMoKungBakit} />
         <Stack.Screen name="Tinig Ng Pastol" component={Tinig} />
+        <Stack.Screen name="Religious And Inspirational Videos" component={ReligiousAndInspirational} />
         <Stack.Screen name="Update Profile" component={UpdateProfile} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -70,7 +70,7 @@ export default function UpdateProfile({ route }) {
       const selectedAsset = result.assets[0];
       const response = await fetch(selectedAsset.uri);
       const blob = await response.blob();
-      const filename = user.id + '_' + new Date().getTime();
+      const filename = 'profile_image_' + user.id;
       const storageRef = firebase.storage().ref().child('profile_images/' + filename);
       await storageRef.put(blob);
       const downloadURL = await storageRef.getDownloadURL();
