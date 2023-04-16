@@ -24,7 +24,7 @@ export default function ReligiousAndInspirational() {
   useEffect(() => {
     const fetchVideos = async () => {
       const storageRef = firebase.storage().ref();
-      const videosRef = storageRef.child('Videos/ReligiousAndInspirational');
+      const videosRef = storageRef.child('Videos/Religious And Inspirational');
       const videosList = await videosRef.listAll();
       const urls = await Promise.all(
         videosList.items.map(async (video) => {
