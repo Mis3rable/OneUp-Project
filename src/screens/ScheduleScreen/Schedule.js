@@ -11,6 +11,7 @@ import Angelus from './Angelus';
 import ThreeClockPrayer from './3ClockPrayer';
 import AngelusSix from './Angelus6';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -35,11 +36,41 @@ export default function Schedule() {
   const [showTimepicker, setShowTimepicker] = useState(false);
   const [schedules, setSchedules] = useState([]);
   const LeftContent = props => <Avatar.Icon {...props} icon="alarm" />
+  const navigation = useNavigation();
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {setNotification(notification);});
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {console.log(response);});
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+      
+      const notificationTitle = response.notification.request.content.title;
+
+      // Navigate to the appropriate screen based on the title of the notification
+      if (notificationTitle === 'Daily Scriptural Readings') {
+        navigation.navigate('Scripture'); 
+      } else if (notificationTitle === 'Liturgical Songs') {
+        navigation.navigate('Liturgical Songs'); 
+      } else if (notificationTitle === 'Icons') {
+        navigation.navigate('Icons'); 
+      } else if (notificationTitle === 'Sa Iyong Tahanan') {
+        navigation.navigate('Sa Iyong Tahanan'); 
+      } else if (notificationTitle === 'Religous And Inspirational Videos') {
+        navigation.navigate('Religous And Inspirational Videos'); 
+      } else if (notificationTitle === 'The Lord Is My Chef') {
+        navigation.navigate('The Lord Is My Chef'); 
+      } else if (notificationTitle === 'Tinig ng Pastol') {
+        navigation.navigate('Tinig ng Pastol'); 
+      } else if (notificationTitle === 'Cross Word') {
+        navigation.navigate('Cross Word'); 
+      } else if (notificationTitle === 'OOTD') {
+        navigation.navigate('OOTD'); 
+      } else if (notificationTitle === 'Sa Madaling Sabi') {
+        navigation.navigate('Sa Madaling Sabi'); 
+      } else if (notificationTitle === 'Itanong Mo Kung Bakit') {
+        navigation.navigate('Itanong Mo Kung Bakit'); 
+      }
+    });
     return () => {
       Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
@@ -122,6 +153,7 @@ export default function Schedule() {
 
   return (
     <ImageBackground source={require('../../../assets/background/people.png')} style={styles.background}>
+    <ScrollView style={{ height: '20%'}}>
     <SafeAreaView style={styles.container}>
       <Text style={styles.scheduleTitle}>Scheduled Notifications</Text>
     <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.addButton}>
@@ -131,8 +163,6 @@ export default function Schedule() {
       <ThreeClockPrayer />
       <AngelusSix />
     <Text style={styles.reminderList}> Reminders List</Text>
-    <ScrollView style={{ height: '20%'}}>
-
     <View>
       <View style={styles.scheduleTemplate}>
       {schedules.map((item) => (
@@ -156,7 +186,6 @@ export default function Schedule() {
             </View>
           ))}
       </View>
-
       {/* MODAL */}
 
       <Modal visible={modalVisible} animationType="slide">
@@ -168,13 +197,17 @@ export default function Schedule() {
                 onValueChange={(itemValue) => setTitle(itemValue)}
                 >
                 <Picker.Item label="Select a Category" value="" />
-                <Picker.Item label="Sa 'Yong Tahanan" value="Sa 'Yong Tahanan" />
+                <Picker.Item label="Daily Scriptural Readings" value="Daily Scriptural Readings" />
+                <Picker.Item label="Liturgical Songs" value="Liturgical Songs" />
+                <Picker.Item label="Icons" value="Icons" />
+                <Picker.Item label="Sa Iyong Tahanan" value="Sa Iyong Tahanan" />
+                <Picker.Item label="Religious And Inspirational Videos" value="Religious And Inspirational Videos" />
+                <Picker.Item label="The Lord Is My Chef" value="The Lord Is My Chef" />
                 <Picker.Item label="Tinig ng Pastol" value="Tinig ng Pastol" />
+                <Picker.Item label="Cross Word" value="Cross Word" />
                 <Picker.Item label="OOTD" value="OOTD" />
                 <Picker.Item label="Sa Madaling Sabi" value="Sa Madaling Sabi" />
-                <Picker.Item label="Crossword" value="Crossword" />
                 <Picker.Item label="Itanong Mo Kung Bakit" value="Itanong Mo Kung Bakit" />
-                <Picker.Item label="Prayer" value="Rosary" />
               </Picker>
             <TextInput placeholder="Message" value={message} onChangeText={setMessage} style={styles.input} />
             <TouchableOpacity onPress={() => setShowTimepicker(true)}>
@@ -226,8 +259,8 @@ export default function Schedule() {
         </Card>
       </Modal>
     </View>
-</ScrollView>
     </SafeAreaView>
+    </ScrollView>
     </ImageBackground>
   );
 }
