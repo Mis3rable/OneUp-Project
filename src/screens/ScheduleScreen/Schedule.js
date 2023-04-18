@@ -10,6 +10,7 @@ import styles from './styles';
 import Angelus from './Angelus';
 import ThreeClockPrayer from './3ClockPrayer';
 import AngelusSix from './Angelus6';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -45,6 +46,21 @@ export default function Schedule() {
     };
   }, []);
 
+  // Retrieve schedules from AsyncStorage on app start
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const existingSchedules = await AsyncStorage.getItem('schedules');
+        if (existingSchedules) {
+          setSchedules(JSON.parse(existingSchedules));
+        }
+      } catch (error) {
+        console.error('Error fetching schedules from AsyncStorage:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const schedulePushNotification = async (item) => {  
     if (title === '') {
       Alert.alert('One Up', 'Category cannot be empty');
@@ -78,10 +94,32 @@ export default function Schedule() {
       time,
       id: Math.random().toString(36).substr(2, 9),
     };
-  
+    
+    try {
+      const existingSchedules = await AsyncStorage.getItem('schedules');
+      let updatedSchedules = existingSchedules ? JSON.parse(existingSchedules) : [];
+      updatedSchedules.push(newSchedule);
+      await AsyncStorage.setItem('schedules', JSON.stringify(updatedSchedules));
+      console.log('Schedule saved to AsyncStorage:', newSchedule);
+    } catch (error) {
+      console.error('Error saving schedule to AsyncStorage:', error);
+    }
     setSchedules([...schedules, newSchedule]);
   };
   
+  const deleteSchedule = async (itemId) => {
+    try {
+      const existingSchedules = await AsyncStorage.getItem('schedules');
+      let updatedSchedules = existingSchedules ? JSON.parse(existingSchedules) : [];
+      updatedSchedules = updatedSchedules.filter(item => item.id !== itemId);
+      await AsyncStorage.setItem('schedules', JSON.stringify(updatedSchedules));
+      console.log('Schedule deleted from AsyncStorage:', itemId);
+      setSchedules(updatedSchedules);
+    } catch (error) {
+      console.error('Error deleting schedule from AsyncStorage:', error);
+    }
+  };
+
   return (
     <ImageBackground source={require('../../../assets/background/people.png')} style={styles.background}>
     <SafeAreaView style={styles.container}>
@@ -96,24 +134,27 @@ export default function Schedule() {
     <ScrollView style={{ height: '20%'}}>
 
     <View>
-    <View style={styles.scheduleTemplate}>
-    {schedules.map((item) => (
-        <View key={item.id} style={styles.scheduleContainer}>
-          <Text style={styles.scheduleCategory}>{item.title}</Text>
-          <Text style={styles.scheduleList}>
-            {item.date.toLocaleDateString()} at{' '}{'\n'}
-            {(() => {
-              const date = new Date(item.time);
-              let hour = date.getHours();
-              const minute = date.getMinutes();
-              const ampm = hour >= 12 ? 'PM' : 'AM';
-              hour = hour % 12;
-              hour = hour ? hour : 12;
-              return `${hour}:${minute < 10 ? '0' + minute : minute} ${ampm}`;
-            })()}
-          </Text>
-        </View>
-      ))}
+      <View style={styles.scheduleTemplate}>
+      {schedules.map((item) => (
+            <View key={item.id} style={styles.scheduleContainer}>
+              <Text style={styles.scheduleCategory}>{item.title}</Text>
+              <Text style={styles.scheduleList}>
+                {item.date && item.date.toLocaleDateString ? item.date.toLocaleDateString() : ''} at{' '}{'\n'}
+                {(() => {
+                  const date = new Date(item.time);
+                  let hour = date.getHours();
+                  const minute = date.getMinutes();
+                  const ampm = hour >= 12 ? 'PM' : 'AM';
+                  hour = hour % 12;
+                  hour = hour ? hour : 12;
+                  return `${hour}:${minute < 10 ? '0' + minute : minute} ${ampm}`;
+                })()}
+              </Text>
+              <TouchableOpacity onPress={() => deleteSchedule(item.id)} style={styles.deleteButton}>
+                <Text style={styles.deleteButtonText}>Delete</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
       </View>
 
       {/* MODAL */}
