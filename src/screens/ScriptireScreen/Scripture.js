@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Modal, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Modal, TouchableOpacity, StyleSheet, Text, View, ImageBackground, SafeAreaView} from 'react-native';
 import firebase from '../../firebase/config';
 import { Button } from 'react-native-paper';
 import { Card, Title, Paragraph } from 'react-native-paper';
@@ -109,6 +109,8 @@ function Scriptures() {
   }, [modalVisible]);
 
   return (
+    <ImageBackground source={require('../../../assets/background/outside.png')} style={styles.background} >
+    <SafeAreaView style={styles.container}>
     <ScrollView>
       {fileData.length === 0 ? (
         <>
@@ -123,10 +125,12 @@ function Scriptures() {
                 <Card key={fileIndex} onPress={() => downloadFile(url, name)} style={isLoading ? styles.cardLoading : styles.card}>
                 {coverUrl && <Card.Cover source={{ uri: coverUrl }} />}
                   <Card.Content>
-                    <Title>{name}</Title>
+                    <Title style={styles.title}>{name}</Title>
                   </Card.Content>
                   <Card.Actions>
-                    <Button>{isLoading ? 'Loading...' : 'View File'}</Button>
+                    <Button 
+                    mode="contained-tonal" buttonColor="chocolate"
+                    labelStyle={{color:'white', fontSize: 15}}>{isLoading ? 'Loading...':'Read'}</Button>
                   </Card.Actions>
                 </Card>
               )
@@ -144,7 +148,7 @@ function Scriptures() {
         <View style={styles.modal}>
           <ScrollView>
             <Title style={styles.modalTitle}>{fileName.replace(/\.[^/.]+$/, '')}</Title>
-            <Button onPress={() => speakText(fileContent)}>
+            <Button style={styles.speak} onPress={() => speakText(fileContent)} icon="microphone" mode="contained" buttonColor="snow" textColor="peru">
               {isSpeaking ? 'Stop Speaking' : 'Speak Text'}
             </Button>
             <Text style={styles.fileContent}>{fileContent}</Text>
@@ -155,40 +159,73 @@ function Scriptures() {
         </View>
       </Modal>
     </ScrollView>
+    </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   card: {
-    width: '95%',
-    margin: 10,
+    width: '88%',
+    margin: 25,
+    marginBottom: 10,
+    marginTop: 40
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 10
   },
   modal: {
     marginTop: 50,
-    marginHorizontal: 20,
+    backgroundColor: 'linen'
   },
   modalTitle: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 10,
+    marginTop: 30,
+    alignSelf: 'center',
+    textAlign: 'center',
+    color: 'saddlebrown'
   },
   fileContent: {
     fontSize: 18,
     padding: 10,
+    alignContent: 'center',
+    marginHorizontal: 20,
+  },
+  speak: {
+    marginTop: 20,
+    marginBottom: 20,
+    marginHorizontal: 30,
   },
   modalButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'snow',
     padding: 12,
-    borderRadius: 4,
+    borderRadius: 20,
+    marginBottom: 100,
+    marginTop: 20,
+    marginHorizontal: 30,
   },
   modalButtonText: {
     fontSize: 18,
-    color: 'white',
+    color: 'peru',
+    alignSelf: 'center',
+    fontWeight: 'bold'
   },
   cardLoading: {
-    margin: 10,
-    width: '95%',
-  },
+    width: '88%',
+    margin: 25,
+    marginBottom: 15
+  }
 });
 
 export default Scriptures;

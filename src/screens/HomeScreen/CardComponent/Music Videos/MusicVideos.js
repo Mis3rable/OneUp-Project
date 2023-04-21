@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 30
+        marginTop: 30,
+        marginBottom: 20,
       },
     title2: {
         fontSize: 20,

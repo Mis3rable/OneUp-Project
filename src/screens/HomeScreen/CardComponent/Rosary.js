@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet, SafeAreaView, ScrollView, ActivityIndicator, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, SafeAreaView, ScrollView, ActivityIndicator, Image, ImageBackground } from 'react-native';
 import { Title, Card } from 'react-native-paper';
 import { Audio, Video } from 'expo-av';
 import firebase from '../../../firebase/config';
 
-const Liturgical = () => {
+const Rosary = () => {
   const [folders, setFolders] = useState([]);
   const [modalVisibility, setModalVisibility] = useState([]);
   const [modalFiles, setModalFiles] = useState({ audioFiles: [], imageFiles: [] });
@@ -51,7 +51,7 @@ const Liturgical = () => {
         const imageFiles = [];
         for (const item of result.items) {
           const url = await item.getDownloadURL();
-          if (item.name.endsWith('.mp3')) {
+          if (item.name.endsWith('.mp3') || item.name.endsWith('.m4a')) {
             audioFiles.push({ fileName: item.name, url });
           } else if (item.name.endsWith('.jpg') || item.name.endsWith('.png')) {
             imageFiles.push({ fileName: item.name, url });
@@ -85,7 +85,6 @@ const Liturgical = () => {
       }
     };
   }, [modalVisibility]);
-  
 
   const closeModal = (index) => {
     const newVisibility = [...modalVisibility];
@@ -94,16 +93,18 @@ const Liturgical = () => {
   };
 
   return (
+    <ImageBackground source={require('../../../../assets/background/outside.png')} style={styles.background}>
+
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Title style={styles.title}>Hymns</Title>
+        <Title style={styles.title}>HYMNS</Title>
         {folders.map((folderName, index) => (
           <TouchableOpacity key={index} onPress={() => toggleModalVisibility(index)} style={styles.folderItem}>
           {imageUrls[index] ? (
             <Image source={{ uri: imageUrls[index] }} style={styles.folderImage} />
-          ) : (
+            ) : (
             <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.folderImage} />
-          )}
+            )}
           <Text style={styles.folderName}>{folderName}</Text>
         </TouchableOpacity>
         
@@ -158,21 +159,26 @@ const Liturgical = () => {
         ))}
       </ScrollView>
     </SafeAreaView>
+  </ImageBackground>
   );  
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    marginLeft:20,
-    color: 'blue',
+    resizeMode: 'cover',
   },
   title: {
-    fontSize: 24,
-    paddingBottom: 50,
-    paddingTop: 20,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: 'blue',
+    alignSelf: 'center',
+    textAlign: 'center',
+    color: 'white'
+  },
+  container: {
+    flex: 1,
+    marginTop: 20,
+    marginLeft: 20,
   },
   folderItem: {
     flexDirection: 'row',
@@ -180,14 +186,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   folderName: {
+    color: 'white',
+    fontWeight: 'bold',
     fontSize: 18,
     marginBottom: 16,
+    textAlign: 'left',
+    width: '40%',
+    lineHeight: 25,
   },
   folderImage: {
-    width: 120,
+    width: 190,
     height: 120,
     marginRight: 10,
-    borderRadius: 5,
   },
   loadingContainer: {
     flex: 1,
@@ -201,14 +211,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'papayawhip',
     padding: 16,
-    borderRadius: 8,
     width: '90%',
   },
   modalTitle: {
-    fontSize: 24,
-    marginBottom: 16,
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: 'center',
+    textAlign: 'center',
+    color: 'saddlebrown'
   },
   audioPlayer: {
     flexDirection: 'row',
@@ -223,16 +237,18 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   closeButton: {
-    backgroundColor: '#dcdcdc',
-    padding: 8,
-    borderRadius: 4,
+    backgroundColor: 'snow',
+    padding: 12,
+    borderRadius: 15,
     marginTop: 16,
   },
   closeButtonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 18,
+    color: 'peru',
+    alignSelf: 'center',
+    fontWeight: 'bold'
   },
 });
 
-export default Liturgical;
+
+export default Rosary;

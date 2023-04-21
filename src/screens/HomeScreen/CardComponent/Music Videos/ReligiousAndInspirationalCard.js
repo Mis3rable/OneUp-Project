@@ -27,10 +27,12 @@ const ReligiousAndInspirationalCard = () => {
             image: require('../../../../../assets/ReligiousAndInspirational.jpg'),
             onPress: handleReligiousAndInspirationalPress,
         },
+        
     ];
 
     return (
         <View style={styles.container}>
+            {/* <Text style={styles.title}>Read</Text> */}
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -54,13 +56,21 @@ const styles = StyleSheet.create({
         color: 'blue',
     },
     title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        marginLeft: 20,
-        marginTop: 10,
-        alignSelf: 'flex-start',
-    },
+        fontSize: 23,
+        fontWeight: '800',
+        alignSelf: 'center',
+        color: 'white',
+        textShadowColor: 'black',
+        textShadowOffset: { width: 3, height: 3 },
+        textShadowRadius: 5,
+        textTransform: 'uppercase',
+        textAlign: 'center', 
+        textAlignVertical: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 30,
+        marginBottom: 20,
+      },
 });
 
 export default ReligiousAndInspirationalCard;

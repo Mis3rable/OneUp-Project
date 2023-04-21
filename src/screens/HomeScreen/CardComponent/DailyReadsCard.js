@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card } from 'react-native-paper';
-import { TouchableOpacity, View, StyleSheet, Dimensions, Text } from 'react-native';
+import { TouchableOpacity, View, StyleSheet, Dimensions} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 
@@ -47,7 +47,7 @@ const DailyReadsCard = () => {
                 sliderWidth={Dimensions.get('window').width}
                 itemWidth={330}
                 layout={'default'}
-            />
+                />
         </View>
     );
 };

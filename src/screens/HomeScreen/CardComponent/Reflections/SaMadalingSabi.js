@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions, AppState } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Video } from 'expo-av';
 import { Card, Searchbar, List } from 'react-native-paper';
@@ -100,34 +100,43 @@ export default function SaMadalingSabi() {
   };
 
   return (
+    <ImageBackground source={require('../../../../../assets/background/outside.png')} style={styles.background}>
     <View style={styles.container}>
       <Text style={styles.title}>Videos</Text>
-      <Searchbar
+      <Searchbar style={styles.searchbar}
         placeholder="Search videos"
         onChangeText={handleSearch}
         value={searchQuery}
-      />
+        />
       {searchQuery.length > 0 && suggestions.length === 0 && (
         <Text style={styles.noSearchText}>No results found for "{searchQuery}"</Text>
-      )}
+        )}
       <View style={styles.carouselContainer}>
         {isLoading ? (
           <SkeletonVideo />
-        ) : (
-          <Carousel
+          ) : (
+            <Carousel
             data={filteredVideos}
             renderItem={renderVideo}
             sliderWidth={Dimensions.get('window').width}
             itemWidth={250}
             onSnapToItem={handleSnapToItem}
-          />
-        )}
+            />
+            )}
       </View>
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  searchbar: {
+    width: '80%'
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -151,6 +160,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: 'italic',
     fontWeight: 'bold',
+    color: 'white'
   },
   videoContainer: {
     width: 255,
