@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   modalTxt: {
     color: 'black',
     fontWeight: 'bold',
-    width: 150,
+    width: 200,
     height: 20,
     textAlign: 'left',
     marginLeft: 10,
