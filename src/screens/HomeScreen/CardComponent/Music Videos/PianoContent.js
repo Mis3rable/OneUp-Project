@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, SafeAreaView, ScrollView, ActivityIndicator, Image } from 'react-native';
 import { Title, Card } from 'react-native-paper';
 import { Audio, Video } from 'expo-av';
-import firebase from '../../../firebase/config';
+import firebase from '../../../../firebase/config';
 
 const PianoContent = () => {
   const [folders, setFolders] = useState([]);

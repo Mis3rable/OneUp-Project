@@ -6,7 +6,6 @@ import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
 import {decode, encode} from 'base-64'
 import Category from './src/screens/CategoryScreen/Category';
 import MyTabs from './src/screens/HomeScreen/HomeScreen';
-import Schedule from './src/screens/ScheduleScreen/Schedule';
 import Journey from './src/screens/JourneyScreen/Journey';
 import Scriptures from './src/screens/ScriptireScreen/Scripture';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,7 +22,7 @@ import Tinig from './src/screens/HomeScreen/CardComponent/Reflections/TinigNgPas
 import OOTD from './src/screens/HomeScreen/CardComponent/Reflections/OOTD';
 import UpdateProfile from './src/screens/ProfileScreen/UpdateProfileForm';
 import ReligiousAndInspirational from './src/screens/HomeScreen/CardComponent/Music Videos/ReligiousAndInspirational';
-import PianoContent from './src/screens/HomeScreen/CardComponent/PianoContent';
+import PianoContent from './src/screens/HomeScreen/CardComponent/Music Videos/PianoContent';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }

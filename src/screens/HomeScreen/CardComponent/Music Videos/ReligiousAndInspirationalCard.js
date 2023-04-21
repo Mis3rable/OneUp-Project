@@ -4,13 +4,12 @@ import { TouchableOpacity, View, StyleSheet, Dimensions, Text } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 
-const Audio = () => {
+const ReligiousAndInspirationalCard = () => {
     const navigation = useNavigation();
 
-    const handleLithurgicalCardPress = () => {
-        navigation.navigate('Liturgical Songs');
+    const handleReligiousAndInspirationalPress = () => {
+        navigation.navigate('Religious And Inspirational Videos');
     }
-
 
     const renderCard = ({ item }) => {
         return (
@@ -24,15 +23,14 @@ const Audio = () => {
 
     const cards = [
         {
-            title: 'Lithurgical',
-            image: require('../../../../../assets/Liturgical.jpg'),
-            onPress: handleLithurgicalCardPress,
+            title: "Religious And Inspirational Videos",
+            image: require('../../../../../assets/ReligiousAndInspirational.jpg'),
+            onPress: handleReligiousAndInspirationalPress,
         },
     ];
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Audio</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}
@@ -40,7 +38,6 @@ const Audio = () => {
                 itemWidth={330}
                 layout={'default'}
             />
-            <Text style={styles.swipe}> Swipe to browse more categories</Text>
         </View>
     );
 };
@@ -52,29 +49,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
+        marginBottom: 20,
+        marginTop: 30,
+        color: 'blue',
     },
     title: {
-        fontSize: 20,
-        fontWeight: '800',
+        fontSize: 24,
+        fontWeight: 'bold',
         marginBottom: 10,
         marginLeft: 20,
-        marginTop: 8,
+        marginTop: 10,
         alignSelf: 'flex-start',
-        color: 'white',
-      textShadowColor: 'black',
-      textShadowOffset: { width: 3, height: 3 },
-      textShadowRadius: 5,
     },
-    swipe: {
-        color: 'white', 
-        fontStyle: 'italic', 
-        fontSize: 14,
-        marginBottom: 15, 
-        marginTop: 5, 
-        textShadowColor: 'black', 
-        textShadowOffset: { width: 3, height: 3 }, 
-        textShadowRadius: 5,
-    }
 });
 
-export default Audio;
+export default ReligiousAndInspirationalCard;

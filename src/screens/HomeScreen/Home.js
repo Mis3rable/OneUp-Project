@@ -5,9 +5,7 @@ import DailyReadsCard from "./CardComponent/DailyReadsCard";
 import PrayerCard from "./CardComponent/PrayerCard";
 import MusicVideos from "./CardComponent/Music Videos/MusicVideos";
 import Reflections from "./CardComponent/Reflections/Reflections";
-import PianoCard from "./CardComponent/PianoCard";
-import Audio from "./CardComponent/Music Videos/Audio";
-
+import LiturgicalCard from "./CardComponent/Music Videos/ReligiousAndInspirationalCard";
 export default function YoutubeCard({ route })  {
   
   const { user } = route.params;
@@ -18,9 +16,8 @@ export default function YoutubeCard({ route })  {
       <Text style={styles.info}> Welcome, {user ? user.fullName : ''}!</Text>
       <DailyReadsCard/>
       <PrayerCard/>
-      <PianoCard/>
       <MusicVideos/>
-      <Audio/>
+      <LiturgicalCard/>
       <Reflections/>
       </ScrollView>
       </ImageBackground>

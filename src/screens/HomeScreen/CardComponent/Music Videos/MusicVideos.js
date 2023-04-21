@@ -15,12 +15,16 @@ const MusicVideos = () => {
       navigation.navigate('Icons');
     }
 
-    // const handleLithurgicalCardPress = () => {
-    //     navigation.navigate('Liturgical Songs');
+    // const handleReligiousAndInspirationalPress = () => {
+    //     navigation.navigate('Religious And Inspirational Videos');
     // }
 
-    const handleReligiousAndInspirationalPress = () => {
-        navigation.navigate('Religious And Inspirational Videos');
+    const handleScripturePress = () => {
+        navigation.navigate('Liturgical Songs');
+    }
+
+    const handlePianoCardPress = () => {
+        navigation.navigate('Bulacan Liturgical Music for Meditation');
     }
 
     const renderCard = ({ item }) => {
@@ -34,11 +38,11 @@ const MusicVideos = () => {
     }
 
     const cards = [
-        // {
-        //     title: 'Lithurgical',
-        //     image: require('../../../../../assets/Liturgical.jpg'),
-        //     onPress: handleLithurgicalCardPress,
-        // },
+        {
+            title: 'Bulacan Liturgical Music for Meditation',
+            image: require('../../../../../assets/Piano.png'),
+            onPress: handlePianoCardPress,
+        },
         {
             title: 'Icon',
             image: require('../../../../../assets/Icons.jpg'),
@@ -49,10 +53,15 @@ const MusicVideos = () => {
             image: require('../../../../../assets/SaIyongTahanan.jpg'),
             onPress: handleICMASCardPress,
         },
+        // {
+        //     title: "Religious And Inspirational Videos",
+        //     image: require('../../../../../assets/ReligiousAndInspirational.jpg'),
+        //     onPress: handleReligiousAndInspirationalPress,
+        // },
         {
-            title: "Religious And Inspirational Videos",
-            image: require('../../../../../assets/ReligiousAndInspirational.jpg'),
-            onPress: handleReligiousAndInspirationalPress,
+            title: 'Liturgical',
+            image: require('../../../../../assets/Liturgical.jpg'),
+            onPress: handleScripturePress,
         },
     ];
 
