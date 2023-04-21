@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, SafeAreaView, ScrollView, ActivityIndicator, Image } from 'react-native';
 import { Title, Card } from 'react-native-paper';
 import { Audio, Video } from 'expo-av';
-import firebase from '../../../../firebase/config';
+import firebase from '../../../firebase/config';
 
-const Liturgical = () => {
+const PianoContent = () => {
   const [folders, setFolders] = useState([]);
   const [modalVisibility, setModalVisibility] = useState([]);
   const [modalFiles, setModalFiles] = useState({ audioFiles: [], imageFiles: [] });
@@ -14,7 +14,7 @@ const Liturgical = () => {
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
-    const storageRef = firebase.storage().ref('/Audio/Eucharistic Celebration Hymns (Diocese of Malolos)');
+    const storageRef = firebase.storage().ref('/Audio/Selected Bulacan Liturgical Music for Meditation');
 
     storageRef.listAll().then(async (result) => {
       const folderNames = result.prefixes.map(prefix => prefix.name);
@@ -24,7 +24,7 @@ const Liturgical = () => {
 
       const urls = await Promise.all(
         folderNames.map(async (folderName) => {
-          const folderRef = firebase.storage().ref(`/Audio/Eucharistic Celebration Hymns (Diocese of Malolos)/${folderName}`);
+          const folderRef = firebase.storage().ref(`/Audio/Selected Bulacan Liturgical Music for Meditation/${folderName}`);
           const items = await folderRef.list();
           const imageItem = items.items.find(item => item.name.endsWith('.jpg') || item.name.endsWith('.png'));
           if (imageItem) {
@@ -44,7 +44,7 @@ const Liturgical = () => {
   const toggleModalVisibility = async (index) => {
     try {
       setIsLoading(true);
-      const storageRef = firebase.storage().ref(`/Audio/Eucharistic Celebration Hymns (Diocese of Malolos)/${folders[index]}`);
+      const storageRef = firebase.storage().ref(`/Audio/Selected Bulacan Liturgical Music for Meditation/${folders[index]}`);
   
       const files = await storageRef.listAll().then(async (result) => {
         const audioFiles = [];
@@ -60,7 +60,7 @@ const Liturgical = () => {
         return { audioFiles, imageFiles };
       });
   
-      console.log(`Files under /Audio/Eucharistic Celebration Hymns (Diocese of Malolos)/${folders[index]}`, files);
+      console.log(`Files under /Audio/Rosary/${folders[index]}`, files);
   
       const newVisibility = [...modalVisibility];
       newVisibility[index] = !modalVisibility[index];
@@ -234,4 +234,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Liturgical;
+export default PianoContent;

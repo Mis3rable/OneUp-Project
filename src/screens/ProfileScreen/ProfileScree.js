@@ -18,7 +18,7 @@ export default function ProfileScreen ({ route }) {
         try {
             // Remove user data from AsyncStorages
             await AsyncStorage.removeItem('userData');
-
+            await AsyncStorage.removeItem('schedules');
             // Sign out user and reset user state
             await firebase.auth().signOut();
             route.params.setUser(null);

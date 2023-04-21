@@ -23,6 +23,7 @@ import Tinig from './src/screens/HomeScreen/CardComponent/Reflections/TinigNgPas
 import OOTD from './src/screens/HomeScreen/CardComponent/Reflections/OOTD';
 import UpdateProfile from './src/screens/ProfileScreen/UpdateProfileForm';
 import ReligiousAndInspirational from './src/screens/HomeScreen/CardComponent/Music Videos/ReligiousAndInspirational';
+import PianoContent from './src/screens/HomeScreen/CardComponent/PianoContent';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -79,7 +80,7 @@ export default function App() {
           {props => <MyTabs {...props} user={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen name="Category" component={Category}/>
-        <Stack.Screen name="Schedule" component={Schedule} options={{ headerShown: false }}/>
+        {/* <Stack.Screen name="Schedule" component={Schedule} options={{ headerShown: false }}/> */}
         <Stack.Screen name="OOTD" component={OOTD} />
         {/* <Stack.Screen name="Prayer" component={Prayer} /> */}
         {/* <Stack.Screen name="Words" component={} /> */}
@@ -95,6 +96,7 @@ export default function App() {
         <Stack.Screen name="Itanong Mo Kung Bakit" component={ItanongMoKungBakit} />
         <Stack.Screen name="Tinig Ng Pastol" component={Tinig} />
         <Stack.Screen name="Religious And Inspirational Videos" component={ReligiousAndInspirational} />
+        <Stack.Screen name="Bulacan Liturgical Music for Meditation" component={PianoContent} />
         <Stack.Screen name="Update Profile" component={UpdateProfile} />
       </Stack.Navigator>
     </NavigationContainer>
