@@ -47,7 +47,7 @@ export default function MyTabs({ navigation, user, setUser }) {
         paddingTop: 30,
         marginBottom: 10,
         },
-        tabBarActiveTintColor: 'blue',
+        tabBarActiveTintColor: 'peru',
         tabBarInactiveTintColor: 'gray',
       })}
     >
@@ -60,7 +60,7 @@ export default function MyTabs({ navigation, user, setUser }) {
               style={{
                 width: 30,
                 height: 30,
-                tintColor: focused ? 'blue' : color,
+                tintColor: focused ? 'peru' : color,
                 marginBottom: 20,
               }}
             />
@@ -78,7 +78,7 @@ export default function MyTabs({ navigation, user, setUser }) {
               style={{
                 width: 30,
                 height: 30,
-                tintColor: focused ? 'blue' : color,
+                tintColor: focused ? 'peru' : color,
                 marginBottom: 20,
               }}
             />
@@ -97,7 +97,7 @@ export default function MyTabs({ navigation, user, setUser }) {
               style={{
                 width: 30,
                 height: 30,
-                tintColor: focused ? 'blue' : color,
+                tintColor: focused ? 'peru' : color,
                 marginBottom: 20,
               }}
             />

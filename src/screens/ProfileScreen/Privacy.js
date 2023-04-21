@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 
 const PrivacyModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View>
-      <TouchableOpacity style={{ backgroundColor: '#FFFFFF', padding: 10 }} onPress={() => setModalVisible(true)}>
-        <Text style={{ color: 'black', fontWeight: 'bold', width: 150, height: 20, textAlign: 'center' }} >Privacy Policy</Text>
+      <TouchableOpacity style={styles.modalBtn} onPress={() => setModalVisible(true)}>
+      <Ionicons name="people-outline" size={20} color="chocolate" style={styles.icon} />
+        <Text style={styles.modalTxt}>Privacy Policy</Text>
       </TouchableOpacity>
       <Modal
         animationType="slide"
@@ -18,9 +20,8 @@ const PrivacyModal = () => {
       >
         <SafeAreaView style={styles.modalContainer}>
         <ScrollView>
-          <Text style={styles.modalTitle}>About One Up</Text>
+          <Text style={styles.modalTitle}>Privacy Policy</Text>
           <Text style={styles.modalText}>
-          <Text style={{fontWeight: "bold"}}>Privacy Policy</Text>
           {"\n\n"}
           <Text style={{fontWeight: "bold"}}>GENERAL</Text>
           {"\n\n"}
@@ -84,17 +85,7 @@ const PrivacyModal = () => {
           {"\n\n"}
           If you have any questions regarding our Privacy Policy, please contact our Privacy Officer at:
           {"\n\n"}
-            ONE UP! App
-            {"\n"}
-            Dr. Yanga’s Colleges Inc.
-            {"\n"}
-            Wakas, Bocaue, Bulacan,
-            {"\n"}
-            Philippines, 3018
-            {"\n"}
-            Email: dycioneup@gmail.com
-            {"\n"}
-            Phone: (+63)9264331574
+          <Text style={{fontStyle: "italic", color: "peru"}}> Contact Info To Be Updated </Text>
             </Text>
           </Text>
           <TouchableOpacity
@@ -111,29 +102,58 @@ const PrivacyModal = () => {
 };
 
 const styles = StyleSheet.create({
+  modalBtn: {
+    backgroundColor: '#FFFFFF', 
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'peru',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    marginLeft: 17,
+  },
+  modalTxt: {
+    color: 'black',
+    fontWeight: 'bold',
+    width: 100,
+    height: 20,
+    textAlign: 'left',
+    marginLeft: 10,
+    fontSize: 15,
+    lineHeight: 20,
+  },
   modalContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
+    backgroundColor: 'seashell'
   },
   modalTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
+    alignSelf: 'center',
+    marginTop: 20,
+    color: 'saddlebrown'
   },
   modalText: {
     fontSize: 18,
-    marginBottom: 24,
+    margin: 20,
+    marginTop: 1
   },
   modalButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'snow',
     padding: 12,
-    borderRadius: 4,
+    borderRadius: 20,
+    marginBottom: 20,
+    marginHorizontal: 30,
   },
   modalButtonText: {
     fontSize: 18,
-    color: 'white',
+    color: 'peru',
+    alignSelf: 'center',
+    fontWeight: 'bold'
   },
 });
 

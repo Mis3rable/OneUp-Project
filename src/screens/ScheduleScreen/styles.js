@@ -22,18 +22,23 @@ export default StyleSheet.create({
       textShadowRadius: 5,
     },
     addButton: {
-      backgroundColor: 'blue',
-      borderRadius: 5,
-      alignItems: "center",
+      backgroundColor: 'white',
+      borderWidth: 1,
+      borderColor: 'peru',
+      padding: 12,
+      width: 180,       
+      borderRadius: 20,
+      marginBottom: 20,
+      marginTop: 20,
+      marginHorizontal: 30,
       justifyContent: 'center',
-      padding: 10,
-      alignSelf: 'flex-end',
-      marginRight: 20,
+      alignSelf: 'flex-end'
     },
     addButtonText: {
-      color: 'white',
-      fontSize: 15,
-      fontWeight: "bold",
+      fontSize: 18,
+      color: 'saddlebrown',
+      alignSelf: 'center',
+      fontWeight: 'bold'
     },
     reminderList: {
       marginTop: 5,

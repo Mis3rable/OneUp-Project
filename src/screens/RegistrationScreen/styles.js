@@ -12,8 +12,9 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         alignSelf: 'center',
-        marginTop: 10,
+        marginTop: 30,
         marginBottom: 10,
+        color: 'chocolate'
     },
     form: {
         height: '85%',
@@ -46,7 +47,7 @@ export default StyleSheet.create({
         borderWeight: 1,
     },
     button: {
-        backgroundColor: 'skyblue',
+        backgroundColor: 'saddlebrown',
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
@@ -73,7 +74,7 @@ export default StyleSheet.create({
         color: 'black',
     },
     footerLink: {
-        color: "skyblue",
+        color: "peru",
         fontWeight: "bold",
         fontSize: 16,
         textDecorationLine: 'underline',

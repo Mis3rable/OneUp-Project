@@ -156,13 +156,13 @@ export default function Schedule() {
     <ScrollView style={{ height: '20%'}}>
     <SafeAreaView style={styles.container}>
       <Text style={styles.scheduleTitle}>Scheduled Notifications</Text>
-    <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.addButton}>
-      <Text style={styles.addButtonText}> + Set A Reminder</Text>
-    </TouchableOpacity>
       <Angelus />
       <ThreeClockPrayer />
       <AngelusSix />
     <Text style={styles.reminderList}> Reminders List</Text>
+    <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.addButton}>
+      <Text style={styles.addButtonText}> + Set A Reminder</Text>
+    </TouchableOpacity>
     <View>
       <View style={styles.scheduleTemplate}>
       {schedules.map((item) => (
@@ -187,7 +187,6 @@ export default function Schedule() {
           ))}
       </View>
       {/* MODAL */}
-
       <Modal visible={modalVisible} animationType="slide">
         <Card style={styles.addModal}>
           <Card.Title title="One Up" subtitle="Set A Schedule" left={LeftContent} />

@@ -71,9 +71,9 @@ export default function AngelusSix() {
         style ={{
           alignItems: 'flex-end'
         }}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "blue" : "black"}
-          ios_backgroundColor="#3e3e3e"
+        trackColor={{ false: "linen", true: "peru" }}
+        thumbColor={isEnabled ? "saddlebrown" : "burlywood"}
+          ios_backgroundColor="linen"
           onValueChange={toggleSwitch}
           value={isEnabled}
         />

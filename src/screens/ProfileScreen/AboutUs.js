@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View, SafeAreaView, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { Ionicons } from '@expo/vector-icons';
 const AboutUsModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View>
-      <TouchableOpacity  style={{ backgroundColor: '#FFFFFF', padding: 10 }} onPress={() => setModalVisible(true)}>
-        <Text style={{ color: 'black', fontWeight: 'bold', width: 150, height: 20, textAlign: 'center' }} >About Us</Text>
+      <TouchableOpacity style={styles.modalBtn} onPress={() => setModalVisible(true)}>
+      <Ionicons name="information-circle-outline" size={20} color="chocolate" style={styles.icon} />
+        <Text style={styles.modalTxt} >About Us</Text>
       </TouchableOpacity>
       <Modal
         animationType="slide"
@@ -20,15 +21,35 @@ const AboutUsModal = () => {
         <ScrollView>
           <Text style={styles.modalTitle}>About One Up</Text>
           <Text style={styles.modalText}>
-          A daily routine of seeking intimacy with God is incredibly powerful and can completely transform lives. 
-          One Up has created experiences that are biblically centered and culturally relevant to make sure that everyone 
-          can easily fit this spiritual practice into their day to day life. 
-          We believe these experiences will help people develop a routine of seeking God with intention and authenticity,
-          ultimately leading to a deeper relationship with Him.{"\n\n"}
-        This journey is not always easy as it requires a dedicated routine of prayer and study to keep us on track.
-        Nevertheless, our hope is that each person in our community would stay encouraged in their pursuit of a 
-        closer relationship with God and discover more about whom He has created them to be. With the right routine
-        and effort, we are confident that we can draw closer to God each day and experience the joy of His presence in our lives.
+          {"\n\n"}
+            The mobile application was developed by a team of talented developers and contributors who have dedicated their time and effort to bring this app to life.
+          {"\n\n"}
+            The following individuals have played a significant role in the creation of this app: 
+          {"\n\n"}
+          <Text style={{fontWeight: "bold", color:'saddlebrown'}}>Developers:</Text>
+          {"\n\n"}
+              Sarah May Aniram S. Repulda as Project Manager / Front-End Developer
+              {"\n\n"}
+              Robert Dominic S. Santos as Full-Stack Developer
+              {"\n\n"}
+              Jonald Cedrick R. De Guzman as Back-End Developer
+              {"\n\n"}
+              Axell John C. Costales as Database Manager / Web Developer
+              {"\n\n"}
+              Jeremy N. Agapito as Database Manager / Web Developer
+              {"\n\n"}
+          <Text style={{fontWeight: "bold", color:'saddlebrown'}}>Contributors:</Text>
+              {"\n\n"}
+              Angelo Yu Caburnay
+              {"\n\n"}
+              Reymond Galvez
+              {"\n\n"}
+              Jhonnel Azarcon
+              {"\n\n"}
+              Kenneth Miranda
+              {"\n\n"}
+          The company expresses its deepest gratitude to these individuals for their hard work and commitment to the success of this project.
+          {"\n\n"}
           </Text>
           <TouchableOpacity
             style={styles.modalButton}
@@ -44,29 +65,58 @@ const AboutUsModal = () => {
 };
 
 const styles = StyleSheet.create({
+  modalBtn: {
+    backgroundColor: '#FFFFFF', 
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'peru',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    marginLeft: 17,
+  },
+  modalTxt: {
+    color: 'black',
+    fontWeight: 'bold',
+    width: 100,
+    height: 20,
+    textAlign: 'left',
+    marginLeft: 10,
+    fontSize: 15,
+    lineHeight: 20,
+  },
   modalContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
+    backgroundColor: 'seashell'
   },
   modalTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
+    alignSelf: 'center',
+    marginTop: 20,
+    color: 'saddlebrown'
   },
   modalText: {
     fontSize: 18,
-    marginBottom: 24,
+    margin: 20,
+    marginTop: 1
   },
   modalButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'snow',
     padding: 12,
-    borderRadius: 4,
+    borderRadius: 20,
+    marginBottom: 20,
+    marginHorizontal: 30,
   },
   modalButtonText: {
     fontSize: 18,
-    color: 'white',
+    color: 'peru',
+    alignSelf: 'center',
+    fontWeight: 'bold'
   },
 
   

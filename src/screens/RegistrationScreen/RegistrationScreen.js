@@ -81,7 +81,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                 /> */}
                 <Text style={styles.text}> Create an Account </Text>
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'fullName' ? 'skyblue' : '#aaaaaa' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'fullName' ? 'peru' : '#aaaaaa' },]}
                     placeholder='Full Name'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setFullName(text)}
@@ -92,7 +92,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                     onBlur={handleBlur}
                 />
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'age' ? 'skyblue' : '#aaaaaa' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'age' ? 'peru' : '#aaaaaa' },]}
                     placeholder='Age'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setAge(text)}
@@ -130,7 +130,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                 )}
                 </>
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'skyblue' : '#aaaaaa' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'peru' : '#aaaaaa' },]}
                     placeholder='E-mail'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmail(text)}
@@ -141,7 +141,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                     onBlur={handleBlur}
                 />
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'skyblue' : '#aaaaaa' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'peru' : '#aaaaaa' },]}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
                     placeholder='Password'
@@ -153,7 +153,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                     onBlur={handleBlur}
                 />
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'confirmPassword' ? 'skyblue' : '#aaaaaa' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'confirmPassword' ? 'peru' : '#aaaaaa' },]}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
                     placeholder='Confirm Password'
@@ -174,7 +174,7 @@ export default function RegistrationScreen({navigation, setUser}) {
                             )}
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
+                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log In Here.</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
             </View>

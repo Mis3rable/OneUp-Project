@@ -72,7 +72,7 @@ export default function LoginScreen({navigation, setUser}) {
                     source={require('../../../assets/transparent-logo.png')}
                 />
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'skyblue' : '#aaaaaa' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'email' ? 'peru' : '#aaaaaa' },]}
                     placeholder='E-mail'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmail(text)}
@@ -83,7 +83,7 @@ export default function LoginScreen({navigation, setUser}) {
                     autoCapitalize="none"
                 />
                 <TextInput
-                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'skyblue' : '#aaaaaa' },]}
+                    style={[styles.input,{ borderColor: focusedInput === 'password' ? 'peru' : '#aaaaaa' },]}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
                     placeholder='Password'

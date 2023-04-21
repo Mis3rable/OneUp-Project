@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Image, ScrollView, ImageBackground } from 'react-native';
 import { firebase } from '../../firebase/config'
 import { Picker } from '@react-native-picker/picker'
 import parishOptions from './ParishOptions';
@@ -79,6 +79,7 @@ export default function UpdateProfile({ route }) {
   };
 
   return (
+    <ImageBackground source={require('../../../assets/background/outside.png')} style={styles.background}>
     <View style={styles.container}>
         <ScrollView style={{ flex: 1 }}>
         <TouchableOpacity onPress={handleSelectPhoto}>
@@ -133,30 +134,39 @@ export default function UpdateProfile({ route }) {
         </Picker>
         )}
         </>
-      <TouchableOpacity onPress={handleUpdateProfile}>
-        <Text>Save Profile</Text>
+      <TouchableOpacity style={styles.button} onPress={handleUpdateProfile}>
+          <Text style={styles.buttonTitle}>Update Profile</Text>
       </TouchableOpacity>
       </ScrollView>
     </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
     container: {
       flex: 1,
       padding: 15,
-      backgroundColor: '#fff',
+      backgroundColor: 'white',
+      borderRadius: 15,
+      margin: 15,
     },
     profileImage: {
         width: 100,
         height: 100,
         borderRadius: 50,
-        marginBottom: 20,
     },
     label: {
       fontSize: 16,
       fontWeight: 'bold',
       marginTop: 20,
+      color: 'saddlebrown',
+      marginBottom: 10,
     },
     input: {
       borderWidth: 1,
@@ -166,14 +176,20 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
     button: {
-      backgroundColor: '#1e90ff',
-      padding: 12,
-      borderRadius: 4,
+      backgroundColor: 'saddlebrown',
+      marginLeft: 30,
+      marginRight: 30,
+      marginTop: 20,
+      height: 48,
+      borderRadius: 5,
       alignItems: 'center',
-    },
-    buttonText: {
-      color: '#fff',
-      fontSize: 18,
-      fontWeight: 'bold',
-    },
+      justifyContent: 'center',
+      // borderColor: 'orange',
+      // borderWidth: 1,
+  },
+  buttonTitle: {
+      color: 'white',
+      fontSize: 20,
+      fontWeight: "bold",
+  },
   });
