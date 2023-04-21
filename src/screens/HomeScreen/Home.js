@@ -7,19 +7,30 @@ import MusicVideos from "./CardComponent/Music Videos/MusicVideos";
 import Reflections from "./CardComponent/Reflections/Reflections";
 import LiturgicalCard from "./CardComponent/Music Videos/ReligiousAndInspirationalCard";
 export default function YoutubeCard({ route })  {
-  
   const { user } = route.params;
+
+  const getTimeBasedGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) {
+      return 'Good morning';
+    } else if (hour >= 12 && hour < 18) {
+      return 'Good afternoon';
+    } else {
+      return 'Good evening';
+    } 
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={require('../../../assets/background/altar.png')}>
-      <ScrollView style={styles.scrollView}>
-      <Text style={styles.info}> Welcome, {user ? user.fullName : ''}!</Text>
-      <DailyReadsCard/>
-      <PrayerCard/>
-      <MusicVideos/>
-      <LiturgicalCard/>
-      <Reflections/>
-      </ScrollView>
+        <ScrollView style={styles.scrollView}>
+          <Text style={styles.info}> {getTimeBasedGreeting()}, {user ? user.fullName : ''}!</Text>
+          <DailyReadsCard/>
+          <PrayerCard/>
+          <MusicVideos/>
+          <LiturgicalCard/>
+          <Reflections/>
+        </ScrollView>
       </ImageBackground>
     </SafeAreaView>
   );
