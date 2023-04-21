@@ -125,8 +125,7 @@ const MusicVideos = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Religious and Inspirational Music</Text>
-            <Text style={styles.title2}>Music Videos</Text>
+            <Text style={styles.title}>Religious and Liturgical Music Videos</Text>
             <Carousel 
                 data={cards}
                 renderItem={renderCard}

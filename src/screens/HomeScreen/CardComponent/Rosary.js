@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, SafeAreaView, ScrollView, ActivityIndicator, Image } from 'react-native';
 import { Title, Card } from 'react-native-paper';
 import { Audio, Video } from 'expo-av';
 import firebase from '../../../firebase/config';
 
-const Rosary = () => {
+const Liturgical = () => {
   const [folders, setFolders] = useState([]);
   const [modalVisibility, setModalVisibility] = useState([]);
   const [modalFiles, setModalFiles] = useState({ audioFiles: [], imageFiles: [] });
   const [sound, setSound] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
     const storageRef = firebase.storage().ref('/Audio/Rosary');
 
-    storageRef.listAll().then(result => {
+    storageRef.listAll().then(async (result) => {
       const folderNames = result.prefixes.map(prefix => prefix.name);
       const visibility = new Array(folderNames.length).fill(false);
       setFolders(folderNames);
       setModalVisibility(visibility);
+
+      const urls = await Promise.all(
+        folderNames.map(async (folderName) => {
+          const folderRef = firebase.storage().ref(`/Audio/Rosary/${folderName}`);
+          const items = await folderRef.list();
+          const imageItem = items.items.find(item => item.name.endsWith('.jpg') || item.name.endsWith('.png'));
+          if (imageItem) {
+            return imageItem.getDownloadURL();
+          } else {
+            return null;
+          }
+        })
+      );
+      setImageUrls(urls);
     }).catch(error => {
       console.log('Error getting folder names:', error);
     });
@@ -37,7 +51,7 @@ const Rosary = () => {
         const imageFiles = [];
         for (const item of result.items) {
           const url = await item.getDownloadURL();
-          if (item.name.endsWith('.mp3') || item.name.endsWith('.m4a')) {
+          if (item.name.endsWith('.mp3')) {
             audioFiles.push({ fileName: item.name, url });
           } else if (item.name.endsWith('.jpg') || item.name.endsWith('.png')) {
             imageFiles.push({ fileName: item.name, url });
@@ -80,64 +94,71 @@ const Rosary = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Title style={styles.title}>Prayers</Title>
-      {folders.map((folderName, index) => (
-        <TouchableOpacity key={index} onPress={() => toggleModalVisibility(index)}
-      >
-        <Text style={styles.folderName}>{folderName}</Text>
-      </TouchableOpacity>      
-      ))}
-      {folders.map((folderName, index) => (
-        <Modal key={index} visible={modalVisibility[index]} onRequestClose={() => {}}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>{folderName}</Text>
-            {isLoading ? (
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color="#0000ff" />
-              </View>
-            ) : (
-              <ScrollView>
-                {modalFiles.imageFiles.length > 0 ? (
-                  modalFiles.imageFiles.map((file, i) => (
-                    <Card key={i}>
-                      <Card.Cover source={{ uri: file.url }} />
-                    </Card>
-                  ))
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Title style={styles.title}>Hymns</Title>
+        {folders.map((folderName, index) => (
+          <TouchableOpacity key={index} onPress={() => toggleModalVisibility(index)} style={styles.folderItem}>
+          {imageUrls[index] ? (
+            <Image source={{ uri: imageUrls[index] }} style={styles.folderImage} />
+          ) : (
+            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.folderImage} />
+          )}
+          <Text style={styles.folderName}>{folderName}</Text>
+        </TouchableOpacity>
+        
+        ))}
+        {folders.map((folderName, index) => (
+          <Modal key={index} visible={modalVisibility[index]} onRequestClose={() => {}}>
+            <View style={styles.modalOverlay}>
+              <View style={styles.modalContainer}>
+                <Text style={styles.modalTitle}>{folderName}</Text>
+                {isLoading ? (
+                  <View style={styles.loadingContainer}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                  </View>
                 ) : (
-                  <Card>
-                    <Card.Cover source={{ uri: 'https://via.placeholder.com/100' }} />
-                  </Card>
+                  <ScrollView>
+                    {modalFiles.imageFiles.length > 0 ? (
+                      modalFiles.imageFiles.map((file, i) => (
+                        <Card key={i}>
+                          <Card.Cover source={{ uri: file.url }} />
+                        </Card>
+                      ))
+                    ) : (
+                      <Card>
+                        <Card.Cover source={{ uri: 'https://via.placeholder.com/100' }} />
+                      </Card>
+                    )}
+                    {modalFiles.audioFiles.length > 0 && modalFiles.audioFiles.map((file, i) => (
+                      <Card key={i}>
+                        <View style={styles.audioPlayer}>
+                          <View style={styles.audioPlayer}>
+                            <Video
+                              source={{ uri: file.url }}
+                              controls={true}
+                              useNativeControls={true}
+                              resizeMode="contain"
+                              isLooping={false}
+                              shouldPlay={isPlaying}
+                              style={{ width: '100%', height: 40 }}
+                            />
+                          </View>
+                        </View>
+                      </Card>
+                    ))}
+                  </ScrollView>
                 )}
-                {modalFiles.audioFiles.length > 0 && modalFiles.audioFiles.map((file, i) => (
-                  <Card key={i}>
-                    <View style={styles.audioPlayer}>
-                      <View style={styles.audioPlayer}>
-                        <Video
-                          source={{ uri: file.url }}
-                          controls={true}
-                          useNativeControls={true}
-                          resizeMode="contain"
-                          isLooping={false}
-                          shouldPlay={isPlaying}
-                          style={{ width: '100%', height: 40 }}
-                        />
-                      </View>
-                    </View>
-                  </Card>
-                ))}
-              </ScrollView>
-            )}
-            <TouchableOpacity style={styles.closeButton} onPress={() => closeModal(index)}>
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-      ))}
-    </View>
-  );
+                <TouchableOpacity style={styles.closeButton} onPress={() => closeModal(index)}>
+                  <Text style={styles.closeButtonText}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
+  );  
 };
 
 const styles = StyleSheet.create({
@@ -153,9 +174,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'blue',
   },
+  folderItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
   folderName: {
     fontSize: 18,
     marginBottom: 16,
+  },
+  folderImage: {
+    width: 120,
+    height: 120,
+    marginRight: 10,
+    borderRadius: 5,
   },
   loadingContainer: {
     flex: 1,
@@ -203,4 +235,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Rosary;
+export default Liturgical;
