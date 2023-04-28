@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
   searchbar: {
-    width: 100
+    width: '80%'
   },
   noSearchText: {
     textAlign: 'center',
