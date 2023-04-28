@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
     marginLeft: 20,
+    
   },
   folderItem: {
     flexDirection: 'row',

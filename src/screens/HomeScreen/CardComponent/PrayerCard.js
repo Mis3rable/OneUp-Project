@@ -51,6 +51,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
+        shadowColor: 'rgba(0, 0, 0, 0.82)',
+        shadowOffset: {
+        width: 10,
+        height: 10,
+        },
+        shadowOpacity: 0.80,
+        shadowRadius: 3.84,
+        elevation: 10,
     },
     title: {
         fontSize: 24,
