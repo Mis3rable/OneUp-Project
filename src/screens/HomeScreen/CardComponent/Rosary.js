@@ -97,7 +97,6 @@ const Rosary = () => {
 
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Title style={styles.title}>HYMNS</Title>
         {folders.map((folderName, index) => (
           <TouchableOpacity key={index} onPress={() => toggleModalVisibility(index)} style={styles.folderItem}>
           {imageUrls[index] ? (

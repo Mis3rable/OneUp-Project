@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Video } from 'expo-av';
-import { Card, Searchbar, List } from 'react-native-paper';
+import { Card, Searchbar } from 'react-native-paper';
+import { VideoThumbnails } from 'expo-video-thumbnails';
 import firebase from '../../../../firebase/config';
 
 const SkeletonVideo = () => {
@@ -81,8 +82,11 @@ export default function SaIyongTahanan() {
   };
 
   const renderVideo = ({ item, index }) => {
-    return (
-      <Card style={styles.cardVideo}>
+    const isSelected = currentVideoIndex === index;
+  
+    if (isSelected) {
+      return (
+        <Card style={styles.cardVideo}>
           <Video
             ref={videoPlayer}
             source={{ uri: item.url }}
@@ -90,13 +94,27 @@ export default function SaIyongTahanan() {
             useNativeControls
             resizeMode="contain"
             isLooping
-            shouldPlay={currentVideoIndex === index}
           />
-        <Card.Content style={styles.cardContent}>
+          <Card.Content style={styles.cardContent}>
+            <Text style={styles.cardText}>{item.name}</Text>
+          </Card.Content>
+        </Card>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => setCurrentVideoIndex(index)}
+          style={styles.cardThumbnailContainer}
+        >
+          <Image
+            source={{ uri: `expo-video-thumbnail:${item.url}` }}
+            style={styles.thumbnail}
+            resizeMode="contain"
+          />
           <Text style={styles.cardText}>{item.name}</Text>
-        </Card.Content>
-      </Card>
-    );
+        </TouchableOpacity>
+      );
+    }
   };
 
   return (
@@ -108,6 +126,7 @@ export default function SaIyongTahanan() {
         onChangeText={handleSearch}
         value={searchQuery}
       />
+      <Text style={{marginTop: 10,}}>Swipe for more vidoes</Text>
       {searchQuery.length > 0 && suggestions.length === 0 && (
         <Text style={styles.noSearchText}>No results found for "{searchQuery}"</Text>
         )}
@@ -123,7 +142,9 @@ export default function SaIyongTahanan() {
             onSnapToItem={handleSnapToItem}
           />
         )}
+        
       </View>
+      
     </View>
     </ImageBackground>
   );

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground} from 'react-native';
+import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Video } from 'expo-av';
-import { Card, Searchbar, List } from 'react-native-paper';
+import { Card, Searchbar } from 'react-native-paper';
+import { VideoThumbnails } from 'expo-video-thumbnails';
 import firebase from '../../../../firebase/config';
 
 const SkeletonVideo = () => {
@@ -24,7 +25,7 @@ export default function Icons() {
   useEffect(() => {
     const fetchVideos = async () => {
       const storageRef = firebase.storage().ref();
-      const videosRef = storageRef.child('Videos/Song Reflections');
+      const videosRef = storageRef.child('Videos/Song Reflections/');
       const videosList = await videosRef.listAll();
       const urls = await Promise.all(
         videosList.items.map(async (video) => {
@@ -81,8 +82,11 @@ export default function Icons() {
   };
 
   const renderVideo = ({ item, index }) => {
-    return (
-      <Card style={styles.cardVideo}>
+    const isSelected = currentVideoIndex === index;
+  
+    if (isSelected) {
+      return (
+        <Card style={styles.cardVideo}>
           <Video
             ref={videoPlayer}
             source={{ uri: item.url }}
@@ -90,13 +94,27 @@ export default function Icons() {
             useNativeControls
             resizeMode="contain"
             isLooping
-            shouldPlay={currentVideoIndex === index}
           />
-        <Card.Content style={styles.cardContent}>
+          <Card.Content style={styles.cardContent}>
+            <Text style={styles.cardText}>{item.name}</Text>
+          </Card.Content>
+        </Card>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => setCurrentVideoIndex(index)}
+          style={styles.cardThumbnailContainer}
+        >
+          <Image
+            source={{ uri: `expo-video-thumbnail:${item.url}` }}
+            style={styles.thumbnail}
+            resizeMode="contain"
+          />
           <Text style={styles.cardText}>{item.name}</Text>
-        </Card.Content>
-      </Card>
-    );
+        </TouchableOpacity>
+      );
+    }
   };
 
   return (
@@ -108,22 +126,25 @@ export default function Icons() {
         onChangeText={handleSearch}
         value={searchQuery}
       />
+      <Text style={{marginTop: 10,}}>Swipe for more vidoes</Text>
       {searchQuery.length > 0 && suggestions.length === 0 && (
         <Text style={styles.noSearchText}>No results found for "{searchQuery}"</Text>
         )}
       <View style={styles.carouselContainer}>
         {isLoading ? (
           <SkeletonVideo />
-        ) : (
-          <Carousel
-          data={filteredVideos}
-          renderItem={renderVideo}
-          sliderWidth={Dimensions.get('window').width}
-          itemWidth={250}
-          onSnapToItem={handleSnapToItem}
+          ) : (
+            <Carousel
+            data={filteredVideos}
+            renderItem={renderVideo}
+            sliderWidth={Dimensions.get('window').width}
+            itemWidth={250}
+            onSnapToItem={handleSnapToItem}
           />
-          )}
+        )}
+        
       </View>
+      
     </View>
     </ImageBackground>
   );
@@ -185,7 +206,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
   searchbar: {
-    width: '90%'
+    width: '80%'
   },
   noSearchText: {
     textAlign: 'center',
