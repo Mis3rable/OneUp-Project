@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ScrollView, Modal, TouchableOpacity, StyleSheet, Text, View, ImageBackground, SafeAreaView} from 'react-native';
 import firebase from '../../firebase/config';
 import { Button } from 'react-native-paper';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import moment from 'moment';
 import * as Speech from 'expo-speech';
+import { Ionicons } from '@expo/vector-icons';
 
 function CardSkeleton() {
   return (
@@ -28,6 +29,22 @@ function Scriptures() {
   const [fileContent, setFileContent] = useState('');
   const [fileName, setFileName] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const scrollViewRef = useRef();
+  const [scrolled, setScrolled] = useState(false);
+  const handleScrollToTop = () => {
+    scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
+  };
+  {scrolled && (
+    <TouchableOpacity
+      style={styles.scrollButton}
+      onPress={() => scrollViewRef.scrollTo({ y: 0, animated: true })}
+    >
+      <Text style={styles.scrollButtonText}>Top</Text>
+    </TouchableOpacity>
+  )}  
+  const handleScrollToBottom = () => {
+    scrollViewRef.current.scrollToEnd({ animated: true });
+  };
 
   async function getFileData() {
     try {
@@ -138,25 +155,39 @@ function Scriptures() {
           </View>
         ))             
       )}
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}>
-        <View style={styles.modal}>
-          <ScrollView>
+      <Modal animationType="slide" transparent={false} visible={modalVisible} onRequestClose={() => {setModalVisible(false);}}>
+        <SafeAreaView style={styles.modal}>
+        <ScrollView ref={scrollViewRef} style={styles.scrollViewContainer} contentContainerStyle={styles.scrollViewContent}>
             <Title style={styles.modalTitle}>{fileName.replace(/\.[^/.]+$/, '')}</Title>
             <Button style={styles.speak} onPress={() => speakText(fileContent)} icon="microphone" mode="contained" buttonColor="snow" textColor="peru">
               {isSpeaking ? 'Stop Speaking' : 'Speak Text'}
             </Button>
             <Text style={styles.fileContent}>{fileContent}</Text>
-            <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
-              <Text style={styles.modalButtonText}>Close</Text>
-            </TouchableOpacity>
           </ScrollView>
-        </View>
+          <View style={styles.bottomContainer}>
+              <View style={styles.closeButton}>
+                <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
+                  <Text style={styles.modalButtonText}>Close</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <TouchableOpacity style={styles.scrollButtonDownContainer} onPress={handleScrollToBottom}>
+                  <View style={styles.scrollButtonDown}>
+                    <Text style={styles.scrollButtonText}>
+                      <Ionicons name="caret-down-outline" size={30} color="white" />
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.scrollButtonUpContainer} onPress={handleScrollToTop}>
+                  <View style={styles.scrollButtonUp}>
+                    <Text style={styles.scrollButtonText}> 
+                      <Ionicons name="caret-up-outline" size={30} color="white" />
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+        </SafeAreaView>
       </Modal>
     </ScrollView>
     </SafeAreaView>
@@ -184,8 +215,8 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   modal: {
-    marginTop: 50,
-    backgroundColor: 'linen'
+    flex: 1,
+    backgroundColor: 'seashell'
   },
   modalTitle: {
     fontSize: 30,
@@ -225,7 +256,71 @@ const styles = StyleSheet.create({
     width: '88%',
     margin: 25,
     marginBottom: 15
-  }
+  },
+
+  //Bottom
+  bottomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'seashell',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    MarginBottom: 5,
+  },  
+  closeButton: {
+    alignSelf: 'flex-start'
+  },
+  modalButton: {
+    backgroundColor: 'saddlebrown',
+    height: 50,
+    width: 100,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    marginRight: 1,
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  scrollButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    position: 'absolute',
+    bottom: 10,
+    right: 30,
+    zIndex: 1,
+  },
+  scrollButtonContainer: {
+    flexDirection: 'row',
+  },
+  scrollButtonDown: {
+    backgroundColor: 'saddlebrown',
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  scrollButtonUpContainer: {
+    marginLeft: 10,
+  },
+  scrollButtonUp: {
+    backgroundColor: 'saddlebrown',
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  scrollButtonText: {
+    color: 'white',
+  }, 
 });
 
 export default Scriptures;
