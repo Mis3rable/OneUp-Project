@@ -78,10 +78,10 @@ const LordChef = () => {
             <Modal visible={selectedFolder !== null} onRequestClose={closeModal}>
               <View style={styles.modalOverlay}>
                 <View style={styles.modalContainer}>
-                <TouchableOpacity onPress={closeModal} style={styles.icon}>
-                  <Ionicons name="close-circle" size={30} color="saddlebrown" style={styles.icon}/>
-                </TouchableOpacity>
                     <Text style={styles.modalTitle}>"{selectedFolder}"</Text>
+                      <TouchableOpacity onPress={closeModal} style={styles.button}>
+                        <Text style={styles.buttonText}><Ionicons name="close" size={20} color="seashell"/></Text>
+                      </TouchableOpacity>
                       <FlatList
                         data={subFolders}
                         renderItem={({ item }) => (
@@ -95,25 +95,25 @@ const LordChef = () => {
                           keyExtractor={(item) => item}
                       />
                 </View>
-                    {selectedSubFolder && (
-                      <Modal visible={fileContent !== null} onRequestClose={closeFileContentModal}>
-                        <View style={styles.modalOverlay}>
-                          <View style={styles.modalContainer}>
-                            <FlatList
-                              data={[fileContent]}
-                              keyExtractor={(item) => item}
-                              renderItem={({ item }) => (
-                                <View>
-                                  <Text style={styles.modalContent}>{item}</Text>
-                                  <TouchableOpacity style={styles.modalButton}onPress={closeFileContentModal}>
-                                    <Text style={styles.modalButtonText}>Close</Text>
-                                  </TouchableOpacity>
-                                </View>
-                              )}
-                              />
-                            </View>
-                        </View>
-                      </Modal>
+                  {selectedSubFolder && (
+                    <Modal visible={fileContent !== null} onRequestClose={closeFileContentModal}>
+                      <View style={styles.modalOverlay}>
+                        <View style={styles.modalContainer}>
+                          <FlatList
+                            data={[fileContent]}
+                            keyExtractor={(item) => item}
+                            renderItem={({ item }) => (
+                              <View>
+                                <Text style={styles.modalContent}>{item}</Text>
+                                <TouchableOpacity style={styles.modalButton}onPress={closeFileContentModal}>
+                                  <Text style={styles.modalButtonText}>Close</Text>
+                                </TouchableOpacity>
+                              </View>
+                            )}
+                            />
+                          </View>
+                      </View>
+                    </Modal>
               )}
             </View>
           </Modal>
@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
     margin: 20,
     flex: 1,
     borderRadius: 20,
-    justifyContent: 'center'
+    justifyContent: 'left'
   },
   folderName: {
     fontSize: 20,
     margin: 20,
-    textAlign: 'center',
+    textAlign: 'left',
     color: 'black',
   },
   folderList: {
@@ -165,11 +165,11 @@ const styles = StyleSheet.create({
     borderBottomLength: 1,
     fontSize: 20,
   },
-  icon: {
-    position: 'absolute',
-    top: 7,
-    right: 10,
-  },
+  // icon: {
+  //   position: 'absolute',
+  //   top: 7,
+  //   right: 10,
+  // },
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -190,7 +190,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 30,
     textAlign: 'left',
-    color: 'saddlebrown'
+    color: 'saddlebrown',
+    maxWidth: '50%',
   },
   modalFolderName: {
     textAlign: 'left',
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
   modalContent: {
     fontSize: 18,
     padding: 10,
-    alignContent: 'center',
+    alignContent: 'left',
     marginHorizontal: 20,
     marginTop: 20,
   },
@@ -225,5 +226,20 @@ const styles = StyleSheet.create({
     color: 'peru',
     alignSelf: 'center',
     fontWeight: 'bold'
+  },
+  button: {
+    backgroundColor: 'saddlebrown',
+    height: 40,
+    width: 40,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 15,
+    right: 15,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
   },
 });

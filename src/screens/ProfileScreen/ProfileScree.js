@@ -52,18 +52,22 @@ export default function ProfileScreen ({ route }) {
                 </View>
                 </View>
                 <View style={styles.userinfo}>
-                <View>
-                    <Text style={styles.label}>Name:</Text>
-                    <Text style={styles.label}>Email:</Text>
-                    <Text style={styles.label}>Parish:</Text>
-                    <Text style={styles.label}>Municipality:</Text>
-                </View>
-                <View>
-                    <Text style={styles.value}>{user ? user.fullName : ''}</Text>
-                    <Text style={styles.value}>{user ? user.email : ''}</Text>
-                    <Text style={styles.value}>{user ? user.selectedParish : ''}</Text>
-                    <Text style={styles.value}>{user ? user.selectedMunicipality : ''}</Text>
-                </View>
+                    <View style={styles.labelValueContainer}>
+                        <Text style={styles.label}>Name:</Text>
+                        <Text style={styles.value}>{user ? user.fullName : ''}</Text>
+                    </View>
+                    <View style={styles.labelValueContainer}>
+                        <Text style={styles.label}>Email:</Text>
+                        <Text style={styles.value}>{user ? user.email : ''}</Text>
+                    </View>
+                    <View style={styles.labelValueContainer}>
+                        <Text style={styles.label}>Municipality:</Text>
+                        <Text style={styles.value}>{user ? user.selectedMunicipality : ''}</Text>
+                    </View>
+                    <View style={styles.labelValueContainer} >
+                        <Text style={styles.label}>Parish:</Text>
+                        <Text style={styles.value}>{user ? user.selectedParish : ''}</Text>
+                    </View>
                 </View>
                 <View style={styles.modalContainer}>
                     <Text style={styles.about}> ABOUT </Text>
@@ -126,17 +130,23 @@ const styles = StyleSheet.create({
     userinfo: {
         backgroundColor: 'white',
         padding: 25,
+        flexDirection: 'column',
+      },
+      labelValueContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom: 10,
+        justifyContent: 'space-between'
       },
       label: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginRight: 10,
+        marginRight: 5,
       },
       value: {
         fontSize: 16,
+        width: '80%',
+        alignSelf: 'flex-end',
       },
       profileContainer: {
         backgroundColor: 'white',
