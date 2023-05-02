@@ -159,9 +159,9 @@ function Scriptures() {
         <SafeAreaView style={styles.modal}>
         <ScrollView ref={scrollViewRef} style={styles.scrollViewContainer} contentContainerStyle={styles.scrollViewContent}>
             <Title style={styles.modalTitle}>{fileName.replace(/\.[^/.]+$/, '')}</Title>
-            <Button style={styles.speak} onPress={() => speakText(fileContent)} icon="microphone" mode="contained" buttonColor="snow" textColor="peru">
+            {/* <Button style={styles.speak} onPress={() => speakText(fileContent)} icon="microphone" mode="contained" buttonColor="snow" textColor="peru">
               {isSpeaking ? 'Stop Speaking' : 'Speak Text'}
-            </Button>
+            </Button> */}
             <Text style={styles.fileContent}>{fileContent}</Text>
           </ScrollView>
           <View style={styles.bottomContainer}>

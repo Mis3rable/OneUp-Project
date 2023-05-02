@@ -4,7 +4,7 @@ import { Title, Card } from 'react-native-paper';
 import { Audio, Video } from 'expo-av';
 import firebase from '../../../firebase/config';
 
-const Rosary = () => {
+const Prayer = () => {
   const [folders, setFolders] = useState([]);
   const [modalVisibility, setModalVisibility] = useState([]);
   const [modalFiles, setModalFiles] = useState({ audioFiles: [], imageFiles: [] });
@@ -14,7 +14,7 @@ const Rosary = () => {
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
-    const storageRef = firebase.storage().ref('/Audio/Rosary');
+    const storageRef = firebase.storage().ref('/Audio/Prayer');
 
     storageRef.listAll().then(async (result) => {
       const folderNames = result.prefixes.map(prefix => prefix.name);
@@ -24,7 +24,7 @@ const Rosary = () => {
 
       const urls = await Promise.all(
         folderNames.map(async (folderName) => {
-          const folderRef = firebase.storage().ref(`/Audio/Rosary/${folderName}`);
+          const folderRef = firebase.storage().ref(`/Audio/Prayer/${folderName}`);
           const items = await folderRef.list();
           const imageItem = items.items.find(item => item.name.endsWith('.jpg') || item.name.endsWith('.png'));
           if (imageItem) {
@@ -44,7 +44,7 @@ const Rosary = () => {
   const toggleModalVisibility = async (index) => {
     try {
       setIsLoading(true);
-      const storageRef = firebase.storage().ref(`/Audio/Rosary/${folders[index]}`);
+      const storageRef = firebase.storage().ref(`/Audio/Prayer/${folders[index]}`);
   
       const files = await storageRef.listAll().then(async (result) => {
         const audioFiles = [];
@@ -250,4 +250,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Rosary;
+export default Prayer;

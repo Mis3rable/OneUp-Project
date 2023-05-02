@@ -11,6 +11,9 @@ const PrayerCard = () => {
         navigation.navigate('Prayers');
       }
 
+    const handleRosaryCardPress = () => {
+    navigation.navigate('Rosary');
+    }
     const renderCard = ({ item }) => {
         return (
             <Card>
@@ -23,10 +26,15 @@ const PrayerCard = () => {
 
     const cards = [
         {
-            title: 'Rosary',
+            title: 'Prayer',
             image: require('../../../../assets/Prayer.jpg'),
             onPress: handlePrayerCardPress,
-        },  
+        }, 
+        {
+            title: 'Rosary',
+            image: require('../../../../assets/Rosary.jpg'),
+            onPress: handleRosaryCardPress,
+        },
         
     ];
 

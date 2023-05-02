@@ -11,7 +11,6 @@ import Scriptures from './src/screens/ScriptireScreen/Scripture';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, ActivityIndicator } from 'react-native'
 import SaIyongTahanan from './src/screens/HomeScreen/CardComponent/Music Videos/SaIyongTahanan';
-import Rosary from './src/screens/HomeScreen/CardComponent/Rosary';
 import Liturgical from './src/screens/HomeScreen/CardComponent/Music Videos/Liturgical';
 import LordChef from './src/screens/HomeScreen/CardComponent/Reflections/LordChef';
 import Icons from './src/screens/HomeScreen/CardComponent/Music Videos/Icons';
@@ -23,6 +22,8 @@ import OOTD from './src/screens/HomeScreen/CardComponent/Reflections/OOTD';
 import UpdateProfile from './src/screens/ProfileScreen/UpdateProfileForm';
 import ReligiousAndInspirational from './src/screens/HomeScreen/CardComponent/Music Videos/ReligiousAndInspirational';
 import PianoContent from './src/screens/HomeScreen/CardComponent/Music Videos/PianoContent';
+import Prayer from './src/screens/HomeScreen/CardComponent/Prayer';
+import Rosary from './src/screens/HomeScreen/CardComponent/Rosary';
 
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -83,7 +84,8 @@ export default function App() {
         <Stack.Screen name="OOTD" component={OOTD} />
         {/* <Stack.Screen name="Prayer" component={Prayer} /> */}
         {/* <Stack.Screen name="Words" component={} /> */}
-        <Stack.Screen name="Prayers" component={Rosary} />
+        <Stack.Screen name="Prayers" component={Prayer} />
+        <Stack.Screen name="Rosary" component={Rosary} />
         <Stack.Screen name="Liturgical Songs" component={Liturgical} />
         <Stack.Screen name="Journey" component={Journey} />
         <Stack.Screen name="Scripture" component={Scriptures} />
