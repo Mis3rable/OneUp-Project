@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
     margin: 20,
     flex: 1,
     borderRadius: 20,
-    justifyContent: 'left'
+    justifyContent: 'center'
   },
   folderName: {
     fontSize: 20,
     margin: 20,
-    textAlign: 'left',
+    textAlign: 'center',
     color: 'black',
   },
   folderList: {
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   modalContent: {
     fontSize: 18,
     padding: 10,
-    alignContent: 'left',
+    alignContent: 'center',
     marginHorizontal: 20,
     marginTop: 20,
   },

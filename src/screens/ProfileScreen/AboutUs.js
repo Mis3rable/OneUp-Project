@@ -60,6 +60,8 @@ const AboutUsModal = () => {
               {"\n\n"}
               Kenneth Miranda
               {"\n\n"}
+              Lemuel Francisco
+              {"\n\n"}
           The company expresses its deepest gratitude to these individuals for their hard work and commitment to the success of this project.
           {"\n\n"}
           </Text>

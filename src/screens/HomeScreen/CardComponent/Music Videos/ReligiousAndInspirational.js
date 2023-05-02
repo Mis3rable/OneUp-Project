@@ -126,7 +126,7 @@ export default function ReligiousAndInspirational() {
         onChangeText={handleSearch}
         value={searchQuery}
       />
-      <Text style={{marginTop: 10,}}>Swipe for more vidoes</Text>
+      <Text style={{marginTop: 10,}}>Swipe for more videos</Text>
       {searchQuery.length > 0 && suggestions.length === 0 && (
         <Text style={styles.noSearchText}>No results found for "{searchQuery}"</Text>
         )}
