@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import { Video } from 'expo-av';
+import { Video, FullscreenUpdateEvent } from 'expo-av';
 import { Card, Searchbar } from 'react-native-paper';
-import { VideoThumbnails } from 'expo-video-thumbnails';
+import Orientation from 'react-native-orientation-locker';
 import firebase from '../../../../firebase/config';
 
 const SkeletonVideo = () => {
@@ -21,7 +21,7 @@ export default function Icons() {
   const [searchQuery, setSearchQuery] = useState('');
   const videoPlayer = useRef(null);
   const appState = useRef(AppState.currentState);
-
+  
   useEffect(() => {
     const fetchVideos = async () => {
       const storageRef = firebase.storage().ref();
@@ -65,6 +65,27 @@ export default function Icons() {
     appState.current = nextAppState;
   };
 
+  // const handleFullscreenUpdate = (event) => {
+  //   if (event.fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT) {
+  //     Orientation.lockToLandscape();
+  //     Orientation.unlockAllOrientations();
+  //     videoPlayer.current.presentFullscreenPlayer();
+  //   } else if (event.fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS) {
+  //     Orientation.lockToPortrait();
+  //     Orientation.unlockAllOrientations();
+  //   }
+  // };  
+
+  const handleOrientationChange = (orientation) => {
+    if (orientation === 'LANDSCAPE-LEFT' || orientation === 'LANDSCAPE-RIGHT') {
+      Orientation.lockToLandscape();
+      videoPlayer.current.presentFullscreenPlayer();
+    } else {
+      Orientation.lockToPortrait();
+      videoPlayer.current.dismissFullscreenPlayer();
+    }
+  };  
+
   const handleSnapToItem = (index) => {
     setCurrentVideoIndex(index);
   };
@@ -94,6 +115,7 @@ export default function Icons() {
             useNativeControls
             resizeMode="contain"
             isLooping
+            onFullscreenUpdate={handleOrientationChange}
           />
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardText}>{item.name}</Text>
