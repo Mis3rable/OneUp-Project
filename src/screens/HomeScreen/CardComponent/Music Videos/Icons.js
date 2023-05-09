@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import { Video, FullscreenUpdateEvent } from 'expo-av';
+import { Video } from 'expo-av';
 import { Card, Searchbar } from 'react-native-paper';
-import Orientation from 'react-native-orientation-locker';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import firebase from '../../../../firebase/config';
 
 const SkeletonVideo = () => {
@@ -65,26 +65,16 @@ export default function Icons() {
     appState.current = nextAppState;
   };
 
-  // const handleFullscreenUpdate = (event) => {
-  //   if (event.fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_WILL_PRESENT) {
-  //     Orientation.lockToLandscape();
-  //     Orientation.unlockAllOrientations();
-  //     videoPlayer.current.presentFullscreenPlayer();
-  //   } else if (event.fullscreenUpdate === Video.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS) {
-  //     Orientation.lockToPortrait();
-  //     Orientation.unlockAllOrientations();
-  //   }
-  // };  
-
-  const handleOrientationChange = (orientation) => {
-    if (orientation === 'LANDSCAPE-LEFT' || orientation === 'LANDSCAPE-RIGHT') {
-      Orientation.lockToLandscape();
-      videoPlayer.current.presentFullscreenPlayer();
-    } else {
-      Orientation.lockToPortrait();
-      videoPlayer.current.dismissFullscreenPlayer();
+  const setOrientation = () => {
+    if (Dimensions.get('window').height > Dimensions.get('window').width) {
+      //Device is in portrait mode, rotate to landscape mode.
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
     }
-  };  
+    else {
+      //Device is in landscape mode, rotate to portrait mode.
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    }
+  } 
 
   const handleSnapToItem = (index) => {
     setCurrentVideoIndex(index);
@@ -113,9 +103,9 @@ export default function Icons() {
             source={{ uri: item.url }}
             style={styles.video}
             useNativeControls
-            resizeMode="contain"
+            resizeMode="cover"
             isLooping
-            onFullscreenUpdate={handleOrientationChange}
+            onFullscreenUpdate={setOrientation}
           />
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardText}>{item.name}</Text>

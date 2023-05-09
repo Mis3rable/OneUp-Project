@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, AppState, ImageBackground, Touchabl
 import Carousel from 'react-native-snap-carousel';
 import { Video } from 'expo-av';
 import { Card, Searchbar } from 'react-native-paper';
-import { VideoThumbnails } from 'expo-video-thumbnails';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import firebase from '../../../../firebase/config';
 
 const SkeletonVideo = () => {
@@ -21,11 +21,11 @@ export default function SaIyongTahanan() {
   const [searchQuery, setSearchQuery] = useState('');
   const videoPlayer = useRef(null);
   const appState = useRef(AppState.currentState);
-
+  
   useEffect(() => {
     const fetchVideos = async () => {
       const storageRef = firebase.storage().ref();
-      const videosRef = storageRef.child('Videos/ICMAS');
+      const videosRef = storageRef.child('Videos/ICMAS/');
       const videosList = await videosRef.listAll();
       const urls = await Promise.all(
         videosList.items.map(async (video) => {
@@ -65,6 +65,17 @@ export default function SaIyongTahanan() {
     appState.current = nextAppState;
   };
 
+  const setOrientation = () => {
+    if (Dimensions.get('window').height > Dimensions.get('window').width) {
+      //Device is in portrait mode, rotate to landscape mode.
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+    }
+    else {
+      //Device is in landscape mode, rotate to portrait mode.
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    }
+  } 
+
   const handleSnapToItem = (index) => {
     setCurrentVideoIndex(index);
   };
@@ -94,6 +105,7 @@ export default function SaIyongTahanan() {
             useNativeControls
             resizeMode="contain"
             isLooping
+            onFullscreenUpdate={setOrientation}
           />
           <Card.Content style={styles.cardContent}>
             <Text style={styles.cardText}>{item.name}</Text>
