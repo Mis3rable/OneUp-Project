@@ -118,11 +118,6 @@ export default function ReligiousAndInspirational() {
           onPress={() => setCurrentVideoIndex(index)}
           style={styles.cardThumbnailContainer}
         >
-          <Image
-            source={{ uri: `expo-video-thumbnail:${item.url}` }}
-            style={styles.thumbnail}
-            resizeMode="contain"
-          />
           <Text style={styles.cardText}>{item.name}</Text>
         </TouchableOpacity>
       );
