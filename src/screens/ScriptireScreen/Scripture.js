@@ -10,13 +10,12 @@ import { Ionicons } from '@expo/vector-icons';
 function CardSkeleton() {
   return (
     <Card style={styles.card}>
+      <Card.Cover source={{ uri: 'https://via.placeholder.com/150' }} />
       <Card.Content>
         <Title>Loading...</Title>
-        <Paragraph>Loading...</Paragraph>
       </Card.Content>
-      <Card.Cover source={{ uri: 'https://via.placeholder.com/150' }} />
       <Card.Actions>
-        <Button>Loading...</Button>
+        <Button buttonColor="chocolate"  labelStyle={{color:'white', fontSize: 15}}>Loading...</Button>
       </Card.Actions>
     </Card>
   );

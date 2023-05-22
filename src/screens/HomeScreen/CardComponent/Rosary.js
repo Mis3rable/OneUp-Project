@@ -104,7 +104,7 @@ const Rosary = () => {
             ) : (
             <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.folderImage} />
             )}
-          <Text style={styles.folderName}>{folderName}</Text>
+          <Text style={styles.folderName}>{folderName.replace(/\d+/g, '')}</Text>
         </TouchableOpacity>
         
         ))}
@@ -112,7 +112,7 @@ const Rosary = () => {
           <Modal key={index} visible={modalVisibility[index]} onRequestClose={() => {}}>
             <View style={styles.modalOverlay}>
               <View style={styles.modalContainer}>
-                <Text style={styles.modalTitle}>{folderName}</Text>
+                <Text style={styles.modalTitle}>{folderName.replace(/\d+/g, '')}</Text>
                 {isLoading ? (
                   <View style={styles.loadingContainer}>
                     <ActivityIndicator size="large" color="#0000ff" />

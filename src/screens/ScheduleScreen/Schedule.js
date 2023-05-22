@@ -47,7 +47,7 @@ export default function Schedule() {
   const [showDatepicker, setShowDatepicker] = useState(false);
   const [showTimepicker, setShowTimepicker] = useState(false);
   const [schedules, setSchedules] = useState([]);
-  const LeftContent = (props) => <Avatar.Icon {...props} icon="alarm" />;
+  const LeftContent = (props) => <Avatar.Image {...props} size={45} source={require('../../../assets/logos/icon.png')} />;
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -334,18 +334,23 @@ export default function Schedule() {
                     )}
                   </Card.Content>
                   <Card.Actions>
-                    <Button
+                    <TouchableOpacity
                       title="Schedule"
                       onPress={async () => {
                         await schedulePushNotification();
                       }}
-                      style={styles.schedule}
-                    />
+                      style={styles.scheduleBtn}
+                    >
+                      <Text style={styles.scheduleText}> Schedule</Text>
+                    </TouchableOpacity>
                     <View style={{ marginVertical: 30 }} />
-                    <Button
+                    <TouchableOpacity
                       title="Close"
                       onPress={() => setModalVisible(false)}
-                    />
+                      style={styles.closeBtn}
+                    >
+                      <Text style={styles.closeText}>Close</Text>
+                    </TouchableOpacity>
                   </Card.Actions>
                 </Card>
               </ImageBackground>

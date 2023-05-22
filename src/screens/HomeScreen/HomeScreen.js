@@ -38,7 +38,6 @@ export default function MyTabs({ navigation, user, setUser }) {
           height: 50,
           backgroundColor: "black",
           paddingTop: 30,
-          marginBottom: 10,
           elevation: 0, // for Android
         },
         tabBarActiveTintColor: "white",

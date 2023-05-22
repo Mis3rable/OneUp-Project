@@ -4,10 +4,10 @@
     "slug": "OneUp-Project",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/adaptive-icon.png",
+    "icon": "./assets/logos/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/Splash_Screen.png",
+      "image": "./assets/NEWSPLASH.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logos/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.dyci_oneup.OneUpProject",

@@ -21,12 +21,29 @@ export default StyleSheet.create({
     textShadowOffset: { width: 3, height: 3 },
     textShadowRadius: 5,
   },
-  schedule: {
-    backgroundColor: "orange",
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginBottom: 10,
+  scheduleBtn: {
+    backgroundColor: "chocolate",
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: 40,
+  },
+  scheduleText:{
+    color: "white",
+    fontSize: 16,
+  },
+  closeBtn: {
+    backgroundColor: "chocolate",
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 80,
+    height: 40,
+  },
+  closeText:{
+    color: "white",
+    fontSize: 16,
   },
   addButton: {
     backgroundColor: "#212427",
@@ -39,6 +56,9 @@ export default StyleSheet.create({
     marginHorizontal: 30,
     justifyContent: "center",
     alignSelf: "flex-end",
+  },
+  deleteButtonText:{
+    color: "red",
   },
   addButtonText: {
     fontSize: 18,
