@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   Button: {
-    backgroundColor: "chocolate",
+    backgroundColor: "#212427",
     padding: 12,
     borderRadius: 20,
     marginBottom: 20,
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "white",
     alignSelf: "center",
-    fontWeight: "bold",
   },
   modalContainer: {
     backgroundColor: "white",
@@ -137,9 +136,8 @@ const styles = StyleSheet.create({
   },
   about: {
     fontSize: 20,
-    fontWeight: "bold",
     textAlign: "center",
-    color: "chocolate",
+    color: "#212427",
   },
   background: {
     flex: 1,
@@ -163,7 +161,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: "bold",
     marginRight: 5,
   },
   value: {
@@ -188,7 +185,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
-    backgroundColor: "saddlebrown",
+    backgroundColor: "peru",
     padding: 8,
     borderRadius: 20,
   },

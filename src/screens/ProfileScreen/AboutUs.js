@@ -68,37 +68,35 @@ const AboutUsModal = () => {
               The following individuals have played a significant role in the
               creation of this app:
               {"\n\n"}
-              <Text style={{ fontWeight: "bold", color: "saddlebrown" }}>
-                Developers:
-              </Text>
+              <Text style={{ color: "#212427" }}>Developers:</Text>
               {"\n\n"}
               Sarah May Aniram S. Repulda
-              {"\n\n"}
+              {"\n"}
               Robert Dominic S. Santos
-              {"\n\n"}
+              {"\n"}
               Jonald Cedrick R. De Guzman
-              {"\n\n"}
+              {"\n"}
               Axell John C. Costales
-              {"\n\n"}
+              {"\n"}
               Jeremy N. Agapito
-              {"\n\n"}
-              <Text style={{ fontWeight: "bold", color: "saddlebrown" }}>
-                Contributors:
-              </Text>
+              {"\n \n"}
+              <Text style={{ color: "#212427" }}>Contributors:</Text>
               {"\n\n"}
               Angelo Yu Caburnay
-              {"\n\n"}
+              {"\n"}
               Reymond Galvez
-              {"\n\n"}
+              {"\n"}
               Jhonnel Azarcon
-              {"\n\n"}
+              {"\n"}
+              Mary Ann Lim
+              {"\n"}
               Kenneth Miranda
-              {"\n\n"}
+              {"\n"}
               Lemuel Francisco
-              {"\n\n"}
-              The company expresses its deepest gratitude to these individuals
-              for their hard work and commitment to the success of this project.
-              {"\n\n"}
+              {"\n \n"}
+              The organization expresses its deepest gratitude to these
+              individuals for their hard work and commitment to the success of
+              this project.
             </Text>
             <View style={{ flexDirection: "row" }}>
               <Image
@@ -241,7 +239,6 @@ const styles = StyleSheet.create({
   },
   modalTxt: {
     color: "black",
-    fontWeight: "bold",
     width: "100%",
     height: "100%",
     textAlign: "left",
@@ -263,7 +260,6 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 24,
-    fontWeight: "bold",
     alignSelf: "center",
     marginTop: 20,
     color: "saddlebrown",
