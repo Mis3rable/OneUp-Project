@@ -14,9 +14,10 @@ export default StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
     color: "chocolate",
+    fontWeight: "bold",
   },
   form: {
-    height: "85%",
+    height: "80%",
     width: "90%",
     backgroundColor: "white",
     borderRadius: 15,
@@ -46,7 +47,7 @@ export default StyleSheet.create({
     borderWeight: 1,
   },
   button: {
-    backgroundColor: "#212427",
+    backgroundColor: "chocolate",
     marginLeft: 30,
     marginRight: 30,
     marginTop: 20,
@@ -62,8 +63,8 @@ export default StyleSheet.create({
   footerView: {
     flex: 1,
     alignItems: "center",
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 10,
+    marginBottom: 20,
   },
   footerText: {
     fontSize: 16,

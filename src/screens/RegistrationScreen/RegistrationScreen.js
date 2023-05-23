@@ -85,10 +85,6 @@ export default function RegistrationScreen({ navigation, setUser }) {
             style={{ flex: 1, width: "100%" }}
             keyboardShouldPersistTaps="always"
           >
-            {/* <Image
-                    style={styles.logo}
-                    source={require('../../../assets/OneUp_Logo.png')}
-                /> */}
             <Text style={styles.text}> Create an Account </Text>
             <TextInput
               style={[
@@ -124,10 +120,7 @@ export default function RegistrationScreen({ navigation, setUser }) {
             />
             <>
               <Picker
-                style={[
-                  styles.input,
-                  { borderWidth: 1, borderColor: "#aaaaaa" },
-                ]}
+                style={[styles.input]}
                 selectedValue={selectedMunicipality}
                 onValueChange={(itemValue, itemIndex) => {
                   setSelectedMunicipality(itemValue);
@@ -140,6 +133,7 @@ export default function RegistrationScreen({ navigation, setUser }) {
                     key={index}
                     label={option.label}
                     value={option.value}
+                    color="black"
                   />
                 ))}
               </Picker>
@@ -147,7 +141,7 @@ export default function RegistrationScreen({ navigation, setUser }) {
                 <Picker
                   style={[
                     styles.input,
-                    { borderWidth: 1, borderColor: "#aaaaaa" },
+                    { borderWidth: 1, borderColor: "black" },
                   ]}
                   selectedValue={selectedParish}
                   onValueChange={(itemValue) => setSelectedParish(itemValue)}
