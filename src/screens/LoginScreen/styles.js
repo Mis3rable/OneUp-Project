@@ -65,8 +65,6 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "black",
-    borderTopEndRadius: "15px",
-    borderTopLeftRadius: "15px",
     marginBottom: 10,
     height: "20%",
   },
