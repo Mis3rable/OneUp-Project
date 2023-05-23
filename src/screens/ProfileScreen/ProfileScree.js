@@ -170,6 +170,8 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     backgroundColor: "white",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   profileImage: {
     marginTop: 5,

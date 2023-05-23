@@ -9,7 +9,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   form: {
-    height: "45%",
+    height: "65%",
     width: "90%",
     backgroundColor: "white",
     borderRadius: 15,
@@ -53,7 +53,7 @@ export default StyleSheet.create({
   footerText: {
     fontSize: 16,
     color: "gray",
-    marginTop: 35,
+    marginTop: 20,
     alignSelf: "center",
     marginBottom: 30,
   },
@@ -65,6 +65,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "black",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
     marginBottom: 10,
     height: "20%",
   },

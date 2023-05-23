@@ -125,13 +125,13 @@ export default function LoginScreen({ navigation, setUser }) {
                 <Text style={styles.buttonTitle}>Sign In</Text>
               )}
             </TouchableOpacity>
-          </View>
-          <Text style={styles.footerText}>
-            Don't have an account?{" "}
-            <Text onPress={onFooterLinkPress} style={styles.footerLink}>
-              Sign up here.
+            <Text style={styles.footerText}>
+              Don't have an account?{" "}
+              <Text onPress={onFooterLinkPress} style={styles.footerLink}>
+                Sign up here.
+              </Text>
             </Text>
-          </Text>
+          </View>
         </View>
       </View>
     </ImageBackground>
