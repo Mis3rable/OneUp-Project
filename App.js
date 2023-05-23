@@ -24,6 +24,7 @@ import ReligiousAndInspirational from "./src/screens/HomeScreen/CardComponent/Mu
 import PianoContent from "./src/screens/HomeScreen/CardComponent/Music Videos/PianoContent";
 import Prayer from "./src/screens/HomeScreen/CardComponent/Prayer";
 import Rosary from "./src/screens/HomeScreen/CardComponent/Rosary";
+import SabiNgaNgIsangKanta from "./src/screens/HomeScreen/CardComponent/Reflections/Kanta";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -104,6 +105,7 @@ export default function App() {
         <Stack.Screen name="Icons" component={Icons} />
         <Stack.Screen name="Cross Word" component={CrossWord} />
         <Stack.Screen name="Sa Madaling Sabi" component={SaMadalingSabi} />
+        <Stack.Screen name="Sabi Nga Ng Isang Kanta" component={SabiNgaNgIsangKanta} />
         <Stack.Screen
           name="Itanong Mo Kung Bakit"
           component={ItanongMoKungBakit}

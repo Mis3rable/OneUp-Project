@@ -29,9 +29,9 @@ const Reflections = () => {
     const handleItanongMoKungBakitPress = () => {
         navigation.navigate('Itanong Mo Kung Bakit');
     }
-    // const handleHimnoAudioPress = () => {
-    //     navigation.navigate('Himno Bulakenyo(Audio)');
-    // }
+    const handleKantaPress = () => {
+        navigation.navigate('Sabi Nga Ng Isang Kanta');
+    }
     
 
     const renderCard = ({ item }) => {
@@ -81,11 +81,11 @@ const Reflections = () => {
             image: require('../../../../../assets/ItanongMoKungBakit.jpg'),
             onPress: handleItanongMoKungBakitPress,
         },
-        // {
-        //     title: 'Himno',
-        //     image: require('../../../../assets/cards-HimnoBulakenyoVid.png'),
-        //     onPress: handleHimnoAudioPress,
-        // },
+        {
+            title: 'SabiNgaNgIsangKanta',
+            image: require('../../../../../assets/Kanta.png'),
+            onPress: handleKantaPress,
+        },
     ];
 
     return (
