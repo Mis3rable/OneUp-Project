@@ -46,8 +46,9 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   addButton: {
-    backgroundColor: "#212427",
+    backgroundColor: "chocolate",
     borderWidth: 1,
+    borderColor: "white",
     padding: 12,
     width: 180,
     borderRadius: 20,

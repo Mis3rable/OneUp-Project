@@ -112,17 +112,22 @@ const Rosary = () => {
           <Modal key={index} visible={modalVisibility[index]} onRequestClose={() => {}}>
             <View style={styles.modalOverlay}>
               <View style={styles.modalContainer}>
-                <Text style={styles.modalTitle}>{folderName.replace(/\d+/g, '')}</Text>
+                  <Text style={styles.modalTitle}>
+                    <Text>{folderName.replace(/\(.*\)|\d+/g, '')}</Text>
+                    <Text style={styles.parenthesesText}>
+                      {folderName.match(/\(.*\)/)}
+                    </Text>
+                  </Text>
                 {isLoading ? (
                   <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="large" color="#0000ff" />
+                    <ActivityIndicator size="large" color="chocolate" />
                   </View>
                 ) : (
                   <ScrollView>
                     {modalFiles.imageFiles.length > 0 ? (
                       modalFiles.imageFiles.map((file, i) => (
                         <Card key={i}>
-                          <Card.Cover source={{ uri: file.url }} />
+                          <Card.Cover source={{ uri: file.url }} style={styles.modalImage} />
                         </Card>
                       ))
                     ) : (
@@ -187,15 +192,19 @@ const styles = StyleSheet.create({
   folderName: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
     marginBottom: 16,
     textAlign: 'left',
     width: '40%',
     lineHeight: 25,
   },
   folderImage: {
-    width: 190,
-    height: 120,
+    width: 225,
+    height: 140,
+    marginRight: 10,
+  },
+  modalImage:{
+    width: '100%',
+    height: 250,
     marginRight: 10,
   },
   loadingContainer: {
@@ -222,6 +231,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
     color: 'saddlebrown'
+  },
+  parenthesesText: {
+    fontSize: 12,
+    baselineOffset: 6, // Adjust this value as per your requirement
   },
   audioPlayer: {
     flexDirection: 'row',
