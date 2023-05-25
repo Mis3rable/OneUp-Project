@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ONE",
-    "slug": "One-Project",
+    "name": "OneUp",
+    "slug": "OneUp-Project",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logos/icon.png",
@@ -30,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c0c336ae-78ae-49b0-8bad-94be85895a82"
+      }
     }
   }
 }

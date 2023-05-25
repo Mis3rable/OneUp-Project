@@ -38,7 +38,7 @@ const PrayerCard = () => {
     },
     {
       title: "Rosary",
-      image: require("../../../../assets/Rosary.jpg"),
+      image: require("../../../../assets/Rosary.png"),
       onPress: handleRosaryCardPress,
     },
   ];
