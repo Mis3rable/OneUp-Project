@@ -58,7 +58,7 @@ const TermsModal = () => {
           >
             <Text style={styles.modalTitle}>Terms and Condition</Text>
             <Text style={styles.modalText}>
-              Agreement between User and One Up Welcome to ONE UP! The ONE UP
+              Agreement between User and ONE. Welcome to ONE! The ONE
               Mobile Application is offered to you conditioned on your
               acceptance without modification of the terms, conditions, and
               notices contained herein. Your use of Mobile Application
@@ -67,7 +67,7 @@ const TermsModal = () => {
               {"\n\n"}
               <Text style={{ color: "saddlebrown" }}>Privacy</Text>
               {"\n\n"}
-              Your use of ONE UP is subject to OA's Privacy Policy. Please
+              Your use of ONE is subject to OA's Privacy Policy. Please
               review our Privacy Policy, which also governs the Site and informs
               users of our data collection practices.
               {"\n\n"}

@@ -58,7 +58,7 @@ const AboutUsModal = () => {
             style={styles.scrollViewContainer}
             contentContainerStyle={styles.scrollViewContent}
           >
-            <Text style={styles.modalTitle}>About One Up</Text>
+            <Text style={styles.modalTitle}>About ONE</Text>
             <Text style={styles.modalText}>
               {"\n\n"}
               The mobile application was developed by a team of talented

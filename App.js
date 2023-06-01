@@ -91,10 +91,7 @@ export default function App() {
           {(props) => <MyTabs {...props} user={user} setUser={setUser} />}
         </Stack.Screen>
         <Stack.Screen name="Category" component={Category} />
-        {/* <Stack.Screen name="Schedule" component={Schedule} options={{ headerShown: false }}/> */}
         <Stack.Screen name="OOTD" component={OOTD} />
-        {/* <Stack.Screen name="Prayer" component={Prayer} /> */}
-        {/* <Stack.Screen name="Words" component={} /> */}
         <Stack.Screen name="Prayers" component={Prayer} />
         <Stack.Screen name="Rosary" component={Rosary} />
         <Stack.Screen name="Liturgical Songs" component={Liturgical} />

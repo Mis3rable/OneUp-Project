@@ -87,7 +87,15 @@ export default function Schedule() {
           navigation.navigate("Sa Madaling Sabi");
         } else if (notificationTitle === "Itanong Mo Kung Bakit") {
           navigation.navigate("Itanong Mo Kung Bakit");
-        }
+        } else if (notificationTitle === "Rosary") {
+          navigation.navigate("Rosary");
+        } else if (notificationTitle === "Prayers") {
+          navigation.navigate("Prayers");
+        } else if (notificationTitle === "Sabi Nga Ng Isang Kanta") {
+          navigation.navigate("Sabi Nga Ng Isang Kanta");
+        } else if (notificationTitle === "Bulacan Liturgical Music for Meditation") {
+          navigation.navigate("Bulacan Liturgical Music for Meditation");
+        } 
       });
     return () => {
       Notifications.removeNotificationSubscription(
@@ -114,7 +122,7 @@ export default function Schedule() {
 
   const schedulePushNotification = async (item) => {
     if (title === "") {
-      Alert.alert("One Up", "Category cannot be empty");
+      Alert.alert("ONE", "Category cannot be empty");
       return;
     }
 
@@ -236,7 +244,7 @@ export default function Schedule() {
               >
                 <Card style={styles.addModal}>
                   <Card.Title
-                    title="One Up"
+                    title="ONE"
                     subtitle="Set A Schedule"
                     left={LeftContent}
                   />
@@ -280,6 +288,22 @@ export default function Schedule() {
                       <Picker.Item
                         label="Itanong Mo Kung Bakit"
                         value="Itanong Mo Kung Bakit"
+                      />
+                      <Picker.Item
+                        label="Rosary"
+                        value="Rosary"
+                      />
+                      <Picker.Item
+                        label="Prayers"
+                        value="Prayers"
+                      />
+                      <Picker.Item
+                        label="Sabi Nga Ng Isang Kanta"
+                        value="Sabi Nga Ng Isang Kanta"
+                      />
+                       <Picker.Item
+                        label="Bulacan Liturgical Music for Meditation"
+                        value="Bulacan Liturgical Music for Meditation"
                       />
                     </Picker>
                     <TextInput

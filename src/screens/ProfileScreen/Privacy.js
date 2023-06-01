@@ -63,7 +63,7 @@ const PrivacyModal = () => {
               <Text style={{ fontWeight: "bold" }}>GENERAL</Text>
               {"\n\n"}
               We respects the privacy of its users (“user” or “you”) that use
-              our ONE UP! application located in apple and google play stores.
+              our ONE application located in apple and google play stores.
               The following “Privacy Policy” is designed to inform you, as a
               user of the App, about the types of information that Company may
               gather about or collect from you in connection with your use of
